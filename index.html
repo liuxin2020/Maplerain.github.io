@@ -170,7 +170,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-04-13 11:22:08 / 修改时间：11:23:26" itemprop="dateCreated datePublished" datetime="2021-04-13T11:22:08+08:00">2021-04-13</time>
+              <time title="创建时间：2021-04-13 11:22:08 / 修改时间：11:28:41" itemprop="dateCreated datePublished" datetime="2021-04-13T11:22:08+08:00">2021-04-13</time>
             </span>
 
           <br>
@@ -179,7 +179,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.3k</span>
+              <span>2.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -198,9 +198,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>title：命令执行<br>data：2021/4/13<br>author：Maple-rain<br>categories：<br>tags：</p>
-<hr>
-<h1 id="ctfshow命令执行篇41-50"><a href="#ctfshow命令执行篇41-50" class="headerlink" title="ctfshow命令执行篇41-50"></a>ctfshow命令执行篇41-50</h1><h2 id="一、web41"><a href="#一、web41" class="headerlink" title="一、web41"></a>一、web41</h2><h3 id="1、题目："><a href="#1、题目：" class="headerlink" title="1、题目："></a>1、题目：</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;c&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$c</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line"><span class="keyword">if</span>(!preg_match(<span class="string">&#x27;/[0-9]|[a-z]|\^|\+|\~|\$|\[|\]|\&#123;|\&#125;|\&amp;|\-/i&#x27;</span>, <span class="variable">$c</span>))&#123;</span><br><span class="line">        <span class="keyword">eval</span>(<span class="string">&quot;echo(<span class="subst">$c</span>);&quot;</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+          <h1 id="ctfshow命令执行篇41-50"><a href="#ctfshow命令执行篇41-50" class="headerlink" title="ctfshow命令执行篇41-50"></a>ctfshow命令执行篇41-50</h1><h2 id="一、web41"><a href="#一、web41" class="headerlink" title="一、web41"></a>一、web41</h2><h3 id="1、题目："><a href="#1、题目：" class="headerlink" title="1、题目："></a>1、题目：</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;c&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$c</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line"><span class="keyword">if</span>(!preg_match(<span class="string">&#x27;/[0-9]|[a-z]|\^|\+|\~|\$|\[|\]|\&#123;|\&#125;|\&amp;|\-/i&#x27;</span>, <span class="variable">$c</span>))&#123;</span><br><span class="line">        <span class="keyword">eval</span>(<span class="string">&quot;echo(<span class="subst">$c</span>);&quot;</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
 
 
