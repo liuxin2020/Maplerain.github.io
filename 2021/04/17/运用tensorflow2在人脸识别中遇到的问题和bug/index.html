@@ -5,10 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 5.4.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/20210420122405.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/20210420122405.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/20210420122405.jpg">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -20,19 +19,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="运用tensorflow2在设计卷积神经网络时遇到的问题和bugbug1：TensorFlow2与TensorFlow1不兼容的问题。这是目前最为常见的问题，由于卷积神经网络最火的时间在18年，当时产出了大量优质的项目和开源代码供使用。但如果今日想要复现当时的成果时，会遭遇TensorFlow和python版本更新后不兼容的问题。 推测当时版本：TensorFlow1，python3.6 根据网上">
+  <meta name="description" content="运用tensorflow2在人脸识别中遇到的问题和bugbug1：TensorFlow2与TensorFlow1不兼容的问题。这是目前最为常见的问题，由于卷积神经网络最火的时间在18年，当时产出了大量优质的项目和开源代码供使用。但如果今日想要复现当时的成果时，会遭遇TensorFlow和python版本更新后不兼容的问题。 推测当时版本：TensorFlow1，python3.6 根据网上报错的解">
 <meta property="og:type" content="article">
-<meta property="og:title" content="运用tensorflow2在设计卷积神经网络时遇到的问题和bug">
-<meta property="og:url" content="http://example.com/2021/04/17/%E8%BF%90%E7%94%A8tensorflow2%E5%9C%A8%E8%AE%BE%E8%AE%A1%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E5%92%8Cbug/index.html">
+<meta property="og:title" content="运用tensorflow2在人脸识别中遇到的问题和bug">
+<meta property="og:url" content="http://example.com/2021/04/17/%E8%BF%90%E7%94%A8tensorflow2%E5%9C%A8%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E5%92%8Cbug/index.html">
 <meta property="og:site_name" content="枫霜月雨のblog">
-<meta property="og:description" content="运用tensorflow2在设计卷积神经网络时遇到的问题和bugbug1：TensorFlow2与TensorFlow1不兼容的问题。这是目前最为常见的问题，由于卷积神经网络最火的时间在18年，当时产出了大量优质的项目和开源代码供使用。但如果今日想要复现当时的成果时，会遭遇TensorFlow和python版本更新后不兼容的问题。 推测当时版本：TensorFlow1，python3.6 根据网上">
+<meta property="og:description" content="运用tensorflow2在人脸识别中遇到的问题和bugbug1：TensorFlow2与TensorFlow1不兼容的问题。这是目前最为常见的问题，由于卷积神经网络最火的时间在18年，当时产出了大量优质的项目和开源代码供使用。但如果今日想要复现当时的成果时，会遭遇TensorFlow和python版本更新后不兼容的问题。 推测当时版本：TensorFlow1，python3.6 根据网上报错的解">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-04-17T02:53:17.000Z">
-<meta property="article:modified_time" content="2021-04-17T03:34:22.235Z">
+<meta property="article:modified_time" content="2021-04-20T04:49:13.065Z">
 <meta property="article:author" content="枫霜月雨">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2021/04/17/%E8%BF%90%E7%94%A8tensorflow2%E5%9C%A8%E8%AE%BE%E8%AE%A1%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E5%92%8Cbug/">
+<link rel="canonical" href="http://example.com/2021/04/17/%E8%BF%90%E7%94%A8tensorflow2%E5%9C%A8%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E5%92%8Cbug/">
 
 
 <script id="page-configurations">
@@ -45,7 +44,7 @@
   };
 </script>
 
-  <title>运用tensorflow2在设计卷积神经网络时遇到的问题和bug | 枫霜月雨のblog</title>
+  <title>运用tensorflow2在人脸识别中遇到的问题和bug | 枫霜月雨のblog</title>
   
 
 
@@ -150,7 +149,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/17/%E8%BF%90%E7%94%A8tensorflow2%E5%9C%A8%E8%AE%BE%E8%AE%A1%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E5%92%8Cbug/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/17/%E8%BF%90%E7%94%A8tensorflow2%E5%9C%A8%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E5%92%8Cbug/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -163,7 +162,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          运用tensorflow2在设计卷积神经网络时遇到的问题和bug
+          运用tensorflow2在人脸识别中遇到的问题和bug
         </h1>
 
         <div class="post-meta">
@@ -172,10 +171,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-04-17 10:53:17 / 修改时间：11:34:22" itemprop="dateCreated datePublished" datetime="2021-04-17T10:53:17+08:00">2021-04-17</time>
+              <time title="创建时间：2021-04-17 10:53:17" itemprop="dateCreated datePublished" datetime="2021-04-17T10:53:17+08:00">2021-04-17</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-20 12:49:13" itemprop="dateModified" datetime="2021-04-20T12:49:13+08:00">2021-04-20</time>
+              </span>
 
           <br>
             <span class="post-meta-item" title="本文字数">
@@ -183,14 +188,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.3k</span>
+              <span>1.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -202,7 +207,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="运用tensorflow2在设计卷积神经网络时遇到的问题和bug"><a href="#运用tensorflow2在设计卷积神经网络时遇到的问题和bug" class="headerlink" title="运用tensorflow2在设计卷积神经网络时遇到的问题和bug"></a>运用tensorflow2在设计卷积神经网络时遇到的问题和bug</h1><h2 id="bug1：TensorFlow2与TensorFlow1不兼容的问题。"><a href="#bug1：TensorFlow2与TensorFlow1不兼容的问题。" class="headerlink" title="bug1：TensorFlow2与TensorFlow1不兼容的问题。"></a>bug1：TensorFlow2与TensorFlow1不兼容的问题。</h2><p>这是目前最为常见的问题，由于卷积神经网络最火的时间在18年，当时产出了大量优质的项目和开源代码供使用。但如果今日想要复现当时的成果时，会遭遇TensorFlow和python版本更新后不兼容的问题。</p>
+        <h1 id="运用tensorflow2在人脸识别中遇到的问题和bug"><a href="#运用tensorflow2在人脸识别中遇到的问题和bug" class="headerlink" title="运用tensorflow2在人脸识别中遇到的问题和bug"></a>运用tensorflow2在人脸识别中遇到的问题和bug</h1><h2 id="bug1：TensorFlow2与TensorFlow1不兼容的问题。"><a href="#bug1：TensorFlow2与TensorFlow1不兼容的问题。" class="headerlink" title="bug1：TensorFlow2与TensorFlow1不兼容的问题。"></a>bug1：TensorFlow2与TensorFlow1不兼容的问题。</h2><p>这是目前最为常见的问题，由于卷积神经网络最火的时间在18年，当时产出了大量优质的项目和开源代码供使用。但如果今日想要复现当时的成果时，会遭遇TensorFlow和python版本更新后不兼容的问题。</p>
 <p>推测当时版本：TensorFlow1，python3.6</p>
 <p>根据网上报错的解答，可以得知TensorFlow1.13版本不兼容python3.7环境，偌使用python3.7环境，建议将TensorFlow更新至1.15。</p>
 <p>本机环境采用的TensorFlow2.0版本</p>
@@ -218,6 +223,17 @@
 
 <p>此法可以解决90%的报错。但是有一个例外，也就是<u><strong>contrib</strong></u>模块。</p>
 <p>此模块的解决方案：建议回TensorFlow1+python3.6，或者根据官方文档及上述引用链接自行修改。</p>
+<p><strong>4月20日更新：</strong></p>
+<p>contrib模块中的slim已经没了，如果需要调用slim模块，需要</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install tf_slim</span><br></pre></td></tr></table></figure>
+
+<p>将配置文件中的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slim = tf.contrib.slim()</span><br></pre></td></tr></table></figure>
+
+<p>全部改为</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slim = tf_slim()</span><br></pre></td></tr></table></figure>
+
+<p>且加上关闭TensorFlow2功能的相关语句。</p>
 <h3 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h3><blockquote>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/kyle1314608/article/details/100594884">https://blog.csdn.net/kyle1314608/article/details/100594884</a></p>
 </blockquote>
@@ -236,7 +252,20 @@
 <h3 id="参考链接：-1"><a href="#参考链接：-1" class="headerlink" title="参考链接："></a>参考链接：</h3><blockquote>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_37882192/article/details/108738901">https://blog.csdn.net/m0_37882192/article/details/108738901</a></p>
 </blockquote>
-<h2 id="bug3-checkpoint文件内部设置。"><a href="#bug3-checkpoint文件内部设置。" class="headerlink" title="bug3:checkpoint文件内部设置。"></a>bug3:checkpoint文件内部设置。</h2>
+<h2 id="bug3-checkpoint文件内部设置。"><a href="#bug3-checkpoint文件内部设置。" class="headerlink" title="bug3:checkpoint文件内部设置。"></a>bug3:checkpoint文件内部设置。</h2><p>以我的为参考：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">G:&#x2F;science&#x2F;trainmodel&#x2F;model-600</span><br></pre></td></tr></table></figure>
+
+<p>注意 ‘ / ‘ 以及模型不带后缀。</p>
+<p>另外，训练时生成模型使用的函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">saver.save(sess, <span class="string">&#x27;G:/science/trainmodel/model&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>中的路径部分采用windows格式的 ‘ / ‘即可，我之前写python路径写顺手了，直接写了全部 // ，直接GG</p>
+<h2 id="bug4-saver-restore恢复模型报错"><a href="#bug4-saver-restore恢复模型报错" class="headerlink" title="bug4:saver.restore恢复模型报错"></a>bug4:saver.restore恢复模型报错</h2><p>经典坑位之一，附上我的代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">saver.restore(sess, tf.train.latest_checkpoint(<span class="string">&#x27;G:/science/trainmodel&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>tf.train一行指调用生成的最后一个模型，还有多种参数可以按需使用。</p>
+<p>路径单双斜杠均不受影响。</p>
+
     </div>
 
     
@@ -255,8 +284,8 @@
       <i class="fa fa-chevron-left"></i> ctfshow命令执行51-57
     </a></div>
       <div class="post-nav-item">
-    <a href="/2021/04/19/ctfshow%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C58-67/" rel="next" title="ctfshow命令执行58-67">
-      ctfshow命令执行58-67 <i class="fa fa-chevron-right"></i>
+    <a href="/2021/04/19/ctfshow%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E7%BB%95%E8%BF%87disable_functions/" rel="next" title="ctfshow命令执行绕过disable_functions">
+      ctfshow命令执行绕过disable_functions <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -316,7 +345,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%90%E7%94%A8tensorflow2%E5%9C%A8%E8%AE%BE%E8%AE%A1%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E5%92%8Cbug"><span class="nav-number">1.</span> <span class="nav-text">运用tensorflow2在设计卷积神经网络时遇到的问题和bug</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#bug1%EF%BC%9ATensorFlow2%E4%B8%8ETensorFlow1%E4%B8%8D%E5%85%BC%E5%AE%B9%E7%9A%84%E9%97%AE%E9%A2%98%E3%80%82"><span class="nav-number">1.1.</span> <span class="nav-text">bug1：TensorFlow2与TensorFlow1不兼容的问题。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%9A"><span class="nav-number">1.1.1.</span> <span class="nav-text">解决方案：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%99%E5%87%BA%E4%B8%A4%E7%A7%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%9A"><span class="nav-number">1.1.1.0.1.</span> <span class="nav-text">给出两种解决方案：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5%EF%BC%9A"><span class="nav-number">1.1.2.</span> <span class="nav-text">参考链接：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bug2-cv2-imread-%E8%AF%BB%E5%8F%96%E5%9B%BE%E7%89%87%E8%BF%94%E5%9B%9Enone%E3%80%82"><span class="nav-number">1.2.</span> <span class="nav-text">bug2:cv2.imread()读取图片返回none。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%9A-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">解决方案：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A01%EF%BC%9A%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84%E5%BD%A2%E5%BC%8F%E4%B9%A6%E5%86%99%E9%94%99%E8%AF%AF"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">原因1：图片路径形式书写错误</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A02%EF%BC%9A%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84%E6%B2%A1%E6%9C%89%E5%86%99%E5%85%A8"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">原因2：图片路径没有写全</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A03%EF%BC%9A%E8%B7%AF%E5%BE%84%E4%B8%AD%E5%B8%A6%E4%B8%AD%E6%96%87"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">原因3：路径中带中文</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A04%EF%BC%9A%E5%9B%BE%E7%89%87%E6%95%B0%E9%87%8F%E4%B8%8D%E4%B8%80%E8%87%B4"><span class="nav-number">1.2.1.4.</span> <span class="nav-text">原因4：图片数量不一致</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5%EF%BC%9A-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">参考链接：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bug3-checkpoint%E6%96%87%E4%BB%B6%E5%86%85%E9%83%A8%E8%AE%BE%E7%BD%AE%E3%80%82"><span class="nav-number">1.3.</span> <span class="nav-text">bug3:checkpoint文件内部设置。</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%90%E7%94%A8tensorflow2%E5%9C%A8%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E5%92%8Cbug"><span class="nav-number">1.</span> <span class="nav-text">运用tensorflow2在人脸识别中遇到的问题和bug</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#bug1%EF%BC%9ATensorFlow2%E4%B8%8ETensorFlow1%E4%B8%8D%E5%85%BC%E5%AE%B9%E7%9A%84%E9%97%AE%E9%A2%98%E3%80%82"><span class="nav-number">1.1.</span> <span class="nav-text">bug1：TensorFlow2与TensorFlow1不兼容的问题。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%9A"><span class="nav-number">1.1.1.</span> <span class="nav-text">解决方案：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%99%E5%87%BA%E4%B8%A4%E7%A7%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%9A"><span class="nav-number">1.1.1.0.1.</span> <span class="nav-text">给出两种解决方案：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5%EF%BC%9A"><span class="nav-number">1.1.2.</span> <span class="nav-text">参考链接：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bug2-cv2-imread-%E8%AF%BB%E5%8F%96%E5%9B%BE%E7%89%87%E8%BF%94%E5%9B%9Enone%E3%80%82"><span class="nav-number">1.2.</span> <span class="nav-text">bug2:cv2.imread()读取图片返回none。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%9A-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">解决方案：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A01%EF%BC%9A%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84%E5%BD%A2%E5%BC%8F%E4%B9%A6%E5%86%99%E9%94%99%E8%AF%AF"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">原因1：图片路径形式书写错误</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A02%EF%BC%9A%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84%E6%B2%A1%E6%9C%89%E5%86%99%E5%85%A8"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">原因2：图片路径没有写全</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A03%EF%BC%9A%E8%B7%AF%E5%BE%84%E4%B8%AD%E5%B8%A6%E4%B8%AD%E6%96%87"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">原因3：路径中带中文</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A04%EF%BC%9A%E5%9B%BE%E7%89%87%E6%95%B0%E9%87%8F%E4%B8%8D%E4%B8%80%E8%87%B4"><span class="nav-number">1.2.1.4.</span> <span class="nav-text">原因4：图片数量不一致</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5%EF%BC%9A-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">参考链接：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bug3-checkpoint%E6%96%87%E4%BB%B6%E5%86%85%E9%83%A8%E8%AE%BE%E7%BD%AE%E3%80%82"><span class="nav-number">1.3.</span> <span class="nav-text">bug3:checkpoint文件内部设置。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bug4-saver-restore%E6%81%A2%E5%A4%8D%E6%A8%A1%E5%9E%8B%E6%8A%A5%E9%94%99"><span class="nav-number">1.4.</span> <span class="nav-text">bug4:saver.restore恢复模型报错</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -368,13 +397,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">12k</span>
+    <span title="站点总字数">14k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">11 分钟</span>
+    <span title="站点阅读时长">13 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
@@ -432,7 +461,7 @@
   
 
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"left","width":250,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"left","width":250,"height":600},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/love.js"></script>
