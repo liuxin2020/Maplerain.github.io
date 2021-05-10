@@ -263,7 +263,6 @@
       
         <h1 id="运用tensorflow2在人脸识别中遇到的问题和bug"><a href="#运用tensorflow2在人脸识别中遇到的问题和bug" class="headerlink" title="运用tensorflow2在人脸识别中遇到的问题和bug"></a>运用tensorflow2在人脸识别中遇到的问题和bug</h1><p>之前做科创项目时遇到的一些问题的解决方案，特此记录。</p>
 <span id="more"></span>
-
 <h2 id="bug1：TensorFlow2与TensorFlow1不兼容的问题。"><a href="#bug1：TensorFlow2与TensorFlow1不兼容的问题。" class="headerlink" title="bug1：TensorFlow2与TensorFlow1不兼容的问题。"></a>bug1：TensorFlow2与TensorFlow1不兼容的问题。</h2><p>这是目前最为常见的问题，由于卷积神经网络最火的时间在18年，当时产出了大量优质的项目和开源代码供使用。但如果今日想要复现当时的成果时，会遭遇TensorFlow和python版本更新后不兼容的问题。</p>
 <p>推测当时版本：TensorFlow1，python3.6</p>
 <p>根据网上报错的解答，可以得知TensorFlow1.13版本不兼容python3.7环境，偌使用python3.7环境，建议将TensorFlow更新至1.15。</p>
@@ -274,36 +273,30 @@
 <h5 id="给出两种解决方案："><a href="#给出两种解决方案：" class="headerlink" title="给出两种解决方案："></a>给出两种解决方案：</h5><p>1、卸载当前版本TensorFlow，回到源代码版本的TensorFlow</p>
 <p>2、将以下代码进行修改：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br></pre></td></tr></table></figure>
-
 <p>改为：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow.compat.v1 <span class="keyword">as</span> tf</span><br><span class="line">tf.disable_v2_behavior()</span><br></pre></td></tr></table></figure>
-
 <p>此法可以解决90%的报错。但是有一个例外，也就是<u><strong>contrib</strong></u>模块。</p>
 <p>此模块的解决方案：建议回TensorFlow1+python3.6，或者根据官方文档及上述引用链接自行修改。</p>
 <p><strong>4月20日更新：</strong></p>
 <p>contrib模块中的slim已经没了，如果需要调用slim模块，需要</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install tf_slim</span><br></pre></td></tr></table></figure>
-
 <p>将配置文件中的</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slim = tf.contrib.slim()</span><br></pre></td></tr></table></figure>
-
 <p>全部改为</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slim = tf_slim()</span><br></pre></td></tr></table></figure>
-
 <p>且加上关闭TensorFlow2功能的相关语句。</p>
 <h3 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h3><blockquote>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/kyle1314608/article/details/100594884">https://blog.csdn.net/kyle1314608/article/details/100594884</a></p>
 </blockquote>
 <h2 id="bug2-cv2-imread-读取图片返回none。"><a href="#bug2-cv2-imread-读取图片返回none。" class="headerlink" title="bug2:cv2.imread()读取图片返回none。"></a>bug2:cv2.imread()读取图片返回none。</h2><p>读取图片返回空，会直接导致后期图片处理出问题，例如：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv2.error: OpenCV(3.4.3) C:\projects\opencv-python\opencv\modules\imgproc\src\resize.cpp:4044: error: (-215:Assertion failed) !ssize.empty() in function &#39;cv::resize’</span><br></pre></td></tr></table></figure>
-
 <h3 id="解决方案：-1"><a href="#解决方案：-1" class="headerlink" title="解决方案："></a>解决方案：</h3><h4 id="原因1：图片路径形式书写错误"><a href="#原因1：图片路径形式书写错误" class="headerlink" title="原因1：图片路径形式书写错误"></a>原因1：图片路径形式书写错误</h4><p>\在程序中为转义符号，不可用错</p>
 <p>OpenCV读取路径单路径即可，不需要 // </p>
 <p>错误的形式：C:\Users\Desktop\test<br>正确的应该：C:/Users/Desktop/test/</p>
 <h4 id="原因2：图片路径没有写全"><a href="#原因2：图片路径没有写全" class="headerlink" title="原因2：图片路径没有写全"></a>原因2：图片路径没有写全</h4><p>具体图片精确到 .jpg/.png</p>
 <p>具体文件夹精确到：test/</p>
 <p>正确的应该：C:/Users/Desktop/test/</p>
-<h4 id="原因3：路径中带中文"><a href="#原因3：路径中带中文" class="headerlink" title="原因3：路径中带中文"></a>原因3：路径中带中文</h4><p>路径中绝对绝对绝对绝对绝对绝对不要有任何***<u>中文</u>***！！！特别是python3环境下</p>
+<h4 id="原因3：路径中带中文"><a href="#原因3：路径中带中文" class="headerlink" title="原因3：路径中带中文"></a>原因3：路径中带中文</h4><p>路径中绝对绝对绝对绝对绝对绝对不要有任何<strong><em><u>中文</u></em></strong>！！！特别是python3环境下</p>
 <h4 id="原因4：图片数量不一致"><a href="#原因4：图片数量不一致" class="headerlink" title="原因4：图片数量不一致"></a>原因4：图片数量不一致</h4><p>你有多少图片，就搞多少图片，别自己变图片出来。</p>
 <p>主要在循环遍历时才会遇到这个问题</p>
 <h3 id="参考链接：-1"><a href="#参考链接：-1" class="headerlink" title="参考链接："></a>参考链接：</h3><blockquote>
@@ -311,15 +304,12 @@
 </blockquote>
 <h2 id="bug3-checkpoint文件内部设置。"><a href="#bug3-checkpoint文件内部设置。" class="headerlink" title="bug3:checkpoint文件内部设置。"></a>bug3:checkpoint文件内部设置。</h2><p>以我的为参考：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">G:&#x2F;science&#x2F;trainmodel&#x2F;model-600</span><br></pre></td></tr></table></figure>
-
 <p>注意 ‘ / ‘ 以及模型不带后缀。</p>
 <p>另外，训练时生成模型使用的函数：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">saver.save(sess, <span class="string">&#x27;G:/science/trainmodel/model&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
 <p>中的路径部分采用windows格式的 ‘ / ‘即可，我之前写python路径写顺手了，直接写了全部 // ，直接GG</p>
 <h2 id="bug4-saver-restore恢复模型报错"><a href="#bug4-saver-restore恢复模型报错" class="headerlink" title="bug4:saver.restore恢复模型报错"></a>bug4:saver.restore恢复模型报错</h2><p>经典坑位之一，附上我的代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">saver.restore(sess, tf.train.latest_checkpoint(<span class="string">&#x27;G:/science/trainmodel&#x27;</span>))</span><br></pre></td></tr></table></figure>
-
 <p>tf.train一行指调用生成的最后一个模型，还有多种参数可以按需使用。</p>
 <p>路径单双斜杠均不受影响。</p>
 
@@ -471,13 +461,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">266k</span>
+    <span title="站点总字数">84k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">4:02</span>
+    <span title="站点阅读时长">1:16</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
