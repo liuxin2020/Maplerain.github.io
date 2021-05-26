@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/20210420122405.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/20210420122405.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/20210420122405.jpg">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"D:\\study\\blog\\node_modules\\hexo-generator-searchdb\\templates\\search.xml"};
+  </script>
+
+  <meta name="description" content="美团CTF密码部分wp比赛的时候做出了easy_RSA，然后random的RSA部分做了一半，可惜不懂pwn模块，没写出nc爆破的脚本。RSAsig在第二天复现即将做出来的时候，平台靶机关了，难受。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MTCTF密码部分wp">
+<meta property="og:url" content="http://example.com/2021/05/25/MTCTF%E5%AF%86%E7%A0%81%E9%83%A8%E5%88%86wp/index.html">
+<meta property="og:site_name" content="枫霜月雨のblog">
+<meta property="og:description" content="美团CTF密码部分wp比赛的时候做出了easy_RSA，然后random的RSA部分做了一半，可惜不懂pwn模块，没写出nc爆破的脚本。RSAsig在第二天复现即将做出来的时候，平台靶机关了，难受。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/05/26/VToBR4vLhIWsUKd.png">
+<meta property="article:published_time" content="2021-05-25T02:28:06.000Z">
+<meta property="article:modified_time" content="2021-05-26T00:20:07.507Z">
+<meta property="article:author" content="枫霜月雨">
+<meta property="article:tag" content="比赛复现">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/05/26/VToBR4vLhIWsUKd.png">
+
+<link rel="canonical" href="http://example.com/2021/05/25/MTCTF%E5%AF%86%E7%A0%81%E9%83%A8%E5%88%86wp/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>MTCTF密码部分wp | 枫霜月雨のblog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">枫霜月雨のblog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Maple-rain</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/25/MTCTF%E5%AF%86%E7%A0%81%E9%83%A8%E5%88%86wp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/face.jpg">
+      <meta itemprop="name" content="枫霜月雨">
+      <meta itemprop="description" content="天行健，君子以自强不息">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="枫霜月雨のblog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MTCTF密码部分wp
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-05-25 10:28:06" itemprop="dateCreated datePublished" datetime="2021-05-25T10:28:06+08:00">2021-05-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-26 08:20:07" itemprop="dateModified" datetime="2021-05-26T08:20:07+08:00">2021-05-26</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>14k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>13 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="美团CTF密码部分wp"><a href="#美团CTF密码部分wp" class="headerlink" title="美团CTF密码部分wp"></a>美团CTF密码部分wp</h1><p>比赛的时候做出了easy_RSA，然后random的RSA部分做了一半，可惜不懂pwn模块，没写出nc爆破的脚本。RSAsig在第二天复现即将做出来的时候，平台靶机关了，难受。</p>
+<span id="more"></span>
+<h2 id="easy-RSA"><a href="#easy-RSA" class="headerlink" title="easy_RSA"></a>easy_RSA</h2><p>经典套娃题</p>
+<h3 id="第一层"><a href="#第一层" class="headerlink" title="第一层"></a>第一层</h3><h4 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">n=<span class="number">0x9371c61a2b760109781f229d43c6f05b58de65aa2a674ff92334cb5219132448d72c1293c145eb6f35e58791669f2d8d3b6ce506f4b3543beb947cf119f463a00bd33a33c4d566c4fd3f4c73c697fa5f3bf65976284b9cc96ec817241385d480003cdda9649fa0995b013e66f583c9a9710f7e18396fbf461cb31720f94a0f79L</span></span><br><span class="line">e=<span class="number">0x3</span></span><br><span class="line">encrypt(m)=<span class="number">0x5f4e03f28702208b215f39f1c8598b77074bfa238dfb9ce424af7cc8a61f7ea48ffbbd5a5e1a10f686c3f240e85d011f6c8b968d1d607b2e1d5a78ad6947b7d3ec8f33ad32489befab601fe745164e4ff4aed7630da89af7f902f6a1bf7266c9c95b29f2c69c33b93a709f282d43b10c61b1a1fe76f5fee970780d7512389fd1L</span></span><br><span class="line">encrypt(m+<span class="number">1</span>)=<span class="number">0x5f4e03f28702208b215f39f1c8598b77074bfa238dfb9ce424af7cc8a61f7ea48ffc5c26b0c12bcff9f697f274f59f0e55a147768332fc1f1bac5bbc8f9bb508104f232bdd20091d26adc52e36feda4a156eae7dce4650f83fabc828fdcfb01d25efb98db8b94811ca855a6aa77caff991e7b986db844ff7a140218449aaa7e8L</span></span><br></pre></td></tr></table></figure>
+<h4 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h4><p>原题，一个字不改的，直接上exp了：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getM2</span>(<span class="params">a,b,c1,c2,n,e</span>):</span></span><br><span class="line">    a3 = <span class="built_in">pow</span>(a,e,n)</span><br><span class="line">    b3 = <span class="built_in">pow</span>(b,e,n)</span><br><span class="line">    first = c1-a3*c2+<span class="number">2</span>*b3</span><br><span class="line">    first = first % n</span><br><span class="line">    second = e*b*(a3*c2-b3)</span><br><span class="line">    second = second % n</span><br><span class="line">    third = second*inverse(first,n)</span><br><span class="line">    third = third % n</span><br><span class="line">    fourth = (third+b)*inverse(a,n)</span><br><span class="line">    <span class="keyword">return</span> fourth % n</span><br><span class="line">e=<span class="number">0x3</span></span><br><span class="line">a=<span class="number">1</span></span><br><span class="line">b=-<span class="number">1</span></span><br><span class="line">c1=<span class="number">0x5f4e03f28702208b215f39f1c8598b77074bfa238dfb9ce424af7cc8a61f7ea48ffbbd5a5e1a10f686c3f240e85d011f6c8b968d1d607b2e1d5a78ad6947b7d3ec8f33ad32489befab601fe745164e4ff4aed7630da89af7f902f6a1bf7266c9c95b29f2c69c33b93a709f282d43b10c61b1a1fe76f5fee970780d7512389fd1</span></span><br><span class="line">c2=<span class="number">0x5f4e03f28702208b215f39f1c8598b77074bfa238dfb9ce424af7cc8a61f7ea48ffc5c26b0c12bcff9f697f274f59f0e55a147768332fc1f1bac5bbc8f9bb508104f232bdd20091d26adc52e36feda4a156eae7dce4650f83fabc828fdcfb01d25efb98db8b94811ca855a6aa77caff991e7b986db844ff7a140218449aaa7e8</span></span><br><span class="line">padding2=<span class="number">1</span></span><br><span class="line">n=<span class="number">0x9371c61a2b760109781f229d43c6f05b58de65aa2a674ff92334cb5219132448d72c1293c145eb6f35e58791669f2d8d3b6ce506f4b3543beb947cf119f463a00bd33a33c4d566c4fd3f4c73c697fa5f3bf65976284b9cc96ec817241385d480003cdda9649fa0995b013e66f583c9a9710f7e18396fbf461cb31720f94a0f79</span></span><br><span class="line">m = getM2(a,b,c1,c2,n,e)-padding2</span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(m))</span><br></pre></td></tr></table></figure>
+<p>解出来</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">the key is :everything_is_easy_in_this_question</span><br></pre></td></tr></table></figure>
+<p>即为压缩包密码，然后进入第二层</p>
+<h4 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h4><p>原理参考：<a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/158944">浅析RSA Padding Attack</a></p>
+<p>脚本参考：<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/6459">深入浅出RSA在CTF中的攻击套路</a></p>
+<h3 id="第二层"><a href="#第二层" class="headerlink" title="第二层"></a>第二层</h3><p>题目给了提示，one_time_cipher，一次一密。额，又是原题，但不完全是。需要修改一下。</p>
+<h4 id="题目"><a href="#题目" class="headerlink" title="题目:"></a>题目:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">280316470206017f5f163a3460100b111b2c254e103715600f13,</span><br><span class="line">091b0f471d05153811122c70340c0111053a394e0b39500f0a18,</span><br><span class="line">4638080a1e49243e55531a3e23161d411a362e4044111f374409,</span><br><span class="line">0e0d15470206017f59122935601405421d3a244e10371560140f,</span><br><span class="line">031a08080e1a540d62327f242517101d4e2b2807177f13280511,</span><br><span class="line">0a090f001e491d2c111d3024601405431a36231b083e022c1d,</span><br><span class="line">16000406080c543854077f24280144451c2a254e093a0333051a,</span><br><span class="line">02050701120a01334553393f32441d5e1b716027107f19334417,</span><br><span class="line">131f15470800192f5d167f352e0716481e2b29010a7139600c12,</span><br><span class="line">1609411e141c543c501d7f232f0812544e2b2807177f00320b1f,</span><br><span class="line">0a090c470a1c1d3c5a1f2670210a0011093a344e103715600712,</span><br><span class="line">141e04040f49153142043a22601711520d3a331d0826</span><br></pre></td></tr></table></figure>
+<h4 id="解答：-1"><a href="#解答：-1" class="headerlink" title="解答："></a>解答：</h4><p>exp:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment">## OTP - Recovering the private key from a set of messages that were encrypted w/ the same private key (Many time pad attack) - crypto100-many_time_secret @ alexctf 2017</span></span><br><span class="line"><span class="comment"># @author intrd - http://dann.com.br/ </span></span><br><span class="line"><span class="comment"># Original code by jwomers: https://github.com/Jwomers/many-time-pad-attack/blob/master/attack.py)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> collections</span><br><span class="line"><span class="keyword">import</span> sets, sys</span><br><span class="line"></span><br><span class="line"><span class="comment"># 11 unknown ciphertexts (in hex format), all encrpyted with the same key</span></span><br><span class="line"></span><br><span class="line">c1 = <span class="string">"280316470206017f5f163a3460100b111b2c254e103715600f13"</span></span><br><span class="line">c2 = <span class="string">"091b0f471d05153811122c70340c0111053a394e0b39500f0a18"</span></span><br><span class="line">c3 = <span class="string">"4638080a1e49243e55531a3e23161d411a362e4044111f374409"</span></span><br><span class="line">c4 = <span class="string">"0e0d15470206017f59122935601405421d3a244e10371560140f"</span></span><br><span class="line">c5 = <span class="string">"031a08080e1a540d62327f242517101d4e2b2807177f13280511"</span></span><br><span class="line">c6 = <span class="string">"0a090f001e491d2c111d3024601405431a36231b083e022c1d"</span></span><br><span class="line">c7 = <span class="string">"16000406080c543854077f24280144451c2a254e093a0333051a"</span></span><br><span class="line">c8 = <span class="string">"02050701120a01334553393f32441d5e1b716027107f19334417"</span></span><br><span class="line">c9 = <span class="string">"131f15470800192f5d167f352e0716481e2b29010a7139600c12"</span></span><br><span class="line">c10 = <span class="string">"1609411e141c543c501d7f232f0812544e2b2807177f00320b1f"</span></span><br><span class="line">c11 = <span class="string">"0a090c470a1c1d3c5a1f2670210a0011093a344e103715600712"</span></span><br><span class="line">ciphers = [c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11]</span><br><span class="line"><span class="comment"># The target ciphertext we want to crack</span></span><br><span class="line">target_cipher = <span class="string">"141e04040f49153142043a22601711520d3a331d0826"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># XORs two string</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">strxor</span>(<span class="params">a, b</span>):</span>     <span class="comment"># xor two strings (trims the longer input)</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">""</span>.join([<span class="built_in">chr</span>(<span class="built_in">ord</span>(x) ^ <span class="built_in">ord</span>(y)) <span class="keyword">for</span> (x, y) <span class="keyword">in</span> <span class="built_in">zip</span>(a, b)])</span><br><span class="line"></span><br><span class="line"><span class="comment"># To store the final key</span></span><br><span class="line">final_key = [<span class="literal">None</span>]*<span class="number">150</span></span><br><span class="line"><span class="comment"># To store the positions we know are broken</span></span><br><span class="line">known_key_positions = <span class="built_in">set</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># For each ciphertext</span></span><br><span class="line"><span class="keyword">for</span> current_index, ciphertext <span class="keyword">in</span> <span class="built_in">enumerate</span>(ciphers):</span><br><span class="line">	counter = collections.Counter()</span><br><span class="line">	<span class="comment"># for each other ciphertext</span></span><br><span class="line">	<span class="keyword">for</span> index, ciphertext2 <span class="keyword">in</span> <span class="built_in">enumerate</span>(ciphers):</span><br><span class="line">		<span class="keyword">if</span> current_index != index: <span class="comment"># don't xor a ciphertext with itself</span></span><br><span class="line">			<span class="keyword">for</span> indexOfChar, char <span class="keyword">in</span> <span class="built_in">enumerate</span>(strxor(ciphertext.decode(<span class="string">'hex'</span>), ciphertext2.decode(<span class="string">'hex'</span>))): <span class="comment"># Xor the two ciphertexts</span></span><br><span class="line">				<span class="comment"># If a character in the xored result is a alphanumeric character, it means there was probably a space character in one of the plaintexts (we don't know which one)</span></span><br><span class="line">				<span class="keyword">if</span> char <span class="keyword">in</span> string.printable <span class="keyword">and</span> char.isalpha(): counter[indexOfChar] += <span class="number">1</span> <span class="comment"># Increment the counter at this index</span></span><br><span class="line">	knownSpaceIndexes = []</span><br><span class="line"></span><br><span class="line">	<span class="comment"># Loop through all positions where a space character was possible in the current_index cipher</span></span><br><span class="line">	<span class="keyword">for</span> ind, val <span class="keyword">in</span> counter.items():</span><br><span class="line">		<span class="comment"># If a space was found at least 7 times at this index out of the 9 possible XORS, then the space character was likely from the current_index cipher!</span></span><br><span class="line">		<span class="keyword">if</span> val &gt;= <span class="number">7</span>: knownSpaceIndexes.append(ind)</span><br><span class="line">	<span class="comment">#print knownSpaceIndexes # Shows all the positions where we now know the key!</span></span><br><span class="line"></span><br><span class="line">	<span class="comment"># Now Xor the current_index with spaces, and at the knownSpaceIndexes positions we get the key back!</span></span><br><span class="line">	xor_with_spaces = strxor(ciphertext.decode(<span class="string">'hex'</span>),<span class="string">' '</span>*<span class="number">150</span>)</span><br><span class="line">	<span class="keyword">for</span> index <span class="keyword">in</span> knownSpaceIndexes:</span><br><span class="line">		<span class="comment"># Store the key's value at the correct position</span></span><br><span class="line">		final_key[index] = xor_with_spaces[index].encode(<span class="string">'hex'</span>)</span><br><span class="line">		<span class="comment"># Record that we known the key at this position</span></span><br><span class="line">		known_key_positions.add(index)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Construct a hex key from the currently known key, adding in '00' hex chars where we do not know (to make a complete hex string)</span></span><br><span class="line">final_key_hex = <span class="string">''</span>.join([val <span class="keyword">if</span> val <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">else</span> <span class="string">'00'</span> <span class="keyword">for</span> val <span class="keyword">in</span> final_key])</span><br><span class="line"><span class="comment"># Xor the currently known key with the target cipher</span></span><br><span class="line">output = strxor(target_cipher.decode(<span class="string">'hex'</span>),final_key_hex.decode(<span class="string">'hex'</span>))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> <span class="string">"Fix this sentence:"</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">''</span>.join([char <span class="keyword">if</span> index <span class="keyword">in</span> known_key_positions <span class="keyword">else</span> <span class="string">'*'</span> <span class="keyword">for</span> index, char <span class="keyword">in</span> <span class="built_in">enumerate</span>(output)])+<span class="string">"\n"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># WAIT.. MANUAL STEP HERE </span></span><br><span class="line"><span class="comment"># This output are printing a * if that character is not known yet</span></span><br><span class="line"><span class="comment"># fix the missing characters like this: "Let*M**k*ow if *o{*a" = "cure, Let Me know if you a"</span></span><br><span class="line"><span class="comment"># if is too hard, change the target_cipher to another one and try again</span></span><br><span class="line"><span class="comment"># and we have our key to fix the entire text!</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#sys.exit(0) #comment and continue if u got a good key</span></span><br><span class="line">list1=<span class="string">' abcdefghijklmnopqrstuvwxyz'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">26</span>):</span><br><span class="line">	<span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">26</span>):</span><br><span class="line">		<span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">26</span>):</span><br><span class="line"></span><br><span class="line">			target_plaintext = <span class="string">"r{0}e{1}{2} answer successly"</span>.<span class="built_in">format</span>(list1[i],list1[j],list1[k])</span><br><span class="line"><span class="comment"># print "Fixed:"</span></span><br><span class="line"><span class="comment"># print target_plaintext+"\n"</span></span><br><span class="line"></span><br><span class="line">			key = strxor(target_cipher.decode(<span class="string">'hex'</span>),target_plaintext)</span><br><span class="line"></span><br><span class="line"><span class="comment">#print "Decrypted msg:"</span></span><br><span class="line"><span class="comment">#for cipher in ciphers:</span></span><br><span class="line"><span class="comment">#	print strxor(cipher.decode('hex'),key)</span></span><br><span class="line">			<span class="keyword">if</span> <span class="string">'flag{'</span> <span class="keyword">in</span> key:</span><br><span class="line">				<span class="built_in">print</span> target_plaintext</span><br><span class="line">				<span class="built_in">print</span> <span class="string">"\nPrivate key recovered: "</span>+key+<span class="string">"\n"</span></span><br><span class="line">				<span class="keyword">for</span> cipher <span class="keyword">in</span> ciphers:</span><br><span class="line">					<span class="built_in">print</span> strxor(cipher.decode(<span class="string">'hex'</span>),key)</span><br><span class="line"></span><br><span class="line"><span class="comment"># print "Fixed:"</span></span><br><span class="line"><span class="comment"># print target_plaintext+"\n"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># key = strxor(target_cipher.decode('hex'),target_plaintext)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># print "Decrypted msg:"</span></span><br><span class="line"><span class="comment"># for cipher in ciphers:</span></span><br><span class="line"><span class="comment"># 	print strxor(cipher.decode('hex'),key)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># print "\nPrivate key recovered: "+key+"\n"</span></span><br></pre></td></tr></table></figure>
+<p>得到的密文为<code>r*e** answer succks*ly</code></p>
+<p>爆破恢复+猜测后，得到实际密文:<code>rrect answer successly</code></p>
+<p>明文段落：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Now you need to use th</span><br><span class="line">own flag as the key of</span><br><span class="line"> Time Pad Encryptin. N</span><br><span class="line">hat you have passed th</span><br><span class="line">evious RSA test, this </span><br><span class="line">lenge is not particula</span><br><span class="line">please get the true me</span><br><span class="line">difficult for you. It </span><br><span class="line">ust simple encryption.</span><br><span class="line">pe you can solve this </span><br><span class="line">lem quickly and get th</span><br><span class="line">rrect answer successly</span><br></pre></td></tr></table></figure>
+<p>得到flag：<code>flag{it_1s_P@dd1n_@nd_</code>好恶心啊，缺了几个字符。</p>
+<p>仔细看明文出来的，缺了字母，恶心坏了。</p>
+<p>缺了4个字节，最后一个字节肯定是<code>}</code>，复原第八行明文后异或爆破前三位，得到flag</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">xor_bytes</span>(<span class="params">key_stream, message</span>):</span></span><br><span class="line">    length = <span class="built_in">min</span>(<span class="built_in">len</span>(key_stream), <span class="built_in">len</span>(message))</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">bytes</span>([key_stream[i]^ message[i] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(length)])</span><br><span class="line"> </span><br><span class="line">message = <span class="string">b"difficult for you. It is j"</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">128</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">128</span>):</span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">128</span>):</span><br><span class="line">            key_stream = <span class="string">b'flag{it_1s_P@dd1n_@nd_'</span>+<span class="string">f'<span class="subst">{<span class="built_in">chr</span>(i)}</span>'</span>.encode()+<span class="string">f'<span class="subst">{<span class="built_in">chr</span>(j)}</span>'</span>.encode()+<span class="string">f'<span class="subst">{<span class="built_in">chr</span>(k)}</span>'</span>.encode()+<span class="string">b'}'</span></span><br><span class="line">            cipher = xor_bytes(key_stream, message)</span><br><span class="line">            <span class="keyword">if</span> cipher.<span class="built_in">hex</span>() == <span class="string">"02050701120a01334553393f32441d5e1b716027107f19334417"</span>:</span><br><span class="line">                <span class="built_in">print</span>(key_stream)</span><br><span class="line">                <span class="built_in">print</span>(cipher.<span class="built_in">hex</span>())</span><br><span class="line">                <span class="built_in">print</span>(xor_bytes(key_stream, cipher))</span><br></pre></td></tr></table></figure>
+<h4 id="参考链接：-1"><a href="#参考链接：-1" class="headerlink" title="参考链接："></a>参考链接：</h4><p><a target="_blank" rel="noopener" href="http://dann.com.br/alexctf2k17-crypto100-many_time_secrets/">alexctf2k17-crypto100</a>（类似例题有杭电2019week1）</p>
+<p><a target="_blank" rel="noopener" href="https://www.wkr.moe/ctf/536.html">Wankko ReeのBlog</a></p>
+<h2 id="RSAsig"><a href="#RSAsig" class="headerlink" title="RSAsig"></a>RSAsig</h2><h3 id="题目：-1"><a href="#题目：-1" class="headerlink" title="题目："></a>题目：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#encoding:utf-8</span></span><br><span class="line"><span class="keyword">import</span> signal</span><br><span class="line"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> Crypto.Util.number</span><br><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> flag</span><br><span class="line"><span class="keyword">from</span> base64 <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> Crypto <span class="keyword">import</span> Random</span><br><span class="line"><span class="keyword">from</span> proof_of_work <span class="keyword">import</span> proof_of_work</span><br><span class="line">banner = <span class="string">'''</span></span><br><span class="line"><span class="string"> ____                             ____  _                   _</span></span><br><span class="line"><span class="string">/ ___|  ___  ___ _   _ _ __ ___  / ___|(_) __ _ _ __   __ _| |_ _   _ _ __ ___</span></span><br><span class="line"><span class="string">\___ \ / _ \/ __| | | | '__/ _ \ \___ \| |/ _` | '_ \ / _` | __| | | | '__/ _ \</span></span><br><span class="line"><span class="string"> ___) |  __/ (__| |_| | | |  __/  ___) | | (_| | | | | (_| | |_| |_| | | |  __/</span></span><br><span class="line"><span class="string">|____/ \___|\___|\__,_|_|  \___| |____/|_|\__, |_| |_|\__,_|\__|\__,_|_|  \___|</span></span><br><span class="line"><span class="string">                                          |___/</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dosend</span>(<span class="params">m</span>):</span></span><br><span class="line">    sys.stdout.flush()</span><br><span class="line">    <span class="built_in">print</span>(m)</span><br><span class="line">    sys.stdout.flush()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dorecv</span>():</span></span><br><span class="line">    sys.stdout.flush()</span><br><span class="line">    <span class="keyword">return</span> sys.stdin.readline().strip()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen</span>():</span></span><br><span class="line">    random_generator = Random.new().read</span><br><span class="line">    rsa = RSA.generate(<span class="number">1024</span>, random_generator)</span><br><span class="line">    private_pem = rsa</span><br><span class="line">    <span class="keyword">return</span> private_pem</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    rsakey = gen()</span><br><span class="line">    a = RSA._RSAobj(<span class="literal">None</span>, rsakey)</span><br><span class="line">    modBits = Crypto.Util.number.size(rsakey.n)</span><br><span class="line">    k = ceil_div(modBits,<span class="number">8</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">True</span>):</span><br><span class="line">        dosend(<span class="string">"Welcome to this secure cryptosystem:"</span>)</span><br><span class="line">        dosend(<span class="string">"1.Get flag.\n2.Have my signature.\n3.Exit.\n4.Get my key."</span>)</span><br><span class="line">        dosend(<span class="string">"What is your choice?"</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            option = <span class="built_in">int</span>(dorecv().strip())</span><br><span class="line">            <span class="keyword">if</span> option == <span class="number">1</span>:</span><br><span class="line">                cipher = rsakey.encrypt(flag, k)</span><br><span class="line">                dosend(b64encode(cipher[<span class="number">0</span>]))</span><br><span class="line">            <span class="keyword">elif</span> option == <span class="number">2</span>:</span><br><span class="line">                dosend(<span class="string">"What message to sign?"</span>)</span><br><span class="line">                m = <span class="built_in">int</span>(dorecv().strip())</span><br><span class="line">                sign = a.sign(m, k)</span><br><span class="line">                dosend(<span class="built_in">str</span>(sign[<span class="number">0</span>][<span class="number">0</span>]))</span><br><span class="line">            <span class="keyword">elif</span> option == <span class="number">3</span>:</span><br><span class="line">                dosend(<span class="string">"Bye~"</span>)</span><br><span class="line">                exit()</span><br><span class="line">            <span class="keyword">elif</span> option == <span class="number">4</span>:</span><br><span class="line">                dosend(<span class="built_in">str</span>(rsakey.n))</span><br><span class="line">                dosend(<span class="built_in">str</span>(rsakey.e))</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                dosend(<span class="string">"Invalid choice!"</span>)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            exit()</span><br><span class="line"><span class="comment">#if  proof_of_work():</span></span><br><span class="line"><span class="comment">#    exit()</span></span><br><span class="line"><span class="comment">#signal.alarm(20)</span></span><br><span class="line">main()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="解答"><a href="#解答" class="headerlink" title="解答:"></a>解答:</h3><p>第一关为sha224爆破。基操，直接贴exp：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line">str1 = <span class="string">'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890'</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(str1)):</span><br><span class="line">	<span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(str1)):</span><br><span class="line">		<span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(str1)):	</span><br><span class="line">			message = <span class="string">'{0}{1}{2}Vw3UrFafQ94N5k4QB'</span>.<span class="built_in">format</span>(str1[i],str1[j],str1[k])</span><br><span class="line">			<span class="comment">#print(message)</span></span><br><span class="line">			m = hashlib.sha224()</span><br><span class="line">			m.update(message.encode(<span class="string">'utf-8'</span>))</span><br><span class="line">			c = m.hexdigest()</span><br><span class="line">			<span class="keyword">if</span> c == <span class="string">'6da53efa50c3ef1481cc0f403212262dd1bcead74d9f0b34f306318c'</span>:</span><br><span class="line">				<span class="built_in">print</span> (message)</span><br><span class="line">				<span class="built_in">print</span>(c)</span><br></pre></td></tr></table></figure>
+<p>爆破前3位字符，然后进下一关。</p>
+<p>疑似非预期了，昨天早上复现到一半，机器被关了，连不上了。根据VN的wp和大佬的指点，可以想象到解法步骤：</p>
+<p>点1拿到base64，将base64转为十进制数，拿到2里签名。签名出来直接转byte就是flag。</p>
+<p><del>人麻了，人麻了。人麻了？人麻了！</del></p>
+<h2 id="random（第一关RSA部分）"><a href="#random（第一关RSA部分）" class="headerlink" title="random（第一关RSA部分）"></a>random（第一关RSA部分）</h2><p>第一关都没过，还没做到LCG。</p>
+<h3 id="第一关："><a href="#第一关：" class="headerlink" title="第一关："></a>第一关：</h3><h4 id="题目：-2"><a href="#题目：-2" class="headerlink" title="题目："></a>题目：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rsa_sign:pow(m,d,p)</span><br><span class="line">e*d+n:3563329754048976946603729466426236052000141166700839903323255268203185709020494450173369806214666850943076188175778667508946270492708397447950521732324059148390232744011000065982865974194986726739638097566303135573072114448615095262066554751858952042395375417151593676621825939069783767865138657768553767717034970</span><br><span class="line">e*d-n:3563121718917234588723786463275555826875232380691165919033718924958406353810813480184744219046717838078497090403751007254545187720107602959381881715875898243474504999760208133192572812110967142474619366650504948619637909653723376917174456091396220576841259798792078769198369072982063716206690589554604992470787752</span><br><span class="line">tmp = e*d</span><br><span class="line">please sign the message with p:you_can_get_more_message</span><br><span class="line">please enter sign:</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="解答：-2"><a href="#解答：-2" class="headerlink" title="解答："></a>解答：</h4><p>先简单的二元一次方程解出<code>n</code>和<code>e*d</code>的值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">len(bin(tmp))-2=1039</span><br><span class="line">len(bin(n))-2=1024</span><br></pre></td></tr></table></figure>
+<p>可以发现，两者差了15位。</p>
+<script type="math/tex; mode=display">
+\because \,\,e\,\,\cdot \,\,d\,\,\equiv \,\,1\left( mod\,\,\varphi \left( n \right) \right) 
+\\
+\therefore \,\,e\,\,\cdot \,\,d\,\,-1 =\,\,k\,\,\cdot \,\,\varphi \left( n \right) \,\,, k\in N
+\\
+\because \,\,k\,\,=\,\,\frac{\left( e\,\,\cdot \,\,d\,\,-\,\,1 \right)}{\varphi \left( n \right)}
+\\
+\therefore \,\,k\,\,\in \,\,\left[ 2^{15},2^{16} \right]</script><p>写一个脚本爆破phi的值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">phi=[]  <span class="comment">#11个</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>**<span class="number">15</span>,<span class="number">2</span>**<span class="number">16</span>):</span><br><span class="line">	<span class="keyword">if</span> ((tmp-<span class="number">1</span>) // i) * i != tmp-<span class="number">1</span>:</span><br><span class="line">		<span class="keyword">continue</span></span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		phi.append((tmp-<span class="number">1</span>) // i)	</span><br></pre></td></tr></table></figure>
+<p>可以得到有11个可能的phi值。</p>
+<p>随后用z3爆破，得到p和q</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> z3 <span class="keyword">import</span> *</span><br><span class="line">x=Int(<span class="string">'x'</span>)</span><br><span class="line">y=Int(<span class="string">'y'</span>)</span><br><span class="line">s = Solver()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">11</span>):</span><br><span class="line">	s.add(x*y==n)</span><br><span class="line">	s.add(x+y==n-phi[i]+<span class="number">1</span>)</span><br><span class="line">	s.add(x&gt;<span class="number">0</span>)</span><br><span class="line">	s.add(y&gt;<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> s.check()!=sat:</span><br><span class="line">		<span class="keyword">continue</span></span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		<span class="built_in">print</span>(phi[i])</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">'x='</span>,s.model()[x])</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">'y='</span>,s.model()[y])</span><br><span class="line">		<span class="keyword">continue</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">p = <span class="number">10980405508174271259925333166343579553719061316941945190323939083665489902286168861229664589365210026388298173482496757264697996404794685064674668272479771</span></span><br><span class="line">q = <span class="number">9473016801951797771267846445459738473973421588058140695253031511700407533935872397264731631901174665159278878658035094231228063878480145556088206641042779</span></span><br><span class="line">phi=<span class="number">104017565871178939971501575340112562454393004836992144768171622389677604840484994312793583974506432289548886013830127200541386300397244284320008224080452437410449815269897363953401430206474104816882552899007591140131802079961736224008071736969511510673117632180401571196581547933965545949203486211512709601060</span></span><br><span class="line"><span class="comment">#k=34256</span></span><br></pre></td></tr></table></figure>
+<p>然后的操作比较复杂，先素数分解tmp，得到因子</p>
+<p><img src="https://i.loli.net/2021/05/26/VToBR4vLhIWsUKd.png" alt="image-20210526080806673"></p>
+<p>279位显然是可以忽略的，然后用以下代码判断e的因子。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">e=[<span class="number">3</span>,<span class="number">47</span>,<span class="number">97</span>,<span class="number">157</span>,<span class="number">1601</span>,<span class="number">21851</span>,<span class="number">56277292709098311733</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">7</span>):</span><br><span class="line">	<span class="keyword">if</span> tmp // e[i] == inverse(e[i],phi):</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">'e='</span>,e[i])</span><br><span class="line"><span class="comment">#因子为：56277292709098311733</span></span><br></pre></td></tr></table></figure>
+<p>判断完因子后，使其互乘得到所有可能的e。代码来源于Wankko Ree大佬，用的算法类似于DFS。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">a=[<span class="number">3</span>,<span class="number">47</span>,<span class="number">97</span>,<span class="number">157</span>,<span class="number">1601</span>,<span class="number">21851</span>]</span><br><span class="line">b = <span class="built_in">set</span>()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">go</span>(<span class="params">p, t</span>):</span></span><br><span class="line">    b.add(t)</span><br><span class="line">    <span class="keyword">if</span> p == <span class="built_in">len</span>(a):</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    go(p+<span class="number">1</span>, t*a[p])</span><br><span class="line">    go(p+<span class="number">1</span>, t)</span><br><span class="line"></span><br><span class="line">go(<span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line">c = <span class="built_in">list</span>(b)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(b)):</span><br><span class="line">	c[i]*=<span class="number">56277292709098311733</span></span><br><span class="line"><span class="built_in">print</span>(c)</span><br></pre></td></tr></table></figure>
+<p>解出来后，需要爆破所有可能的e，总数量为</p>
+<script type="math/tex; mode=display">
+C_{6}^{0}+C_{6}^{1}+C_{6}^{2}+C_{6}^{3}+C_{6}^{4}+C_{6}^{5}+C_{6}^{6}=64</script><p>应该是很好理解的，然后pq的值不确定，同样需要爆破。由于需要用到pwn的remote模块，而我完全不会。同时靶机也在第二天关闭，未能完整复现。根据已有WP，e的值应该是<code>5627729270909831173 * 3 * 21851</code>，然后根据题目要求sign：<code>pow(m,d,p)</code>签名。</p>
+<p>后半部分LCG未能复现。</p>
+<h3 id="参考链接：-2"><a href="#参考链接：-2" class="headerlink" title="参考链接："></a>参考链接：</h3><p>WP参考VN战队wp，中间的递归求e来自于Wankko Ree大佬。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%AF%94%E8%B5%9B%E5%A4%8D%E7%8E%B0/" rel="tag"># 比赛复现</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/05/22/%E9%AB%98%E6%95%B0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%9E%81%E9%99%90%E4%B8%8E%E8%BF%9E%E7%BB%AD/" rel="prev" title="高数学习笔记1 第一章 极限与连续">
+      <i class="fa fa-chevron-left"></i> 高数学习笔记1 第一章 极限与连续
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BE%8E%E5%9B%A2CTF%E5%AF%86%E7%A0%81%E9%83%A8%E5%88%86wp"><span class="nav-number">1.</span> <span class="nav-text">美团CTF密码部分wp</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#easy-RSA"><span class="nav-number">1.1.</span> <span class="nav-text">easy_RSA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E5%B1%82"><span class="nav-number">1.1.1.</span> <span class="nav-text">第一层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%EF%BC%9A"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">题目：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E7%AD%94%EF%BC%9A"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">解答：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5%EF%BC%9A"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">参考链接：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E5%B1%82"><span class="nav-number">1.1.2.</span> <span class="nav-text">第二层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">题目:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E7%AD%94%EF%BC%9A-1"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">解答：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5%EF%BC%9A-1"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">参考链接：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RSAsig"><span class="nav-number">1.2.</span> <span class="nav-text">RSAsig</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%EF%BC%9A-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">题目：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E7%AD%94"><span class="nav-number">1.2.2.</span> <span class="nav-text">解答:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#random%EF%BC%88%E7%AC%AC%E4%B8%80%E5%85%B3RSA%E9%83%A8%E5%88%86%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">random（第一关RSA部分）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E5%85%B3%EF%BC%9A"><span class="nav-number">1.3.1.</span> <span class="nav-text">第一关：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%EF%BC%9A-2"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">题目：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E7%AD%94%EF%BC%9A-2"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">解答：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5%EF%BC%9A-2"><span class="nav-number">1.3.2.</span> <span class="nav-text">参考链接：</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="枫霜月雨"
+      src="/images/face.jpg">
+  <p class="site-author-name" itemprop="name">枫霜月雨</p>
+  <div class="site-description" itemprop="description">天行健，君子以自强不息</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">枫霜月雨</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">112k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:42</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '[object Object]';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"left","width":250,"height":600},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/click-love.js"></script>
