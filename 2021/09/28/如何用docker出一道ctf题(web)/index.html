@@ -19,20 +19,22 @@
     var CONFIG = {"hostname":"liuxin2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"D:\\study\\blog\\node_modules\\hexo-generator-searchdb\\templates\\search.xml"};
   </script>
 
-  <meta name="description" content="以下内容不对外公开哦！请输入阅览密码。">
+  <meta name="description" content="如何用docker出一道ctf题(web)目前docker的使用越来越宽泛，ctfd也支持从dockerhub一键拉题了。因此，学习如何使用docker出ctf题是非常必要的。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="刑事科学技术笔记">
-<meta property="og:url" content="https://liuxin2020.github.io/2021/09/07/%E5%88%91%E4%BA%8B%E7%A7%91%E5%AD%A6%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:title" content="如何用docker出一道ctf题(web)">
+<meta property="og:url" content="https://liuxin2020.github.io/2021/09/28/%E5%A6%82%E4%BD%95%E7%94%A8docker%E5%87%BA%E4%B8%80%E9%81%93ctf%E9%A2%98(web)/index.html">
 <meta property="og:site_name" content="枫霜月雨のblog">
-<meta property="og:description" content="以下内容不对外公开哦！请输入阅览密码。">
+<meta property="og:description" content="如何用docker出一道ctf题(web)目前docker的使用越来越宽泛，ctfd也支持从dockerhub一键拉题了。因此，学习如何使用docker出ctf题是非常必要的。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-09-07T00:23:09.000Z">
-<meta property="article:modified_time" content="2021-09-07T00:39:28.160Z">
+<meta property="og:image" content="https://i.loli.net/2021/09/28/uqStyEBAihHYGU1.png">
+<meta property="article:published_time" content="2021-09-28T09:00:50.000Z">
+<meta property="article:modified_time" content="2021-09-28T10:06:33.709Z">
 <meta property="article:author" content="枫霜月雨">
-<meta property="article:tag" content="刑事科学技术">
+<meta property="article:tag" content="ctf出题指南">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/09/28/uqStyEBAihHYGU1.png">
 
-<link rel="canonical" href="https://liuxin2020.github.io/2021/09/07/%E5%88%91%E4%BA%8B%E7%A7%91%E5%AD%A6%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">
+<link rel="canonical" href="https://liuxin2020.github.io/2021/09/28/%E5%A6%82%E4%BD%95%E7%94%A8docker%E5%87%BA%E4%B8%80%E9%81%93ctf%E9%A2%98(web)/">
 
 
 <script id="page-configurations">
@@ -45,7 +47,7 @@
   };
 </script>
 
-  <title>刑事科学技术笔记 | 枫霜月雨のblog</title>
+  <title>如何用docker出一道ctf题(web) | 枫霜月雨のblog</title>
   
 
 
@@ -195,7 +197,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://liuxin2020.github.io/2021/09/07/%E5%88%91%E4%BA%8B%E7%A7%91%E5%AD%A6%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">
+    <link itemprop="mainEntityOfPage" href="https://liuxin2020.github.io/2021/09/28/%E5%A6%82%E4%BD%95%E7%94%A8docker%E5%87%BA%E4%B8%80%E9%81%93ctf%E9%A2%98(web)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/face.jpg">
@@ -208,7 +210,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          刑事科学技术笔记
+          如何用docker出一道ctf题(web)
         </h1>
 
         <div class="post-meta">
@@ -219,7 +221,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-09-07 08:23:09 / 修改时间：08:39:28" itemprop="dateCreated datePublished" datetime="2021-09-07T08:23:09+08:00">2021-09-07</time>
+              <time title="创建时间：2021-09-28 17:00:50 / 修改时间：18:06:33" itemprop="dateCreated datePublished" datetime="2021-09-28T17:00:50+08:00">2021-09-28</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -227,7 +229,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%9F%BA%E7%A1%80%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">基础课程学习</span></a>
+                  <a href="/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">环境搭建</span></a>
                 </span>
             </span>
 
@@ -237,7 +239,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>122</span>
+              <span>1.5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -256,18 +258,29 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉, 密码不对呢，为什么不去社工管理员呢？" data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="1b6299a77c26c017a5adcc4d15af4812297e2d0c770b026ec99099af0a3e0aec">da8d53aaa19bbdad5d86e33d4a12bdd6b9a3fd944e151eb6f07b8a7b61f8c7f3487fcc8805abe2b0f8ede49293fe598de3d667e4fe3e6702c8c8780657e33e7abbf51130c9b9472487682b5e2b6876497dccfa08306f8d5ccc65d4f9621124dfce0b38dbd50c32fb57a0026a02a3d20ce682dc5c3377fd271b8cd287ee34215c084a9a45e7d4b8b54260c9702d8664a7f62a230734210398e8ea6a480ade4119b574a701dbe5f5d270f09271872e0800d9fbdd54e6520de6069dd721e83d7e4acfe0fe123c7783a84bf38ac55f7af850515444459bcdce074bc72f8611627a1ee482b5b82e79bb9463c4cd3a70a9ba75e7de14246aa6c41dc0949ce6772579587bc4671c9d52d2ee6ea5efdc4af34f8a7555ac57d3e44f1b4240f53831158afdba37f77f0ea8c1e8475e4c807eb91262dada5658ccd3992260d364189c7f4c1b52720ad1ef1e868a979604f1369914c6eb3d645ec6bbdf8b5edb4a7d84fb998725779ee29827a78a617bec101be242196154ebc7653f3252e9266753303b168bc4f3a1a339c0b350ad6c5a8efa3dc5df49fa9a2853292065eaf5f2a0020c08928609d78e95434675fbba5db71168f69efd4b7cffd91f49e97c01c19dfc3c368c4f3e36f5f54b5b688a872e5f69659cca</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">您好,接下来的内容需要密码才能阅览。</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
+        <h1 id="如何用docker出一道ctf题-web"><a href="#如何用docker出一道ctf题-web" class="headerlink" title="如何用docker出一道ctf题(web)"></a>如何用docker出一道ctf题(web)</h1><p>目前docker的使用越来越宽泛，ctfd也支持从dockerhub一键拉题了。因此，学习如何使用docker出ctf题是非常必要的。</p>
+<span id="more"></span>
+<h2 id="安装docker和docker-compose"><a href="#安装docker和docker-compose" class="headerlink" title="安装docker和docker-compose"></a>安装docker和docker-compose</h2><p>100种方法，写个最简单的。之前一篇文章CTFD部署里我也提到过如何安装。</p>
+<h3 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://get.docker.com -o get-docker.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh get-docker.sh --mirror Aliyun</span><br></pre></td></tr></table></figure>
+<h3 id="安装docker-compose"><a href="#安装docker-compose" class="headerlink" title="安装docker-compose"></a>安装docker-compose</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install python3-pip -y</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install docker-compose</span><br></pre></td></tr></table></figure>
+<h2 id="无数据库篇"><a href="#无数据库篇" class="headerlink" title="无数据库篇"></a>无数据库篇</h2><p>这个比较简单，先挂一下tree。</p>
+<p><img src="https://i.loli.net/2021/09/28/uqStyEBAihHYGU1.png" alt="image-20210928171223267"></p>
+<p>我本人习惯在windows下出题，主要是因为方便。<del>实际上是因为我虚拟机里一堆bug</del>。</p>
+<p>接下来我们一层一层解析。</p>
+<h3 id="flag-php"><a href="#flag-php" class="headerlink" title="flag.php"></a>flag.php</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$flag</span> = <span class="string">&#x27;flag&#123;1234&#125;&#x27;</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>先从最底层<code>html</code>文件夹内的内容说起。这里面就放题目和<code>flag.php</code>即可，flag如果在根目录的情况我会另外标注(在flag.sh中改)。</p>
+<h3 id="flag-sh"><a href="#flag-sh" class="headerlink" title="flag.sh"></a>flag.sh</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">sed -i <span class="string">&quot;s/flag&#123;1234&#125;/<span class="variable">$FLAG</span>/&quot;</span> /var/www/html/flag.php</span><br><span class="line"><span class="built_in">export</span> FLAG=not_flag</span><br><span class="line">FLAG=not_flag</span><br><span class="line"></span><br><span class="line">rm -f /flag.sh</span><br></pre></td></tr></table></figure>
+<p>ctfd-whale会自动生成一个随机flag的变量在$FLAG里。</p>
+<p>第二行就是将你存储flag的位置，做个替换，3,4行清空环境变量值，否则执行<code>echo $FLAG</code>就能直接出flag。</p>
+<p>如果要把flag放入根目录/flag，把第二行改成：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">$FLAG</span> &gt;&gt; /flag</span><br></pre></td></tr></table></figure>
+<h3 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h3><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 请务必保证该出能从 hub.docker.com 上拉取下来。</span></span><br><span class="line"><span class="comment"># 尽量使用能在 hub.docker.com 上查看到 Dockerfile，下载量高的官方认证镜像，推荐使用 https://github.com/DASCTF.</span></span><br><span class="line"><span class="keyword">FROM</span> ctftraining/base_image_nginx_php_73</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拷贝源码到相应目录下。</span></span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> src /var/www</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如需自定义 FLAG 请将自定义脚本覆盖到 /flag.sh</span></span><br><span class="line"><span class="comment"># COPY files/flag.sh /flag.sh</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如需操作数据库请将 sql 文件拷贝到 /db.sql</span></span><br><span class="line"><span class="comment"># COPY files/db.sql /db.sql</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如有上传文件等操作请务必将权限设置正确！</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> chown -R www-data:www-data /var/www/html/ &amp;&amp; \</span></span><br><span class="line"><span class="bash">    mv /var/www/flag.sh / &amp;&amp; \</span></span><br><span class="line"><span class="bash">    chmod +x /flag.sh &amp;&amp; \</span></span><br><span class="line"><span class="bash">    dos2unix /flag.sh</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如需静态 FLAG 请在此利用环境变量声明</span></span><br><span class="line"><span class="comment"># ENV DASFLAG=DASCTF&#123;flag_test&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 请声明对外暴露端口</span></span><br><span class="line"><span class="comment"># EXPOSE 80</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>直接用集成镜像了，太猛了。这个镜像不需要暴露端口。DASCTF的镜像需要暴露端口。相关源码可以去github上搜ctftraining去看。</p>
+<h2 id="有数据库篇"><a href="#有数据库篇" class="headerlink" title="有数据库篇"></a>有数据库篇</h2><p>正在学习，玩不明白数据库，蕾姆。之后看情况更新密码nc题出题方法。</p>
+
     </div>
 
     
@@ -282,7 +295,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://liuxin2020.github.io/2021/09/07/%E5%88%91%E4%BA%8B%E7%A7%91%E5%AD%A6%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" title="刑事科学技术笔记">https://liuxin2020.github.io/2021/09/07/刑事科学技术笔记/</a>
+    <a href="https://liuxin2020.github.io/2021/09/28/%E5%A6%82%E4%BD%95%E7%94%A8docker%E5%87%BA%E4%B8%80%E9%81%93ctf%E9%A2%98(web)/" title="如何用docker出一道ctf题(web)">https://liuxin2020.github.io/2021/09/28/如何用docker出一道ctf题(web)/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -303,7 +316,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E5%88%91%E4%BA%8B%E7%A7%91%E5%AD%A6%E6%8A%80%E6%9C%AF/" rel="tag"># 刑事科学技术</a>
+              <a href="/tags/ctf%E5%87%BA%E9%A2%98%E6%8C%87%E5%8D%97/" rel="tag"># ctf出题指南</a>
           </div>
 
         
@@ -312,13 +325,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/08/28/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E7%94%B5%E5%AD%90%E6%95%B0%E6%8D%AE%E5%8F%96%E8%AF%81/" rel="prev" title="零基础入门电子数据取证">
-      <i class="fa fa-chevron-left"></i> 零基础入门电子数据取证
+    <a href="/2021/09/27/%E5%9F%BA%E4%BA%8EAWD-platform%E7%9A%84AWD%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" rel="prev" title="基于AWD-platform的AWD环境搭建">
+      <i class="fa fa-chevron-left"></i> 基于AWD-platform的AWD环境搭建
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/09/27/vulforce%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA%E5%8F%8Abug%E5%A4%84%E7%90%86/" rel="next" title="vulfocus靶场搭建及bug处理">
-      vulfocus靶场搭建及bug处理 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -377,6 +387,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E7%94%A8docker%E5%87%BA%E4%B8%80%E9%81%93ctf%E9%A2%98-web"><span class="nav-number">1.</span> <span class="nav-text">如何用docker出一道ctf题(web)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85docker%E5%92%8Cdocker-compose"><span class="nav-number">1.1.</span> <span class="nav-text">安装docker和docker-compose</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85docker"><span class="nav-number">1.1.1.</span> <span class="nav-text">安装docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85docker-compose"><span class="nav-number">1.1.2.</span> <span class="nav-text">安装docker-compose</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AF%87"><span class="nav-number">1.2.</span> <span class="nav-text">无数据库篇</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#flag-php"><span class="nav-number">1.2.1.</span> <span class="nav-text">flag.php</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flag-sh"><span class="nav-number">1.2.2.</span> <span class="nav-text">flag.sh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dockerfile"><span class="nav-number">1.2.3.</span> <span class="nav-text">Dockerfile</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AF%87"><span class="nav-number">1.3.</span> <span class="nav-text">有数据库篇</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
