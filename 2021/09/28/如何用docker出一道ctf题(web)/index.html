@@ -28,7 +28,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2021/09/28/uqStyEBAihHYGU1.png">
 <meta property="article:published_time" content="2021-09-28T09:00:50.000Z">
-<meta property="article:modified_time" content="2021-09-28T10:06:33.709Z">
+<meta property="article:modified_time" content="2021-09-29T00:27:16.940Z">
 <meta property="article:author" content="枫霜月雨">
 <meta property="article:tag" content="ctf出题指南">
 <meta name="twitter:card" content="summary">
@@ -219,10 +219,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-09-28 17:00:50 / 修改时间：18:06:33" itemprop="dateCreated datePublished" datetime="2021-09-28T17:00:50+08:00">2021-09-28</time>
+              <time title="创建时间：2021-09-28 17:00:50" itemprop="dateCreated datePublished" datetime="2021-09-28T17:00:50+08:00">2021-09-28</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-29 08:27:16" itemprop="dateModified" datetime="2021-09-29T08:27:16+08:00">2021-09-29</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -239,7 +245,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.5k</span>
+              <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -279,6 +285,7 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">$FLAG</span> &gt;&gt; /flag</span><br></pre></td></tr></table></figure>
 <h3 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h3><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 请务必保证该出能从 hub.docker.com 上拉取下来。</span></span><br><span class="line"><span class="comment"># 尽量使用能在 hub.docker.com 上查看到 Dockerfile，下载量高的官方认证镜像，推荐使用 https://github.com/DASCTF.</span></span><br><span class="line"><span class="keyword">FROM</span> ctftraining/base_image_nginx_php_73</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拷贝源码到相应目录下。</span></span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> src /var/www</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如需自定义 FLAG 请将自定义脚本覆盖到 /flag.sh</span></span><br><span class="line"><span class="comment"># COPY files/flag.sh /flag.sh</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如需操作数据库请将 sql 文件拷贝到 /db.sql</span></span><br><span class="line"><span class="comment"># COPY files/db.sql /db.sql</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如有上传文件等操作请务必将权限设置正确！</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> chown -R www-data:www-data /var/www/html/ &amp;&amp; \</span></span><br><span class="line"><span class="bash">    mv /var/www/flag.sh / &amp;&amp; \</span></span><br><span class="line"><span class="bash">    chmod +x /flag.sh &amp;&amp; \</span></span><br><span class="line"><span class="bash">    dos2unix /flag.sh</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如需静态 FLAG 请在此利用环境变量声明</span></span><br><span class="line"><span class="comment"># ENV DASFLAG=DASCTF&#123;flag_test&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 请声明对外暴露端口</span></span><br><span class="line"><span class="comment"># EXPOSE 80</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>直接用集成镜像了，太猛了。这个镜像不需要暴露端口。DASCTF的镜像需要暴露端口。相关源码可以去github上搜ctftraining去看。</p>
+<p>注意第18行<code>dos2unix /flag.sh</code>，个人习惯在windows上出题，写的shell脚本的换行符在linux系统中会炸，因此需要执行该命令。当然也可以使用编辑器，例如notepad++或sublime text中设置文件为unix格式。</p>
 <h2 id="有数据库篇"><a href="#有数据库篇" class="headerlink" title="有数据库篇"></a>有数据库篇</h2><p>正在学习，玩不明白数据库，蕾姆。之后看情况更新密码nc题出题方法。</p>
 
     </div>
@@ -328,7 +335,10 @@
     <a href="/2021/09/27/%E5%9F%BA%E4%BA%8EAWD-platform%E7%9A%84AWD%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" rel="prev" title="基于AWD-platform的AWD环境搭建">
       <i class="fa fa-chevron-left"></i> 基于AWD-platform的AWD环境搭建
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/09/30/%E5%A6%82%E4%BD%95%E7%94%A8docker%E5%87%BA%E4%B8%80%E9%81%93ctf%E9%A2%98-crypto/" rel="next" title="如何用docker出一道ctf题(crypto)">
+      如何用docker出一道ctf题(crypto) <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -403,7 +413,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -456,13 +466,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">126k</span>
+    <span title="站点总字数">128k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:55</span>
+    <span title="站点阅读时长">1:57</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
@@ -599,7 +609,7 @@
 
 
 
-<!-- mathjax config similar to math.stackexchange -->
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"left","width":250,"height":600},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- mathjax config similar to math.stackexchange -->
 
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
@@ -629,7 +639,7 @@
 
 <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"left","width":250,"height":600},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</body>
 </html>
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/click-love.js"></script>

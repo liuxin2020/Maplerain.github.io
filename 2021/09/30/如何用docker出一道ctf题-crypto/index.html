@@ -19,20 +19,20 @@
     var CONFIG = {"hostname":"liuxin2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"D:\\study\\blog\\node_modules\\hexo-generator-searchdb\\templates\\search.xml"};
   </script>
 
-  <meta name="description" content="以下内容不对外公开哦！请输入阅览密码。">
+  <meta name="description" content="如何用docker出一道ctf题(crypto)目前docker的使用越来越宽泛，ctfd也支持从dockerhub一键拉题了。因此，学习如何使用docker出ctf题是非常必要的。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="高数学习笔记1 第一章 极限与连续">
-<meta property="og:url" content="https://liuxin2020.github.io/2021/05/22/%E9%AB%98%E6%95%B0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%9E%81%E9%99%90%E4%B8%8E%E8%BF%9E%E7%BB%AD/index.html">
+<meta property="og:title" content="如何用docker出一道ctf题(crypto)">
+<meta property="og:url" content="https://liuxin2020.github.io/2021/09/30/%E5%A6%82%E4%BD%95%E7%94%A8docker%E5%87%BA%E4%B8%80%E9%81%93ctf%E9%A2%98-crypto/index.html">
 <meta property="og:site_name" content="枫霜月雨のblog">
-<meta property="og:description" content="以下内容不对外公开哦！请输入阅览密码。">
+<meta property="og:description" content="如何用docker出一道ctf题(crypto)目前docker的使用越来越宽泛，ctfd也支持从dockerhub一键拉题了。因此，学习如何使用docker出ctf题是非常必要的。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-05-22T03:56:42.000Z">
-<meta property="article:modified_time" content="2021-06-15T02:27:28.128Z">
+<meta property="article:published_time" content="2021-09-30T03:50:04.000Z">
+<meta property="article:modified_time" content="2021-09-30T04:28:51.732Z">
 <meta property="article:author" content="枫霜月雨">
-<meta property="article:tag" content="高数">
+<meta property="article:tag" content="ctf出题指南">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://liuxin2020.github.io/2021/05/22/%E9%AB%98%E6%95%B0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%9E%81%E9%99%90%E4%B8%8E%E8%BF%9E%E7%BB%AD/">
+<link rel="canonical" href="https://liuxin2020.github.io/2021/09/30/%E5%A6%82%E4%BD%95%E7%94%A8docker%E5%87%BA%E4%B8%80%E9%81%93ctf%E9%A2%98-crypto/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>高数学习笔记1 第一章 极限与连续 | 枫霜月雨のblog</title>
+  <title>如何用docker出一道ctf题(crypto) | 枫霜月雨のblog</title>
   
 
 
@@ -76,119 +76,7 @@
   </style>
 </noscript>
 
-<style>mjx-container[jax="SVG"] {
-  direction: ltr;
-}
-
-mjx-container[jax="SVG"] > svg {
-  overflow: visible;
-}
-
-mjx-container[jax="SVG"][display="true"] {
-  display: block;
-  text-align: center;
-  margin: 1em 0;
-}
-
-mjx-container[jax="SVG"][justify="left"] {
-  text-align: left;
-}
-
-mjx-container[jax="SVG"][justify="right"] {
-  text-align: right;
-}
-
-g[data-mml-node="merror"] > g {
-  fill: red;
-  stroke: red;
-}
-
-g[data-mml-node="merror"] > rect[data-background] {
-  fill: yellow;
-  stroke: none;
-}
-
-g[data-mml-node="mtable"] > line[data-line] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > rect[data-frame] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > .mjx-dashed {
-  stroke-dasharray: 140;
-}
-
-g[data-mml-node="mtable"] > .mjx-dotted {
-  stroke-linecap: round;
-  stroke-dasharray: 0,140;
-}
-
-g[data-mml-node="mtable"] > svg {
-  overflow: visible;
-}
-
-[jax="SVG"] mjx-tool {
-  display: inline-block;
-  position: relative;
-  width: 0;
-  height: 0;
-}
-
-[jax="SVG"] mjx-tool > mjx-tip {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-mjx-tool > mjx-tip {
-  display: inline-block;
-  padding: .2em;
-  border: 1px solid #888;
-  font-size: 70%;
-  background-color: #F8F8F8;
-  color: black;
-  box-shadow: 2px 2px 5px #AAAAAA;
-}
-
-g[data-mml-node="maction"][data-toggle] {
-  cursor: pointer;
-}
-
-mjx-status {
-  display: block;
-  position: fixed;
-  left: 1em;
-  bottom: 1em;
-  min-width: 25%;
-  padding: .2em .4em;
-  border: 1px solid #888;
-  font-size: 90%;
-  background-color: #F8F8F8;
-  color: black;
-}
-
-foreignObject[data-mjx-xml] {
-  font-family: initial;
-  line-height: normal;
-  overflow: visible;
-}
-
-.MathJax path {
-  stroke-width: 3;
-}
-
-mjx-container[display="true"] {
-  overflow: auto hidden;
-}
-
-mjx-container[display="true"] + br {
-  display: none;
-}
-</style></head>
+</head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -307,7 +195,7 @@ mjx-container[display="true"] + br {
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://liuxin2020.github.io/2021/05/22/%E9%AB%98%E6%95%B0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%9E%81%E9%99%90%E4%B8%8E%E8%BF%9E%E7%BB%AD/">
+    <link itemprop="mainEntityOfPage" href="https://liuxin2020.github.io/2021/09/30/%E5%A6%82%E4%BD%95%E7%94%A8docker%E5%87%BA%E4%B8%80%E9%81%93ctf%E9%A2%98-crypto/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/face.jpg">
@@ -320,7 +208,7 @@ mjx-container[display="true"] + br {
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          高数学习笔记1 第一章 极限与连续
+          如何用docker出一道ctf题(crypto)
         </h1>
 
         <div class="post-meta">
@@ -329,23 +217,17 @@ mjx-container[display="true"] + br {
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2021-05-22 11:56:42" itemprop="dateCreated datePublished" datetime="2021-05-22T11:56:42+08:00">2021-05-22</time>
+              <time title="创建时间：2021-09-30 11:50:04 / 修改时间：12:28:51" itemprop="dateCreated datePublished" datetime="2021-09-30T11:50:04+08:00">2021-09-30</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-15 10:27:28" itemprop="dateModified" datetime="2021-06-15T10:27:28+08:00">2021-06-15</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%9F%BA%E7%A1%80%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">基础课程学习</span></a>
+                  <a href="/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">环境搭建</span></a>
                 </span>
             </span>
 
@@ -355,14 +237,14 @@ mjx-container[display="true"] + br {
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>140</span>
+              <span>1.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -374,18 +256,24 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
 
       
-        <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉, 密码不对呢，为什么不去社工管理员呢？" data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="7a95cd575697c61acb28b894430ae46be5837e79e65c3cd5bb8690ec12c114e5">da8d53aaa19bbdad5d86e33d4a12bdd6c03b3bc8d0e87b6fefb0fd7748994bb16e3a6c084efdf182bad542e1e910ae1396160552189a596756a1ea79b06cffcbc2266360b13c6a1d3617bf91999afcec8863e7df8dd44ba2b9a057cd8a5e9259e0dd9af49856847b71b18809411a775867e8b2a1426d9e812076854a154c9d727ecd88199baedc909eea08ca313c95475cf1c444a1bf3fa6406ad44aa714d4c16576697e36adc334cb2606ab7e10ec09555021fd0ac13d535df31932b96a7f9b7b9eede08a8b035b6bc70d2150c9e056a9d93177c8734d5c0111dfc5165481547d08cf1b5cdbb624545b51cb07989b2aec8ff07f906952d960860d4fdd88e16490ecef1f32c99ef2da3e6b647eaab85f0843f43df3b3732fd647505e24e37f431fa9ee80f55596c91cd6d9c26f2a461bc96e8c70c13469a756b0a6f718152715e825aed74965d0d293cc3f65ec9a5ab6546f8b04ed4835afea6b155ccc6ef9611d8eaefbfa9ef3e399bddd81e412b7f6bf5a19ce07ac8f51e0e33111ee73563196786c2d7cc8781964228ded5c1c494ff2a3b47b8ee8cd6fe89461ecd5fb437b4b6ce38ad2779e51827c4149597c7250b0bed21d0fb2a423aa2da02b1931d4d6d271b75d1b97dc34fcf400eadab551d8b1428aebd94401116d1fb5ab08eba08ad534555d916a1d67f7e6c39ebf745f46421cd673b4ed3ed0ac94fae7946429e996501fcde17aa83a1429f0c47654e8c1cf7ae52099366b54c24c75ec4788795d1b6fb28648441dc52eea38c26abd3c7b47bdc430624480b1ffe66fa80918c7739a9b3291c1e00e4c0f4b238e0dfda5714a9e406afb177f0326ddc30cfadaf25fddeefad8bbba4e22675b9abfe980c5c1f6d21f0b78cb3cf6fa9c6eb9cae02a8bbb64d378ccd4e59d3c53ad4b45c251333f9d3cbd17ae21fa5ecf206fa378753b373edc6ef30caf195af555f1106b8b5d1f1d161e63abd7e545831fa399c437cb24d178122d967c02544ce47853cbbb3ff44d21a1cfc9b7154139720a95c2d3fdadfe09d8c59e81b2bb0ea6634049cfad5f2042c1a4463a4bba22eb1b1af3d984b72fb31ee904b0fdc253bad11c6ee3f25a9d3ec26701f121ca874372db8692ca4c4c5aaaba0623e2e7ba1b214073cba2e04051afe679dab7a3aba4601427f7e30e1d734384aaa621f2b48ae615702547aa04de3a5eaec15f4f2909319f8702af8c7fa38c21b66bedb649f9055b21ca4218b5b6b2a618c1ce17d7e5c38ff1fdff45b1cb1b0399c66f68b685cefd2639e028b624aad308dbbf6fe9422f50f8162a87594e6d5523134e9aa64eddda68359a16283908f689d356179525ba500c5c5dced011d5a3b62187957597e171178c94430177e0ef8888d10a774d21675b8246e64900124dadf6574837fe750e0583915f14c81096cc6ce51ceb29f07814a8dbf6f8335e2422834f2356b418649427d616e45531c5a221bbc176cf785ff65c96f1e122e682f23c669131d73cf78e5ec78139d2a4e7dd353b26a829d63a3105e4fd09f0e873d46ca8b8ca7c38c4778ccd26e6ef25bf0443edea3be982d26e2d25b5e9b5db0667d5f9002a2fa998d9bd60be3be114e390438f81c391fedcee29ed5b2b9bf5e7ddd451e9d3dbbec38e60691783dd9cd1702b23c428ee5c07c6962f3e9a507caf86d043dbddbf8f7caf53c26e027cd96bf18a415eb32f54ead6441e9e97024bcf7a32c23684e66210ac77161780a3ab0d88bd33a96c1b89a1576c1c64fac4c50a92aa67234255aab0f48cf7baf90516e0df8730337ea59cab15a00997e0f454ce5d277d4c2d44fc119f3a7a684be8c02b64879e1f257f56b903032337f67902095931e989a9234400039ea02629dff927761a0671d16281a9cf337ae457466aa1132dcea4852e47b841307a0a3eff0774b7159754d6e1dc9becc5ab2f73b4f26cae03f4648318841ac47b3b018264c224892362ad152971dc329335ee1454fd8f3cc836e7bd0035fafeddd432285f082f3cc4878dfd891dcb90bd4b59a41349b26370ed578fe5a9a9d498e7</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">您好,接下来的内容需要密码才能阅览。</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
+        <h1 id="如何用docker出一道ctf题-crypto"><a href="#如何用docker出一道ctf题-crypto" class="headerlink" title="如何用docker出一道ctf题(crypto)"></a>如何用docker出一道ctf题(crypto)</h1><p>目前docker的使用越来越宽泛，ctfd也支持从dockerhub一键拉题了。因此，学习如何使用docker出ctf题是非常必要的。</p>
+<span id="more"></span>
+<h2 id="python3篇"><a href="#python3篇" class="headerlink" title="python3篇"></a>python3篇</h2><p>在介绍python2篇和python3篇之前，首先需要对raw_input和input这两个函数做一个讲解。引用<a target="_blank" rel="noopener" href="https://www.runoob.com/python/python-func-raw_input.html">菜鸟教程</a>。</p>
+<blockquote>
+<p>注意：input() 和 raw_input() 这两个函数均能接收 字符串 ，但 raw_input()  直接读取控制台的输入（任何类型的输入它都可以接收）。而对于 input() ，它希望能够读取一个合法的 python  表达式，即你输入字符串的时候必须使用引号将它括起来，否则它会引发一个 SyntaxError 。</p>
+<p>除非对 input() 有特别需要，否则一般情况下我们都是推荐使用 raw_input() 来与用户交互。</p>
+<p>注意：python3 里 input() 默认接收到的是 str 类型。</p>
+</blockquote>
+<p>因此，在python3环境下出题，输入端要填input()。</p>
+<p>和web篇一样，我们以一道完整的题来演示一下。题目为sha256碰撞。</p>
+<h3 id="sha256-py"><a href="#sha256-py" class="headerlink" title="sha256.py"></a>sha256.py</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"></span><br><span class="line">BUFSIZE = <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">c0</span>():</span></span><br><span class="line">    random.seed(os.urandom(<span class="number">128</span>))</span><br><span class="line">    alphabet = string.ascii_letters+string.digits</span><br><span class="line">    proof = <span class="string">&#x27;&#x27;</span>.join(random.choices(alphabet, k=<span class="number">16</span>))</span><br><span class="line">    hash_value = hashlib.sha256(proof.encode(<span class="string">&#x27;ascii&#x27;</span>)).hexdigest()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;???&#x27;</span>+<span class="string">&#x27;+&#x27;</span>+proof[<span class="number">3</span>:])</span><br><span class="line">    <span class="built_in">print</span>(hash_value)</span><br><span class="line">    buf = <span class="built_in">input</span>(BUFSIZE).replace(<span class="string">&#x27;\n&#x27;</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    tmp = buf+proof[<span class="number">3</span>:]</span><br><span class="line">    <span class="keyword">if</span> hashlib.sha256(tmp.encode(<span class="string">&#x27;ascii&#x27;</span>)).hexdigest() == hash_value:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;proof completed\n&#x27;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;bye~&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">win</span>():</span></span><br><span class="line">    <span class="built_in">print</span>(os.environ.get(<span class="string">&#x27;FLAG&#x27;</span>, <span class="string">&#x27;Flag not Found...&#x27;</span>)+<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        c0 = c0()</span><br><span class="line">        <span class="keyword">if</span> c0 == <span class="number">1</span>:</span><br><span class="line">            win()</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<p>先是一波经典偷懒，直接拿了<code>ctftraining</code>的<code>copperstudy2.py</code>进行修改，改除了这道题目。由于答案在环境变量里，可以采用<code>print(os.environ.get(&#39;FLAG&#39;))</code>这种方法，但是我个人更喜欢<code>from flag import flag</code>这种方法，区别不大，主要就是知道如何从系统环境变量中拿flag就行。</p>
+<p>然后看Dockerfile，更简单。</p>
+<h3 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h3><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ctfhub/base_misc_socat_python_36</span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> sha256.py /app/sha256.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">MAINTAINER</span> mapleice &lt;https://liuxin2020.github.io&gt;</span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">10000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="bash"> socat TCP4-LISTEN:10000,tcpwrap=script,reuseaddr,fork EXEC:<span class="string">&quot;/usr/bin/env python3 -u /app/sha256.py&quot;</span></span></span><br></pre></td></tr></table></figure>
+<p>做成镜像传上去就行了。</p>
+<p>其他记得注意填写<code>requirements.txt</code></p>
+<h2 id="python2"><a href="#python2" class="headerlink" title="python2"></a>python2</h2><p>有空回来更。注意使用<code>raw_input</code></p>
+
     </div>
 
     
@@ -400,7 +288,7 @@ mjx-container[display="true"] + br {
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://liuxin2020.github.io/2021/05/22/%E9%AB%98%E6%95%B0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01-%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%9E%81%E9%99%90%E4%B8%8E%E8%BF%9E%E7%BB%AD/" title="高数学习笔记1 第一章 极限与连续">https://liuxin2020.github.io/2021/05/22/高数学习笔记1-第一章-极限与连续/</a>
+    <a href="https://liuxin2020.github.io/2021/09/30/%E5%A6%82%E4%BD%95%E7%94%A8docker%E5%87%BA%E4%B8%80%E9%81%93ctf%E9%A2%98-crypto/" title="如何用docker出一道ctf题(crypto)">https://liuxin2020.github.io/2021/09/30/如何用docker出一道ctf题-crypto/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -421,7 +309,7 @@ mjx-container[display="true"] + br {
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E9%AB%98%E6%95%B0/" rel="tag"># 高数</a>
+              <a href="/tags/ctf%E5%87%BA%E9%A2%98%E6%8C%87%E5%8D%97/" rel="tag"># ctf出题指南</a>
           </div>
 
         
@@ -430,13 +318,10 @@ mjx-container[display="true"] + br {
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/05/19/%E5%9B%BD%E8%B5%9B%E5%AF%86%E7%A0%81%E9%83%A8%E5%88%86wp/" rel="prev" title="国赛密码部分wp">
-      <i class="fa fa-chevron-left"></i> 国赛密码部分wp
+    <a href="/2021/09/28/%E5%A6%82%E4%BD%95%E7%94%A8docker%E5%87%BA%E4%B8%80%E9%81%93ctf%E9%A2%98(web)/" rel="prev" title="如何用docker出一道ctf题(web)">
+      <i class="fa fa-chevron-left"></i> 如何用docker出一道ctf题(web)
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/05/25/MTCTF%E5%AF%86%E7%A0%81%E9%83%A8%E5%88%86wp/" rel="next" title="MTCTF密码部分wp">
-      MTCTF密码部分wp <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -495,6 +380,7 @@ mjx-container[display="true"] + br {
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E7%94%A8docker%E5%87%BA%E4%B8%80%E9%81%93ctf%E9%A2%98-crypto"><span class="nav-number">1.</span> <span class="nav-text">如何用docker出一道ctf题(crypto)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#python3%E7%AF%87"><span class="nav-number">1.1.</span> <span class="nav-text">python3篇</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sha256-py"><span class="nav-number">1.1.1.</span> <span class="nav-text">sha256.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dockerfile"><span class="nav-number">1.1.2.</span> <span class="nav-text">Dockerfile</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python2"><span class="nav-number">1.2.</span> <span class="nav-text">python2</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -629,59 +515,6 @@ mjx-container[display="true"] + br {
   
 
   
-      
-
-<script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = '[object Object]';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
-    
 
   
 
