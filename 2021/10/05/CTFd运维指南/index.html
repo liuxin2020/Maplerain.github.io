@@ -19,20 +19,24 @@
     var CONFIG = {"hostname":"liuxin2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"D:\\study\\blog\\node_modules\\hexo-generator-searchdb\\templates\\search.xml"};
   </script>
 
-  <meta name="description" content="如何用docker出一道ctf题(crypto)目前docker的使用越来越宽泛，ctfd也支持从dockerhub一键拉题了。因此，学习如何使用docker出ctf题是非常必要的。">
+  <meta name="description" content="如何运维CTFd简单的总结并分享一下CTFd 3.4.0版本的运维。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何用docker出一道ctf题(crypto)">
-<meta property="og:url" content="https://liuxin2020.github.io/2021/09/30/%E5%A6%82%E4%BD%95%E7%94%A8docker%E5%87%BA%E4%B8%80%E9%81%93ctf%E9%A2%98-crypto/index.html">
+<meta property="og:title" content="CTFd运维指南">
+<meta property="og:url" content="https://liuxin2020.github.io/2021/10/05/CTFd%E8%BF%90%E7%BB%B4%E6%8C%87%E5%8D%97/index.html">
 <meta property="og:site_name" content="枫霜月雨のblog">
-<meta property="og:description" content="如何用docker出一道ctf题(crypto)目前docker的使用越来越宽泛，ctfd也支持从dockerhub一键拉题了。因此，学习如何使用docker出ctf题是非常必要的。">
+<meta property="og:description" content="如何运维CTFd简单的总结并分享一下CTFd 3.4.0版本的运维。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-09-30T03:50:04.000Z">
-<meta property="article:modified_time" content="2021-09-30T04:28:51.732Z">
+<meta property="og:image" content="https://i.loli.net/2021/10/05/FfgzivcqAC64OU3.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/05/qkQOGrdWeJPCaN3.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/05/erAlTybiufHhmQW.png">
+<meta property="article:published_time" content="2021-10-05T05:46:56.000Z">
+<meta property="article:modified_time" content="2021-10-06T09:00:54.920Z">
 <meta property="article:author" content="枫霜月雨">
-<meta property="article:tag" content="ctf出题指南">
+<meta property="article:tag" content="CTFd运维">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/10/05/FfgzivcqAC64OU3.png">
 
-<link rel="canonical" href="https://liuxin2020.github.io/2021/09/30/%E5%A6%82%E4%BD%95%E7%94%A8docker%E5%87%BA%E4%B8%80%E9%81%93ctf%E9%A2%98-crypto/">
+<link rel="canonical" href="https://liuxin2020.github.io/2021/10/05/CTFd%E8%BF%90%E7%BB%B4%E6%8C%87%E5%8D%97/">
 
 
 <script id="page-configurations">
@@ -45,7 +49,7 @@
   };
 </script>
 
-  <title>如何用docker出一道ctf题(crypto) | 枫霜月雨のblog</title>
+  <title>CTFd运维指南 | 枫霜月雨のblog</title>
   
 
 
@@ -195,7 +199,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://liuxin2020.github.io/2021/09/30/%E5%A6%82%E4%BD%95%E7%94%A8docker%E5%87%BA%E4%B8%80%E9%81%93ctf%E9%A2%98-crypto/">
+    <link itemprop="mainEntityOfPage" href="https://liuxin2020.github.io/2021/10/05/CTFd%E8%BF%90%E7%BB%B4%E6%8C%87%E5%8D%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/face.jpg">
@@ -208,7 +212,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          如何用docker出一道ctf题(crypto)
+          CTFd运维指南
         </h1>
 
         <div class="post-meta">
@@ -217,10 +221,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-09-30 11:50:04 / 修改时间：12:28:51" itemprop="dateCreated datePublished" datetime="2021-09-30T11:50:04+08:00">2021-09-30</time>
+              <time title="创建时间：2021-10-05 13:46:56" itemprop="dateCreated datePublished" datetime="2021-10-05T13:46:56+08:00">2021-10-05</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-06 17:00:54" itemprop="dateModified" datetime="2021-10-06T17:00:54+08:00">2021-10-06</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -256,23 +266,45 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="如何用docker出一道ctf题-crypto"><a href="#如何用docker出一道ctf题-crypto" class="headerlink" title="如何用docker出一道ctf题(crypto)"></a>如何用docker出一道ctf题(crypto)</h1><p>目前docker的使用越来越宽泛，ctfd也支持从dockerhub一键拉题了。因此，学习如何使用docker出ctf题是非常必要的。</p>
+        <h1 id="如何运维CTFd"><a href="#如何运维CTFd" class="headerlink" title="如何运维CTFd"></a>如何运维CTFd</h1><p>简单的总结并分享一下CTFd 3.4.0版本的运维。</p>
 <span id="more"></span>
-<h2 id="python3篇"><a href="#python3篇" class="headerlink" title="python3篇"></a>python3篇</h2><p>在介绍python2篇和python3篇之前，首先需要对raw_input和input这两个函数做一个讲解。引用<a target="_blank" rel="noopener" href="https://www.runoob.com/python/python-func-raw_input.html">菜鸟教程</a>。</p>
-<blockquote>
-<p>注意：input() 和 raw_input() 这两个函数均能接收 字符串 ，但 raw_input()  直接读取控制台的输入（任何类型的输入它都可以接收）。而对于 input() ，它希望能够读取一个合法的 python  表达式，即你输入字符串的时候必须使用引号将它括起来，否则它会引发一个 SyntaxError 。</p>
-<p>除非对 input() 有特别需要，否则一般情况下我们都是推荐使用 raw_input() 来与用户交互。</p>
-<p>注意：python3 里 input() 默认接收到的是 str 类型。</p>
-</blockquote>
-<p>因此，在python3环境下出题，输入端要填input()。</p>
-<p>和web篇一样，我们以一道完整的题来演示一下。题目为sha256碰撞。</p>
-<h3 id="sha256-py"><a href="#sha256-py" class="headerlink" title="sha256.py"></a>sha256.py</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"></span><br><span class="line">BUFSIZE = <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">c0</span>():</span></span><br><span class="line">    random.seed(os.urandom(<span class="number">128</span>))</span><br><span class="line">    alphabet = string.ascii_letters+string.digits</span><br><span class="line">    proof = <span class="string">&#x27;&#x27;</span>.join(random.choices(alphabet, k=<span class="number">16</span>))</span><br><span class="line">    hash_value = hashlib.sha256(proof.encode(<span class="string">&#x27;ascii&#x27;</span>)).hexdigest()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;???&#x27;</span>+<span class="string">&#x27;+&#x27;</span>+proof[<span class="number">3</span>:])</span><br><span class="line">    <span class="built_in">print</span>(hash_value)</span><br><span class="line">    buf = <span class="built_in">input</span>(BUFSIZE).replace(<span class="string">&#x27;\n&#x27;</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    tmp = buf+proof[<span class="number">3</span>:]</span><br><span class="line">    <span class="keyword">if</span> hashlib.sha256(tmp.encode(<span class="string">&#x27;ascii&#x27;</span>)).hexdigest() == hash_value:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;proof completed\n&#x27;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;bye~&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">win</span>():</span></span><br><span class="line">    <span class="built_in">print</span>(os.environ.get(<span class="string">&#x27;FLAG&#x27;</span>, <span class="string">&#x27;Flag not Found...&#x27;</span>)+<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        c0 = c0()</span><br><span class="line">        <span class="keyword">if</span> c0 == <span class="number">1</span>:</span><br><span class="line">            win()</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
-<p>先是一波经典偷懒，直接拿了<code>ctftraining</code>的<code>copperstudy2.py</code>进行修改，改除了这道题目。由于答案在环境变量里，可以采用<code>print(os.environ.get(&#39;FLAG&#39;))</code>这种方法，但是我个人更喜欢<code>from flag import flag</code>这种方法，区别不大，主要就是知道如何从系统环境变量中拿flag就行。</p>
-<p>然后看Dockerfile，更简单。</p>
-<h3 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h3><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ctfhub/base_misc_socat_python_36</span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> sha256.py /app/sha256.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">MAINTAINER</span> mapleice &lt;https://liuxin2020.github.io&gt;</span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">10000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="bash"> socat TCP4-LISTEN:10000,tcpwrap=script,reuseaddr,fork EXEC:<span class="string">&quot;/usr/bin/env python3 -u /app/sha256.py&quot;</span></span></span><br></pre></td></tr></table></figure>
-<p>做成镜像传上去就行了。</p>
-<p>其他记得注意填写<code>requirements.txt</code></p>
-<h2 id="python2"><a href="#python2" class="headerlink" title="python2"></a>python2</h2><p>有空回来更。注意使用<code>raw_input</code></p>
+<p><img src="https://i.loli.net/2021/10/05/FfgzivcqAC64OU3.png" alt="image-20211005134919356"></p>
+<p>进入管理员页面，大概是这样一个总览图。接下来我会介绍一下每个模块的功能。</p>
+<h2 id="Statistics"><a href="#Statistics" class="headerlink" title="Statistics"></a>Statistics</h2><p>一个统计页面，过。</p>
+<h2 id="Notifications"><a href="#Notifications" class="headerlink" title="Notifications"></a>Notifications</h2><p>通知页面，没玩过，无非就是发些通知、公告类，影响不大，过。</p>
+<h2 id="Pages"><a href="#Pages" class="headerlink" title="Pages"></a>Pages</h2><p>页面功能，就是给网站加页面，自定义路由和路由名字。</p>
+<p><img src="https://i.loli.net/2021/10/05/qkQOGrdWeJPCaN3.png" alt="image-20211005135405456"></p>
+<p>没什么花里胡哨的，都是字面意思。Authentication Required选项是需要登录后才可查看的意思。</p>
+<h2 id="Users"><a href="#Users" class="headerlink" title="Users"></a>Users</h2><p><img src="https://i.loli.net/2021/10/05/erAlTybiufHhmQW.png" alt="image-20211005135756947"></p>
+<p>都看得懂的吧，编辑权限、状态、修改信息等功能。注意，管理员账号权限非常高，可以任意修改他人（包括其他管理员的权限），也可以自己把自己号删了，使用时建议管理员越少越好。</p>
+<p>还可以看到每个人的正确、错误提交，未解题、登录IP地址（较准确）、个人统计等数据。</p>
+<h2 id="Scoreboard"><a href="#Scoreboard" class="headerlink" title="Scoreboard"></a>Scoreboard</h2><p>积分榜，没什么好多说的。</p>
+<h2 id="Challenges"><a href="#Challenges" class="headerlink" title="Challenges"></a>Challenges</h2><p>挑战模块，最常用的模块，只讲解dynamic_docker部分。ICPC的ACM插件自行探索吧。</p>
+<p>首先是categories分类，也就是体现在主页上的内容。pages主题会自动识别这个框里的<code>.</code>符号，实现二级标题。</p>
+<p>然后是docker image，写你上传在docker上的镜像，就是docker pull后面的内容。</p>
+<p>Frp Redirect Type，有域名会配置解析写HTTP，不会老老实实用direct。</p>
+<p>Frp Redirect Port，你dockerfile里暴露的哪个端口，就写映射哪个端口。</p>
+<p>下面两个不要动。静态分数和动态分数。</p>
+<p>动态分数的曲线公式写出来估计你们也看不懂，所以我写了个实现函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Cal</span>(<span class="params">max_point,min_point,solve_threshold,x</span>):</span></span><br><span class="line">	a = max_point</span><br><span class="line">	b = min_point</span><br><span class="line">	s = solve_threshold</span><br><span class="line">	<span class="keyword">if</span> x&gt;=s:</span><br><span class="line">		<span class="keyword">return</span> b</span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		results = ((b-a)*x*x)/(s*s)+a </span><br><span class="line">		<span class="keyword">return</span> results</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">10</span>):</span><br><span class="line">	<span class="built_in">print</span>(Cal(<span class="number">100</span>,<span class="number">20</span>,<span class="number">5</span>,i))</span><br><span class="line">    </span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">100.0</span></span><br><span class="line"><span class="string">96.8</span></span><br><span class="line"><span class="string">87.2</span></span><br><span class="line"><span class="string">71.2</span></span><br><span class="line"><span class="string">48.8</span></span><br><span class="line"><span class="string">20.0</span></span><br><span class="line"><span class="string">20</span></span><br><span class="line"><span class="string">20</span></span><br><span class="line"><span class="string">20</span></span><br><span class="line"><span class="string">20</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>需要4个参数，最高分、最低分、一个固定常数s、解题人数x</p>
+<p>程序很简单，都能看懂，不解释。</p>
+<h2 id="Submissions"><a href="#Submissions" class="headerlink" title="Submissions"></a>Submissions</h2><p>记录了所有人所有题目的正确提交和错误提交。</p>
+<h2 id="config"><a href="#config" class="headerlink" title="config"></a>config</h2><p>这个是个人能用翻译的都看得懂了，基础设置。</p>
+<p>security是邀请码，写了以后，注册要填邀请码。</p>
+<p>backup备份，建议定期备份站的数据。也可以导入数据，做平台迁移。注意导入后要坚持whale和一些其他设置的信息。每个平台都有自己的架构。</p>
+<h2 id="whale"><a href="#whale" class="headerlink" title="whale"></a>whale</h2><p>ctfd的动态靶机插件，Direct IP Address不懂的写自己真实ip，这个没法教，自己搭一遍平台就懂了。否则说也说不清楚。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>开发、导入插件等自定义功能请自行探索。</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a target="_blank" rel="noopener" href="https://github.com/frankli0324/ctfd-whale">CTF3.0版本CTFd-whale</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/frankli0324/ctfd-pages-theme">pages主题</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.zhaoj.in/read-6333.html">赵总官方教程</a></p>
+<p>搭建可以参考我的博客（旧版2.3.2），以及vaalacat和frankli0324的教程（新版）</p>
+<h2 id="寄语"><a href="#寄语" class="headerlink" title="寄语"></a>寄语</h2><p>当我写下这篇文档时，恐怕我不会再对这个我早8晚1肝了2个月的平台做进一步维护了。希望它能成为结合课堂教学、日常练习、训练赛等各项功能于一体的综合性训练平台。同时，我的个人dockerhub仓库很有可能不再更新，也不再会代表Rainbow7战队参加比赛。不过，这并不意味着我的网安之路的结束，我认为这更像是一场全新的开始。我依然有可能参与一些线上比赛，也有可能和其他志同道合的朋友一起去玩玩更多的东西。只是对我来说，CTF将不再是我的全部。</p>
+<p>留下一点期待。</p>
+<p>希望后辈有人能设计出n机frp转发模式，这样可以大幅降低平台压力。1核2G配置极限应该只够20人同时使用。虽然根据概率论的原理来计算，35个活跃用户同时开启10台及以上的靶机的概率≈0.0004，但是，这样的训练平台肯定无法满足比赛需求。</p>
+<p>以及开发<code>v1/api</code>插件，只使用<code>go-cqhttp</code>即可做出ctfshow和大牛的播报效果。</p>
+<p>根据<code>onebot</code>机器人协议，可以开发出更多带有意思的功能的qqbot，推荐使用nonebot2 。</p>
+<p>还有内网穿透，公网访问内网服务器地址，尤其适用于博客。</p>
 
     </div>
 
@@ -288,7 +320,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://liuxin2020.github.io/2021/09/30/%E5%A6%82%E4%BD%95%E7%94%A8docker%E5%87%BA%E4%B8%80%E9%81%93ctf%E9%A2%98-crypto/" title="如何用docker出一道ctf题(crypto)">https://liuxin2020.github.io/2021/09/30/如何用docker出一道ctf题-crypto/</a>
+    <a href="https://liuxin2020.github.io/2021/10/05/CTFd%E8%BF%90%E7%BB%B4%E6%8C%87%E5%8D%97/" title="CTFd运维指南">https://liuxin2020.github.io/2021/10/05/CTFd运维指南/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -309,7 +341,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/ctf%E5%87%BA%E9%A2%98%E6%8C%87%E5%8D%97/" rel="tag"># ctf出题指南</a>
+              <a href="/tags/CTFd%E8%BF%90%E7%BB%B4/" rel="tag"># CTFd运维</a>
           </div>
 
         
@@ -318,12 +350,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/09/28/%E5%A6%82%E4%BD%95%E7%94%A8docker%E5%87%BA%E4%B8%80%E9%81%93ctf%E9%A2%98(web)/" rel="prev" title="如何用docker出一道ctf题(web)">
-      <i class="fa fa-chevron-left"></i> 如何用docker出一道ctf题(web)
+    <a href="/2021/10/04/%E8%8B%B1%E8%AF%AD/" rel="prev" title="英语">
+      <i class="fa fa-chevron-left"></i> 英语
     </a></div>
       <div class="post-nav-item">
-    <a href="/2021/10/04/%E8%8B%B1%E8%AF%AD/" rel="next" title="英语">
-      英语 <i class="fa fa-chevron-right"></i>
+    <a href="/2021/10/06/%E7%BB%BF%E5%9F%8E%E6%9D%AF%E5%AF%86%E7%A0%81/" rel="next" title="绿城杯密码">
+      绿城杯密码 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -383,7 +415,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E7%94%A8docker%E5%87%BA%E4%B8%80%E9%81%93ctf%E9%A2%98-crypto"><span class="nav-number">1.</span> <span class="nav-text">如何用docker出一道ctf题(crypto)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#python3%E7%AF%87"><span class="nav-number">1.1.</span> <span class="nav-text">python3篇</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sha256-py"><span class="nav-number">1.1.1.</span> <span class="nav-text">sha256.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dockerfile"><span class="nav-number">1.1.2.</span> <span class="nav-text">Dockerfile</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python2"><span class="nav-number">1.2.</span> <span class="nav-text">python2</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%BF%90%E7%BB%B4CTFd"><span class="nav-number">1.</span> <span class="nav-text">如何运维CTFd</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Statistics"><span class="nav-number">1.1.</span> <span class="nav-text">Statistics</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Notifications"><span class="nav-number">1.2.</span> <span class="nav-text">Notifications</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pages"><span class="nav-number">1.3.</span> <span class="nav-text">Pages</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Users"><span class="nav-number">1.4.</span> <span class="nav-text">Users</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scoreboard"><span class="nav-number">1.5.</span> <span class="nav-text">Scoreboard</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Challenges"><span class="nav-number">1.6.</span> <span class="nav-text">Challenges</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Submissions"><span class="nav-number">1.7.</span> <span class="nav-text">Submissions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#config"><span class="nav-number">1.8.</span> <span class="nav-text">config</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#whale"><span class="nav-number">1.9.</span> <span class="nav-text">whale</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">1.10.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-number">1.11.</span> <span class="nav-text">参考链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%84%E8%AF%AD"><span class="nav-number">1.12.</span> <span class="nav-text">寄语</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

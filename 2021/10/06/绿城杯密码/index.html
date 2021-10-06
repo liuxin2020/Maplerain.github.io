@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/20210420122405.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/20210420122405.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/20210420122405.jpg">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"liuxin2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"D:\\study\\blog\\node_modules\\hexo-generator-searchdb\\templates\\search.xml"};
+  </script>
+
+  <meta name="description" content="绿城杯密码题出题人是真的垃圾，出的这么简单，被全国的师傅打了不知道多少种解。不会出题可以不出，出这种垃圾题简直是在侮辱做题师傅们的智商。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="绿城杯密码">
+<meta property="og:url" content="https://liuxin2020.github.io/2021/10/06/%E7%BB%BF%E5%9F%8E%E6%9D%AF%E5%AF%86%E7%A0%81/index.html">
+<meta property="og:site_name" content="枫霜月雨のblog">
+<meta property="og:description" content="绿城杯密码题出题人是真的垃圾，出的这么简单，被全国的师傅打了不知道多少种解。不会出题可以不出，出这种垃圾题简直是在侮辱做题师傅们的智商。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-10-06T10:27:44.000Z">
+<meta property="article:modified_time" content="2021-10-06T11:02:05.960Z">
+<meta property="article:author" content="枫霜月雨">
+<meta property="article:tag" content="比赛复现">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://liuxin2020.github.io/2021/10/06/%E7%BB%BF%E5%9F%8E%E6%9D%AF%E5%AF%86%E7%A0%81/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>绿城杯密码 | 枫霜月雨のblog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">枫霜月雨のblog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Maple-rain</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://liuxin2020.github.io/2021/10/06/%E7%BB%BF%E5%9F%8E%E6%9D%AF%E5%AF%86%E7%A0%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/face.jpg">
+      <meta itemprop="name" content="枫霜月雨">
+      <meta itemprop="description" content="天行健，君子以自强不息">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="枫霜月雨のblog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          绿城杯密码
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-10-06 18:27:44 / 修改时间：19:02:05" itemprop="dateCreated datePublished" datetime="2021-10-06T18:27:44+08:00">2021-10-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/crypto/" itemprop="url" rel="index"><span itemprop="name">crypto</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>17k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>16 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="绿城杯密码题"><a href="#绿城杯密码题" class="headerlink" title="绿城杯密码题"></a>绿城杯密码题</h1><p>出题人是真的垃圾，出的这么简单，被全国的师傅打了不知道多少种解。不会出题可以不出，出这种垃圾题简直是在侮辱做题师傅们的智商。</p>
+<span id="more"></span>
+<h2 id="warmup-50"><a href="#warmup-50" class="headerlink" title="warmup(50)"></a>warmup(50)</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>密码签到题，给了以下脚本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> flag <span class="keyword">import</span> flag</span><br><span class="line"><span class="keyword">assert</span> flag[:<span class="number">5</span>]==<span class="string">'flag{'</span></span><br><span class="line"></span><br><span class="line">str1 = <span class="string">'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encode</span>(<span class="params">plain_text, a, b, m</span>):</span></span><br><span class="line">	cipher_text = <span class="string">''</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> plain_text:</span><br><span class="line">		<span class="keyword">if</span> i <span class="keyword">in</span> str1:</span><br><span class="line">			addr = str1.find(i)</span><br><span class="line">			cipher_text += str1[(a*addr+b) % m]</span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			cipher_text += i</span><br><span class="line">	<span class="built_in">print</span>(cipher_text)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">encode(flag,<span class="number">37</span>,<span class="number">23</span>,<span class="number">52</span>)</span><br><span class="line"><span class="comment"># cipher_text = 'aoxL{XaaHKP_tHgwpc_hN_ToXnnht}'</span></span><br></pre></td></tr></table></figure>
+<h3 id="考点"><a href="#考点" class="headerlink" title="考点"></a>考点</h3><p>就一个，一眼就能根据加密算法看出来这是affline cipher。</p>
+<p>没什么好多说的，加解密函数</p>
+<script type="math/tex; mode=display">
+E\left( x \right) \,\,=\,\,\left( ax+b \right) \,\,mod\,\,m
+\\
+D\left( x \right) \,\,=\,\,a^{-1}\left( x-b \right) \,\,mod\,\,m</script><p>求个逆元完事。</p>
+<h3 id="解法一（预期解）"><a href="#解法一（预期解）" class="headerlink" title="解法一（预期解）"></a>解法一（预期解）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line">cipher_text = <span class="string">'aoxL{XaaHKP_tHgwpc_hN_ToXnnht}'</span></span><br><span class="line">str1 = <span class="string">'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">affline_decode</span>(<span class="params">cipher_text, a, b, m</span>):</span></span><br><span class="line">	plain_text = <span class="string">''</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> cipher_text:</span><br><span class="line">		<span class="keyword">if</span> i <span class="keyword">in</span> str1:</span><br><span class="line">			addr = str1.find(i)</span><br><span class="line">			plain_text += str1[(addr-b) * inverse(a,m) % m]</span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			plain_text += i</span><br><span class="line">	<span class="built_in">print</span>(plain_text)</span><br><span class="line"></span><br><span class="line">affline_decode(cipher_text,<span class="number">37</span>,<span class="number">23</span>,<span class="number">52</span>)</span><br><span class="line"><span class="comment">#flag{AffInE_CIpheR_iS_clAssiC}</span></span><br></pre></td></tr></table></figure>
+<h3 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h3><p>放进在线工具的仿射密码里，直接能求出flag原文。然后根据加密算法，爆破一下大小写。也是一种不错的解法。这道题和一般的仿射密码的唯一区别在于，一般仿射密码的字母为26个，不区分大小写。而这道题加了大小写的考点，最后肯定是要用到脚本的。</p>
+<h2 id="RSA-1"><a href="#RSA-1" class="headerlink" title="RSA-1"></a>RSA-1</h2><h3 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a>题目</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">from</span> flag <span class="keyword">import</span> flag</span><br><span class="line"><span class="keyword">assert</span> flag[:<span class="number">5</span>]==<span class="string">b'flag{'</span></span><br><span class="line"></span><br><span class="line">m = bytes_to_long(flag)</span><br><span class="line">p = getPrime(<span class="number">1024</span>)</span><br><span class="line">q = getPrime(<span class="number">1024</span>)</span><br><span class="line">n = p * q</span><br><span class="line"><span class="built_in">print</span>(<span class="string">'n ='</span>,n)</span><br><span class="line">e = <span class="number">0x10001</span></span><br><span class="line">M = <span class="number">2021</span> * m * <span class="number">1001</span> * p </span><br><span class="line">c = <span class="built_in">pow</span>(M,e,n)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">'c ='</span>,c)</span><br><span class="line"></span><br><span class="line"><span class="comment">#n = 17365231154926348364478276872558492775911760603002394353723603461898405740234715001820111548600914907617003806652492391686710256274156677887101997175692277729648456087534987616743724646598234466094779540729413583826355145277980479040157075453694250572316638348121571218759769533738721506811175866990851972838466307594226293836934116659685215775643285465895317755892754473332034234495795936183610569571016400535362762699517686781602302045048532131426035260878979892169441059467623523060569285570577199236309888155833013721997933960457784653262076135561769838704166810384309655788983073376941843467117256002645962737847</span></span><br><span class="line"><span class="comment">#c = 6944967108815437735428941286784119403138319713455732155925055928646536962597672941805831312130689338014913452081296400272862710447207265099750401657828165836013122848656839100854719965188680097375491193249127725599660383746827031803066026497989298856420216250206035068180963797454792151191071433645946245914916732637007117085199442894495667455544517483404006536607121480678688000420422281380539368519807162175099763891988648117937777951069899975260190018995834904541447562718307433906592021226666885638877020304005614450763081337082838608414756162253825697420493509914578546951634127502393647068722995363753321912676</span></span><br></pre></td></tr></table></figure>
+<h3 id="考点-1"><a href="#考点-1" class="headerlink" title="考点"></a>考点</h3><p>考了个小同余的性质。</p>
+<script type="math/tex; mode=display">
+\text{如果} a\,\,\equiv \,\,b\,\,\left( mod\,\,m \right) \,\,
+\\
+\text{则有} \left( a,m \right) \,\,=\,\,\left( b,m \right)</script><p>证明过程不写了，比较简单。</p>
+<h3 id="解法一（预期解）-1"><a href="#解法一（预期解）-1" class="headerlink" title="解法一（预期解）"></a>解法一（预期解）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">n = <span class="number">17365231154926348364478276872558492775911760603002394353723603461898405740234715001820111548600914907617003806652492391686710256274156677887101997175692277729648456087534987616743724646598234466094779540729413583826355145277980479040157075453694250572316638348121571218759769533738721506811175866990851972838466307594226293836934116659685215775643285465895317755892754473332034234495795936183610569571016400535362762699517686781602302045048532131426035260878979892169441059467623523060569285570577199236309888155833013721997933960457784653262076135561769838704166810384309655788983073376941843467117256002645962737847</span></span><br><span class="line">c = <span class="number">6944967108815437735428941286784119403138319713455732155925055928646536962597672941805831312130689338014913452081296400272862710447207265099750401657828165836013122848656839100854719965188680097375491193249127725599660383746827031803066026497989298856420216250206035068180963797454792151191071433645946245914916732637007117085199442894495667455544517483404006536607121480678688000420422281380539368519807162175099763891988648117937777951069899975260190018995834904541447562718307433906592021226666885638877020304005614450763081337082838608414756162253825697420493509914578546951634127502393647068722995363753321912676</span></span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line">p = gmpy2.gcd(c,n)</span><br><span class="line">q = n//p</span><br><span class="line">phi = (p-<span class="number">1</span>)*(q-<span class="number">1</span>)</span><br><span class="line">e = <span class="number">0x10001</span></span><br><span class="line">d = inverse(e,phi)</span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(<span class="built_in">pow</span>(c,d,n)//<span class="number">1001</span>//p//<span class="number">2021</span>))</span><br><span class="line"><span class="comment">#b'flag{Math_1s_1nterest1ng_hah}'</span></span><br></pre></td></tr></table></figure>
+<h3 id="解法二-1"><a href="#解法二-1" class="headerlink" title="解法二"></a>解法二</h3><p>rsatools里面竟然有函数能判断<code>n</code>和<code>c</code>是否有相同因子，属实给我蚌埠住了。大意了，没想到还有用工具做RSA的。放进去直接出<code>d</code>了，然后有<code>d</code>和<code>n</code>能求出<code>p</code>和<code>q</code>，答案就出了。</p>
+<p>用工具做密码是没有灵魂的。</p>
+<h2 id="RSA-2"><a href="#RSA-2" class="headerlink" title="RSA-2"></a>RSA-2</h2><h3 id="题目-2"><a href="#题目-2" class="headerlink" title="题目"></a>题目</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">from</span> flag <span class="keyword">import</span> flag</span><br><span class="line"><span class="keyword">assert</span> flag[:<span class="number">5</span>]==<span class="string">b'flag{'</span></span><br><span class="line"></span><br><span class="line">m1 = bytes_to_long(flag[:<span class="number">20</span>])</span><br><span class="line">p  = getPrime(<span class="number">512</span>)</span><br><span class="line">p1 = gmpy2.next_prime(p)</span><br><span class="line">q  = getPrime(<span class="number">512</span>)</span><br><span class="line">q1 = gmpy2.next_prime(q)</span><br><span class="line">n1 = p*q*p1*q1</span><br><span class="line"><span class="built_in">print</span>(<span class="string">'n1 ='</span>,n1)</span><br><span class="line">e = <span class="number">0x10001</span></span><br><span class="line">c1 = <span class="built_in">pow</span>(m1,e,n1)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">'c1 ='</span>,c1)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">m2 = bytes_to_long(flag[<span class="number">20</span>:])</span><br><span class="line">p2 = getPrime(<span class="number">1024</span>)</span><br><span class="line">q2 = getPrime(<span class="number">1024</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">'p2+q2 ='</span>,p2+q2)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">'p2*q2 ='</span>,p2*q2)</span><br><span class="line">n2 = p2*p2*q2*q2*q2</span><br><span class="line"><span class="built_in">print</span>(<span class="string">'n2 ='</span>,n2)</span><br><span class="line">c2 = <span class="built_in">pow</span>(m2,e,n2)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">'c2 ='</span>,c2)</span><br><span class="line"></span><br><span class="line"><span class="comment">#n1 = 6348779979606280884589422188738902470575876294643492831465947360363568026280963989291591157710389629216109615274754718329987990551836115660879103234129921943824061416396264358110216047994331119920503431491509529604742468032906950984256964560405062345280120526771439940278606226153077959057882262745273394986607004406770035459301695806378598890589432538916219821477777021460189140081521779103226953544426441823244765828342973086422949017937701261348963541035128661464068769033772390320426795044617751909787914185985911277628404632533530390761257251552073493697518547350246993679844132297414094727147161169548160586911</span></span><br><span class="line"><span class="comment">#c1 = 6201882078995455673376327652982610102807874783073703018551044780440620679217833227711395689114659144506630609087600915116940111002026241056808189658969089532597757995423694966667948250438579639890580690392400661711864264184444018345499567505424672090632235109624193289954785503512742400960515331371813467034511130432319427185134018830006918682733848618201088649690422818940385123599468595766345668931882249779415788129316594083269412221804774856038796248038700275509397599351533280014908894068141056694660319816046357462684688942519849441237878018480036145051967731081582598773076490918572392784684372694103015244826</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#p2+q2 = 274773146761138462708137582309097386437793891793691383033856524303010811294101933454824485010521468914846151819876043508541879637544444256520741418495479393777132830985856522008561088410862815913292288683761657919121930016956916865849261153721097671315883469348972925757078089715102032241818526925988645578778</span></span><br><span class="line"><span class="comment">#p2*q2 = 18514724270030962172566965941723224386374076294232652258701085781018776172843355920566035157331579524980108190739141959926523082142273672741849552475156278397131571360099018592018959785627785130126477982765210498547680367230723634424036009539347854344573537848628061468892166199866227984167843139793429682559241317072979374002912607549039431398267184818771503468116379618249319324788996321340764624593443106354104274472601170229835219638093242557547840060892527576940077162990069687019966946826210112318408269749294366586682732614372434218768720577917368726530200897558912687470088583774711767599580037663378929000217</span></span><br><span class="line"><span class="comment">#n2 = 40588227045595304080360385041082238507044292731344465815296032905633525556943787610712651675460810768762763493579129831271018141591546207557410817432455139315527674932933085299277599173971912445226532235814580879585317211349524406424200622675880992390782025158621241499693400288031658194434641718026910652327933253877313106112861283314274635124734817398465059373562194694957841264834312640926278890386089611103714990646541470577351599526904458342660444968591197606820361364761648205241041444681145820799054413179462285509661124362074093583494932706249461954240408827087015525507173082129412234486228092002841868365895837463699200959915782767657258729794037776401995309244941171415842403617486719492483671490834562579225506831496881542530519595438932482796867853234159664409420977526102480385193101883785161080269573707156626838551506024455480650224305894501968583442346807126920740779780593650871645915149689424292912611578291912721896864772950410266629045542480009266574096080138709683466489568290569363478444349563498507530805502511051165160827192795520182720802422213364247355775222858214648603034743679187470844212529134374975737510982287957316878179964602394749601431823167982157434890459245394370728942790117156485268116758052636794417268680901420193002289035538753620555488506926366624641291881353268617130968991258983002165300186971963661666476600998389048880565199317280428349802824448329898502788492233381873026217202981921654673840142095839603360666049476100561268336225902504932800605464136192275593886736746497955270280541423593</span></span><br><span class="line"><span class="comment">#c2 = 25591090168544821761746024178724660839590948190451329227481168576490717242294520739865602061082558759751196452117720647426598261568572440942370039702932821941366792140173428488344932203576334292648255551171274828821657097667106792872200082579319963310503721435500623146012954474613150848083425126987554594651797477741828655238243550266972216752593788734836373144363217639612492397228808215205862281278774096317615918854403992620720969173788151215489908812749179861803144937169587452008097008940710091361183942268245271154461872102813602754439939747566507116519362821255724179093051041994730856401493996771276172343313045755916751082693149885922105491818225012844519264933137622929024918619477538521533548551789739698933067212305578480416163609137189891797209277557411169643568540392303036719952140554435338851671440952865151077383220305295001632816442144022437763089133141886924265774247290306669825085862351732336395617276100374237159580759999593028756939354840677333467281632435767033150052439262501059299035212928041546259933118564251119588970009016873855478556588250138969938599988198494567241172399453741709840486953189764289118312870580993115636710724139809708256360212728127786394411676427828431569046279687481368215137561500777480380501551616577832499521295655237360184159889151837766353116185320317774645294201044772828099074917077896631909654671612557207653830344897644115936322128351494551004652981550758791285434809816872381900401440743578104582305215488888563166054568802145921399726673752722820646807494657299104190123945675647</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="考点："><a href="#考点：" class="headerlink" title="考点："></a>考点：</h3><p>第一段</p>
+<script type="math/tex; mode=display">
+n\,\,=\,\,p\,\,* q\,\,* nextprime\left( p \right) \,\,* nextprime\left( q \right)</script><p>费马分解。</p>
+<p>第二段解个方程（实际出了个离谱非预期，根本不用解，但是没有战队想到），然后欧拉函数。</p>
+<h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><p>这垃圾出题人刷没刷过题啊，祥云杯2020的原题都好意思拿来出。</p>
+<p>祥云杯脚本走一下就行。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">n1 = <span class="number">6348779979606280884589422188738902470575876294643492831465947360363568026280963989291591157710389629216109615274754718329987990551836115660879103234129921943824061416396264358110216047994331119920503431491509529604742468032906950984256964560405062345280120526771439940278606226153077959057882262745273394986607004406770035459301695806378598890589432538916219821477777021460189140081521779103226953544426441823244765828342973086422949017937701261348963541035128661464068769033772390320426795044617751909787914185985911277628404632533530390761257251552073493697518547350246993679844132297414094727147161169548160586911</span></span><br><span class="line">c1 = <span class="number">6201882078995455673376327652982610102807874783073703018551044780440620679217833227711395689114659144506630609087600915116940111002026241056808189658969089532597757995423694966667948250438579639890580690392400661711864264184444018345499567505424672090632235109624193289954785503512742400960515331371813467034511130432319427185134018830006918682733848618201088649690422818940385123599468595766345668931882249779415788129316594083269412221804774856038796248038700275509397599351533280014908894068141056694660319816046357462684688942519849441237878018480036145051967731081582598773076490918572392784684372694103015244826</span></span><br><span class="line"></span><br><span class="line">jia = <span class="number">274773146761138462708137582309097386437793891793691383033856524303010811294101933454824485010521468914846151819876043508541879637544444256520741418495479393777132830985856522008561088410862815913292288683761657919121930016956916865849261153721097671315883469348972925757078089715102032241818526925988645578778</span></span><br><span class="line">cheng = <span class="number">18514724270030962172566965941723224386374076294232652258701085781018776172843355920566035157331579524980108190739141959926523082142273672741849552475156278397131571360099018592018959785627785130126477982765210498547680367230723634424036009539347854344573537848628061468892166199866227984167843139793429682559241317072979374002912607549039431398267184818771503468116379618249319324788996321340764624593443106354104274472601170229835219638093242557547840060892527576940077162990069687019966946826210112318408269749294366586682732614372434218768720577917368726530200897558912687470088583774711767599580037663378929000217</span></span><br><span class="line">n2 = <span class="number">40588227045595304080360385041082238507044292731344465815296032905633525556943787610712651675460810768762763493579129831271018141591546207557410817432455139315527674932933085299277599173971912445226532235814580879585317211349524406424200622675880992390782025158621241499693400288031658194434641718026910652327933253877313106112861283314274635124734817398465059373562194694957841264834312640926278890386089611103714990646541470577351599526904458342660444968591197606820361364761648205241041444681145820799054413179462285509661124362074093583494932706249461954240408827087015525507173082129412234486228092002841868365895837463699200959915782767657258729794037776401995309244941171415842403617486719492483671490834562579225506831496881542530519595438932482796867853234159664409420977526102480385193101883785161080269573707156626838551506024455480650224305894501968583442346807126920740779780593650871645915149689424292912611578291912721896864772950410266629045542480009266574096080138709683466489568290569363478444349563498507530805502511051165160827192795520182720802422213364247355775222858214648603034743679187470844212529134374975737510982287957316878179964602394749601431823167982157434890459245394370728942790117156485268116758052636794417268680901420193002289035538753620555488506926366624641291881353268617130968991258983002165300186971963661666476600998389048880565199317280428349802824448329898502788492233381873026217202981921654673840142095839603360666049476100561268336225902504932800605464136192275593886736746497955270280541423593</span></span><br><span class="line">c2 = <span class="number">25591090168544821761746024178724660839590948190451329227481168576490717242294520739865602061082558759751196452117720647426598261568572440942370039702932821941366792140173428488344932203576334292648255551171274828821657097667106792872200082579319963310503721435500623146012954474613150848083425126987554594651797477741828655238243550266972216752593788734836373144363217639612492397228808215205862281278774096317615918854403992620720969173788151215489908812749179861803144937169587452008097008940710091361183942268245271154461872102813602754439939747566507116519362821255724179093051041994730856401493996771276172343313045755916751082693149885922105491818225012844519264933137622929024918619477538521533548551789739698933067212305578480416163609137189891797209277557411169643568540392303036719952140554435338851671440952865151077383220305295001632816442144022437763089133141886924265774247290306669825085862351732336395617276100374237159580759999593028756939354840677333467281632435767033150052439262501059299035212928041546259933118564251119588970009016873855478556588250138969938599988198494567241172399453741709840486953189764289118312870580993115636710724139809708256360212728127786394411676427828431569046279687481368215137561500777480380501551616577832499521295655237360184159889151837766353116185320317774645294201044772828099074917077896631909654671612557207653830344897644115936322128351494551004652981550758791285434809816872381900401440743578104582305215488888563166054568802145921399726673752722820646807494657299104190123945675647</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> z3 <span class="keyword">import</span> *</span><br><span class="line">s=Solver()</span><br><span class="line">x=Int(<span class="string">'x'</span>)</span><br><span class="line">y=Int(<span class="string">'y'</span>)</span><br><span class="line">s.add(x+y==jia)</span><br><span class="line">s.add(x*y==cheng)</span><br><span class="line"><span class="keyword">assert</span> s.check()==sat</span><br><span class="line"></span><br><span class="line">p2=<span class="built_in">int</span>(<span class="built_in">str</span>(s.model()[x]))</span><br><span class="line">q2=<span class="built_in">int</span>(<span class="built_in">str</span>(s.model()[y]))</span><br><span class="line"></span><br><span class="line">phi = n2 * (p2-<span class="number">1</span>) * (q2-<span class="number">1</span>) // (p2 * q2)</span><br><span class="line">e = <span class="number">0x10001</span></span><br><span class="line">d = inverse(e,phi)</span><br><span class="line">m2=long_to_bytes(<span class="built_in">pow</span>(c2,d,n2))</span><br><span class="line"><span class="built_in">print</span>(m2)</span><br><span class="line"></span><br><span class="line">phi1=p2-<span class="number">1</span></span><br><span class="line">d = inverse(e,phi1)</span><br><span class="line">m = <span class="built_in">pow</span>(c2, d, p2)</span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(m))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fermat_factorization</span>(<span class="params">n</span>):</span></span><br><span class="line">	factor_list = []</span><br><span class="line">	get_context().precision = <span class="number">1024</span></span><br><span class="line">	x = <span class="built_in">int</span>(sqrt(n))</span><br><span class="line">	<span class="comment">#print(x)</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">		x += <span class="number">1</span></span><br><span class="line">		y2 = x ** <span class="number">2</span> - n</span><br><span class="line">		<span class="keyword">if</span> is_square(y2):</span><br><span class="line">			<span class="comment">#print('x = ',x)</span></span><br><span class="line">			y2 = mpz(y2)</span><br><span class="line">			get_context().precision = <span class="number">1024</span></span><br><span class="line">			y = <span class="built_in">int</span>(sqrt(y2))</span><br><span class="line">			factor_list.append([x+y, x-y])</span><br><span class="line">		<span class="keyword">if</span> <span class="built_in">len</span>(factor_list) == <span class="number">2</span>:</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">	<span class="keyword">return</span> factor_list</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">* 复制并使用代码请注明引用出处哦~</span><br><span class="line">* Lazzaro @ https://lazzzaro.github.io</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">tmp1=(fermat_factorization(n1)[<span class="number">0</span>])[<span class="number">0</span>]</span><br><span class="line">tmp2=(fermat_factorization(n1)[<span class="number">0</span>])[<span class="number">1</span>]</span><br><span class="line">tmp3=(fermat_factorization(n1)[<span class="number">1</span>])[<span class="number">0</span>]    <span class="comment">#p1*q1</span></span><br><span class="line">tmp4=(fermat_factorization(n1)[<span class="number">1</span>])[<span class="number">1</span>]    <span class="comment">#p*q</span></span><br><span class="line"></span><br><span class="line">p=gcd(tmp1,tmp4)</span><br><span class="line">q=gcd(tmp2,tmp4)</span><br><span class="line">p1=next_prime(p)</span><br><span class="line">q1=next_prime(q)</span><br><span class="line">phi1=(p-<span class="number">1</span>)*(q-<span class="number">1</span>)*(p1-<span class="number">1</span>)*(q1-<span class="number">1</span>)</span><br><span class="line">d1=inverse(<span class="number">65537</span>,phi1)</span><br><span class="line">m1=long_to_bytes(<span class="built_in">pow</span>(c1,d1,n1))</span><br><span class="line"><span class="built_in">print</span>(m1)</span><br><span class="line"><span class="built_in">print</span>(m1+m2)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>解方程有很多种解法，z3，sagemath，求根公式，当然也可以不解方程。</p>
+<script type="math/tex; mode=display">
+n\,\,=\,\,p^2\,\,*\,q^3
+\\
+p*q\,\,=\,\,c
+\\
+q\,\,=\,\,n\,\,\div \,\,\left( p^2q^2 \right)</script><p>看得出来出题人确实没学好除法。</p>
+<p>费马分解后，4个值为<code>p*q</code>、<code>p1*q</code>、<code>p*q1</code>、<code>p1*q1</code>，显然，4个数最大的为<code>p1*q1</code>，最小的为<code>p*q</code>，那和剩下的两个数求个公因数就出来了。</p>
+<p>欧拉函数不多解释了，放两个。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">phi = p-<span class="number">1</span></span><br><span class="line">d = inverse(e,phi)</span><br><span class="line">m = <span class="built_in">pow</span>(c,d,p)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">phi = (p-<span class="number">1</span>) * p * (q-<span class="number">1</span>) * q * q</span><br><span class="line">d = inverse(e,phi)</span><br><span class="line">m = <span class="built_in">pow</span>(c,d,n)</span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>建议出题人好好学习数学，不要不自量力去给全国性的比赛出题。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>枫霜月雨
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://liuxin2020.github.io/2021/10/06/%E7%BB%BF%E5%9F%8E%E6%9D%AF%E5%AF%86%E7%A0%81/" title="绿城杯密码">https://liuxin2020.github.io/2021/10/06/绿城杯密码/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+  
+</div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%AF%94%E8%B5%9B%E5%A4%8D%E7%8E%B0/" rel="tag"># 比赛复现</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/05/CTFd%E8%BF%90%E7%BB%B4%E6%8C%87%E5%8D%97/" rel="prev" title="CTFd运维指南">
+      <i class="fa fa-chevron-left"></i> CTFd运维指南
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%BF%E5%9F%8E%E6%9D%AF%E5%AF%86%E7%A0%81%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">绿城杯密码题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#warmup-50"><span class="nav-number">1.1.</span> <span class="nav-text">warmup(50)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-number">1.1.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%80%83%E7%82%B9"><span class="nav-number">1.1.2.</span> <span class="nav-text">考点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%B3%95%E4%B8%80%EF%BC%88%E9%A2%84%E6%9C%9F%E8%A7%A3%EF%BC%89"><span class="nav-number">1.1.3.</span> <span class="nav-text">解法一（预期解）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%B3%95%E4%BA%8C"><span class="nav-number">1.1.4.</span> <span class="nav-text">解法二</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RSA-1"><span class="nav-number">1.2.</span> <span class="nav-text">RSA-1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%80%83%E7%82%B9-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">考点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%B3%95%E4%B8%80%EF%BC%88%E9%A2%84%E6%9C%9F%E8%A7%A3%EF%BC%89-1"><span class="nav-number">1.2.3.</span> <span class="nav-text">解法一（预期解）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%B3%95%E4%BA%8C-1"><span class="nav-number">1.2.4.</span> <span class="nav-text">解法二</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RSA-2"><span class="nav-number">1.3.</span> <span class="nav-text">RSA-2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE-2"><span class="nav-number">1.3.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%80%83%E7%82%B9%EF%BC%9A"><span class="nav-number">1.3.2.</span> <span class="nav-text">考点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%B3%95%EF%BC%9A"><span class="nav-number">1.3.3.</span> <span class="nav-text">解法：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="枫霜月雨"
+      src="/images/face.jpg">
+  <p class="site-author-name" itemprop="name">枫霜月雨</p>
+  <div class="site-description" itemprop="description">天行健，君子以自强不息</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">枫霜月雨</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">147k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:14</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '[object Object]';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"left","width":250,"height":600},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/click-love.js"></script>
