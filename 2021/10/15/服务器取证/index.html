@@ -19,20 +19,20 @@
     var CONFIG = {"hostname":"liuxin2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="如何用docker出一道ctf题(crypto)目前docker的使用越来越宽泛，ctfd也支持从dockerhub一键拉题了。因此，学习如何使用docker出ctf题是非常必要的。">
+  <meta name="description" content="以下内容不对外公开哦！请输入阅览密码。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何用docker出一道ctf题(crypto)">
-<meta property="og:url" content="https://liuxin2020.github.io/2021/09/30/%E5%A6%82%E4%BD%95%E7%94%A8docker%E5%87%BA%E4%B8%80%E9%81%93ctf%E9%A2%98-crypto/index.html">
+<meta property="og:title" content="服务器取证">
+<meta property="og:url" content="https://liuxin2020.github.io/2021/10/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%96%E8%AF%81/index.html">
 <meta property="og:site_name" content="枫霜月雨のblog">
-<meta property="og:description" content="如何用docker出一道ctf题(crypto)目前docker的使用越来越宽泛，ctfd也支持从dockerhub一键拉题了。因此，学习如何使用docker出ctf题是非常必要的。">
+<meta property="og:description" content="以下内容不对外公开哦！请输入阅览密码。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-09-30T03:50:04.000Z">
-<meta property="article:modified_time" content="2021-09-30T04:28:51.732Z">
+<meta property="article:published_time" content="2021-10-15T12:04:40.000Z">
+<meta property="article:modified_time" content="2021-10-16T13:22:53.227Z">
 <meta property="article:author" content="枫霜月雨">
-<meta property="article:tag" content="ctf出题指南">
+<meta property="article:tag" content="服务器取证">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://liuxin2020.github.io/2021/09/30/%E5%A6%82%E4%BD%95%E7%94%A8docker%E5%87%BA%E4%B8%80%E9%81%93ctf%E9%A2%98-crypto/">
+<link rel="canonical" href="https://liuxin2020.github.io/2021/10/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%96%E8%AF%81/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>如何用docker出一道ctf题(crypto) | 枫霜月雨のblog</title>
+  <title>服务器取证 | 枫霜月雨のblog</title>
   
 
 
@@ -195,7 +195,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://liuxin2020.github.io/2021/09/30/%E5%A6%82%E4%BD%95%E7%94%A8docker%E5%87%BA%E4%B8%80%E9%81%93ctf%E9%A2%98-crypto/">
+    <link itemprop="mainEntityOfPage" href="https://liuxin2020.github.io/2021/10/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%96%E8%AF%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/face.jpg">
@@ -208,7 +208,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          如何用docker出一道ctf题(crypto)
+          服务器取证
         </h1>
 
         <div class="post-meta">
@@ -217,17 +217,23 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-09-30 11:50:04 / 修改时间：12:28:51" itemprop="dateCreated datePublished" datetime="2021-09-30T11:50:04+08:00">2021-09-30</time>
+              <time title="创建时间：2021-10-15 20:04:40" itemprop="dateCreated datePublished" datetime="2021-10-15T20:04:40+08:00">2021-10-15</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-16 21:22:53" itemprop="dateModified" datetime="2021-10-16T21:22:53+08:00">2021-10-16</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">环境搭建</span></a>
+                  <a href="/categories/%E7%94%B5%E5%AD%90%E5%8F%96%E8%AF%81/" itemprop="url" rel="index"><span itemprop="name">电子取证</span></a>
                 </span>
             </span>
 
@@ -237,14 +243,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.8k</span>
+              <span>831</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -256,24 +262,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="如何用docker出一道ctf题-crypto"><a href="#如何用docker出一道ctf题-crypto" class="headerlink" title="如何用docker出一道ctf题(crypto)"></a>如何用docker出一道ctf题(crypto)</h1><p>目前docker的使用越来越宽泛，ctfd也支持从dockerhub一键拉题了。因此，学习如何使用docker出ctf题是非常必要的。</p>
-<span id="more"></span>
-<h2 id="python3篇"><a href="#python3篇" class="headerlink" title="python3篇"></a>python3篇</h2><p>在介绍python2篇和python3篇之前，首先需要对raw_input和input这两个函数做一个讲解。引用<a target="_blank" rel="noopener" href="https://www.runoob.com/python/python-func-raw_input.html">菜鸟教程</a>。</p>
-<blockquote>
-<p>注意：input() 和 raw_input() 这两个函数均能接收 字符串 ，但 raw_input()  直接读取控制台的输入（任何类型的输入它都可以接收）。而对于 input() ，它希望能够读取一个合法的 python  表达式，即你输入字符串的时候必须使用引号将它括起来，否则它会引发一个 SyntaxError 。</p>
-<p>除非对 input() 有特别需要，否则一般情况下我们都是推荐使用 raw_input() 来与用户交互。</p>
-<p>注意：python3 里 input() 默认接收到的是 str 类型。</p>
-</blockquote>
-<p>因此，在python3环境下出题，输入端要填input()。</p>
-<p>和web篇一样，我们以一道完整的题来演示一下。题目为sha256碰撞。</p>
-<h3 id="sha256-py"><a href="#sha256-py" class="headerlink" title="sha256.py"></a>sha256.py</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"></span><br><span class="line">BUFSIZE = <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">c0</span>():</span></span><br><span class="line">    random.seed(os.urandom(<span class="number">128</span>))</span><br><span class="line">    alphabet = string.ascii_letters+string.digits</span><br><span class="line">    proof = <span class="string">&#x27;&#x27;</span>.join(random.choices(alphabet, k=<span class="number">16</span>))</span><br><span class="line">    hash_value = hashlib.sha256(proof.encode(<span class="string">&#x27;ascii&#x27;</span>)).hexdigest()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;???&#x27;</span>+<span class="string">&#x27;+&#x27;</span>+proof[<span class="number">3</span>:])</span><br><span class="line">    <span class="built_in">print</span>(hash_value)</span><br><span class="line">    buf = <span class="built_in">input</span>(BUFSIZE).replace(<span class="string">&#x27;\n&#x27;</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    tmp = buf+proof[<span class="number">3</span>:]</span><br><span class="line">    <span class="keyword">if</span> hashlib.sha256(tmp.encode(<span class="string">&#x27;ascii&#x27;</span>)).hexdigest() == hash_value:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;proof completed\n&#x27;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;bye~&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">win</span>():</span></span><br><span class="line">    <span class="built_in">print</span>(os.environ.get(<span class="string">&#x27;FLAG&#x27;</span>, <span class="string">&#x27;Flag not Found...&#x27;</span>)+<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        c0 = c0()</span><br><span class="line">        <span class="keyword">if</span> c0 == <span class="number">1</span>:</span><br><span class="line">            win()</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
-<p>先是一波经典偷懒，直接拿了<code>ctftraining</code>的<code>copperstudy2.py</code>进行修改，改除了这道题目。由于答案在环境变量里，可以采用<code>print(os.environ.get(&#39;FLAG&#39;))</code>这种方法，但是我个人更喜欢<code>from flag import flag</code>这种方法，区别不大，主要就是知道如何从系统环境变量中拿flag就行。</p>
-<p>然后看Dockerfile，更简单。</p>
-<h3 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h3><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ctfhub/base_misc_socat_python_36</span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> sha256.py /app/sha256.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">MAINTAINER</span> mapleice &lt;https://liuxin2020.github.io&gt;</span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">10000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="bash"> socat TCP4-LISTEN:10000,tcpwrap=script,reuseaddr,fork EXEC:<span class="string">&quot;/usr/bin/env python3 -u /app/sha256.py&quot;</span></span></span><br></pre></td></tr></table></figure>
-<p>做成镜像传上去就行了。</p>
-<p>其他记得注意填写<code>requirements.txt</code></p>
-<h2 id="python2"><a href="#python2" class="headerlink" title="python2"></a>python2</h2><p>有空回来更。注意使用<code>raw_input</code></p>
-
+        <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉, 密码不对呢，为什么不去社工管理员呢？" data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="53902169e503115bb8bd4315389b3fd2f338d6916e4a6b99cde8e38658e758ed">da8d53aaa19bbdad5d86e33d4a12bdd6c03b3bc8d0e87b6fefb0fd7748994bb1f94ba9fed74b7020192e409d578ca3c45b98f197e2025f862705a672b23323c5b0cf027d73ec0836cbf2536a39a6162e52529f8f617cce3470c67d8cf2ec56c41de701f5680e07395e88af649aaa4d5d07e7ed41d31fd5b4357a55e8849864e703097e265f6d23db46428e5086605ce9103b3e38fe42e5b9b7d3fbe665aca79ee576a660197a88b45bc684e587b26eae40a709f5c42c30d47f901b20b0bc9f5b06dd890cef0a7b23d28bd6fd859caf303d4d941919aa4064e9116195124c87a4dc150ce4224479324310cdb9d53fccbd89f09fca549d91787c014c4b1efe4915af43db4ea48a09d92dc1a49503e5caaab0a85c2407dd17190ee143b460f876ef76431e1c52fbed0ba6a45f1268e1a26ced07a850eca69e7271bf3931512769b41351aa11fe497ebefe570460019077e8964796ee6946c549d956ca764adb49012fcfc1fa8631384176a2f9db93d4d2845e1e101bb250bb79179c59f2da39fcdc0d59a1d61ba8adc5c6250e03d359363105d2d24f34df7e9c085f7c2ef7e06bc953ec900d54c8f2b5ac6ccdad83bfed0b912c8b91ce315a2283dff5650045ed8ca7fb8fee0bb799a7e29818bd6edcf6fcbb426eaad9cf1d0bc3f776096239e77c8d7077ddaed299abc39a8d280f06ea9369376302d5930e5bf9ae96c72e31c729fc1905227858e23536dbd5893b722d8250ffcda35a2cf4cd213e57ef666c9311020a5f9bcc3ec260a8172bf7b0005f4f9d57419cff2d07f54294bf96c61457cedd0439f4aba6d8784397c595a94c6b836da5bd9152e6a197595b3a66c71abbb23ad1a829add3ac6ab8827bd40b5ef7b1567c2b91964b5b8c1bd55fe5b0b14105b59a11a8edc9e86d6f382e693da0e7fa3bfe65d31189349e8e7f3022de5ba6e436238e69069ea08cf6de2dcba63e5e8e326f492b0874bd2d9d2996bbe6839aed04b9827175a6b0b99de9a52acf675acd7771290fbd38d2b897c252da12c0379e46be0ec4ee78d1849cfce0f4d6e3ed35ba0b8d2e90dbe205bf38f15a803057ca63efb58e82d865246cb384744c71d308a17d1b07cf592ebe7340a46c438b9fd41e0552074b8f804eeccda04a2249e979bddec03c17f0b8dbb5e322f27630607c5861a21b1c3c96b61cdb156537a0b394e6a23b84015903830764acfb8716d444a3efcb07fd0a42e8ff3869fbfd88066595cf2f085188f293b5ddb3ae12accabe9893b79474d3ca18a59ad870b615d8a94852c5e355579e938b4ab596d2c88f597fa8824c9e000ce7c0cff51c4c02b09d40fcbd4f05251e6fa50553a9e34f301669d0971f687404fe5da220ab16a7cdb52229500251bfbf2365ca571d95053887e4389681d5a24b6849d24a6ace97d8a2feca617c7c188dbc6942db4fc09bdd2a26cf25813d3abb2a1a1982f44f348cae5a56e520ce282c7575422f8130483e6a4106a8e83a9727ff2e5cf70b43727bfdce2e1894bc3ab9a9df210125b02d75428ca7acaf06bb39b1a93a7210e86425eae1891bdc4b87e012a5c143251ade82f99ce5a2c1988aab020df6b73d36b1961f537326d74e9266dd169400031c6ae4c3717a023950d13cf050fe175801928e4a493d20f52c85accc28abd18355fdaebceb2006ef7b59bb54f985d4c6125e2c0d9b9cddbc2b3d736f78b84fe4f28d7f640665afb102110f6b1e8863154b24c06ac4fdcabbb5a5c50dac431c5f543fa7e9aa59219867f20c3f9dbf5703279da482bf6474ffb8db67215a0979f1a46665102c5d36a9d47353dd19ea7bfb7829a559aefe25cae39bf7b5747db22d3b7eed821b6cef6eb8d06ff0df577a3350af0b3a7a6b922d08f66860762b5427600de11bf4826c712a98158ce74478f7f54ff98c5d75873804aae059ff6e4ca74591881227cfbaada5f26307b9dd64319e035f22c112a66433e1868e747b11a4245e26ee9ab9b8d8cb5f36d38a61b0bce792d9d5f68db1e4e4c99d7c5a7d0b0aa979470ccd057dac9795b2173393c95ea8d7349a66c5a633297bb805a39955fa367bcd4b038508c37a7c35a123fdb0c5ea6f7f3d9df68554a729208c9a2e60fca1519999cbd82276ee69e1cc58c6285ec8bf77c1d723c0297532d6714bb22402d78e0c0cdaf600e79250a0cf541d0bb02866c2d41052cdd268c25a820253125b11a612fbc319a7c21dd9152d6b1fd1df4bf7c9c4485f832cc397313eb0b144654944e17167052a22b8aad38502bee6b0f272a592c9720b7bdee699777031d08b0fc4a7ff05c5c19bf73eb22b537b416609d3dc1b058c992494629e084d70c39a4f27fe4c488e06bcfdcafe241af4e1a32ff0d8b960fb4c72905531d2f5efe2e4dc850942509a8359fe47250df107e0c43ac3924bfa3f8e30c0aa16cb72e7f8cd57a86454b548c077e79678f0a8bcad45db1bce3c72e7791890a134cf407c4aeb1c7180f3f01451dfae8ddd2227c0590c01942485ea64f1153fee139c561dc629e19661d6554faf61c14ee9892d5c69779c2e0277e0106d6587f06ecf3175bac7744b372a1d9ee241aeba04ad61b7b9be5e031eb16e0d67c425ed630ae6434090bc0acca3dd775552c17ac36a7f4900b1fa75f717e90cb7eb4fca896cfc265485d144428e7fbc4c7dac0d7570b7140e41fb26fd97c08abd15ae6e79fbdbfac6665dcddd5d7fdbe538f9af4be3567d41ee3780d58276ff16b1d59d29f7f0788e5560219ee7f3191ece62e263d684278705a6e907986a69d6ba0619894214fc71c8a61c10b5fe08ab046a10e763b63c889bbdb912c6b68551919f680664397b85b38163b0fb06d853cb93aa75219e125e4a88baebd489ff49928ccced16f724fdad57511d140b0bd44ae7bf9e9e796fe8b50a0cba3754f3f1c52ec912706c20566ca72532102c37cacb792d6106f2cb9b01e3c22292d4dc8cfc60b41dc6c4046e425a769b5e26faae5a4e7a9810d76c9ff3d14a8b5c9d96677f5aeaf26eb4f11620d233634aff6e3b739ca843918ed62a0ea7575fb22b61b8cb9f16fe03dd6f4b55f5b5c535687afe2357902b72f6ce04b8bdd293bc4244d07bc7477439dffc9cf6f3b70ae0d7213dc7c9a79636abead967f449fad16460ece1a1fe8172133611647f7a02c6c90b47a498238dfe0ef31339a857d5f85227b83dd6e6a3a7d98face7cf0c00311fbf0d0b26b1c6f4805312425ad014c8cc0b174db89ff61823986a85bdb314d6fc2077fb985032bde8e61050a49590dae30f6b95e1b4d4685a093edd7976e9a720c752b623703021c68f01970659a1c0c4a8297b6392a486feff21c5be567f50a201a0b2a4e4b28804be7ea7af7cab43327b57b745bbd01a46742831217aeb2f96454433b2c302072acaf68946f28e86f09ad9eb1116d3bcd36e4498507bd71ebba6950043eb334e8e7ad05aa82d38df0a7e23d384fccccc5303cc50bbd634437a0aef0bf2e8811afbbd77c24e911f1d5f79ab843d4aae9ed590582fd684190a23fe436906fc9f62f229f45fa0575a8f9acf3a738d979d09f712031ec70b46edf6219c5e817d668b8c825a4649a8307540301f491e547aabe05a0113de48383e8b5113630d27084115282ac76f46ac9dd73f05c41976548481c56c82d6b4dac97f6b236385584f458344200083c35b72adec0674b8e96dc5daab8159a3695c14d2256910479973e1f725219d6ad22bc91de79d01995179f6f926035d307f41d35f37cdbb1a0fc13d781fa418a4dcc7f52cc2ab57bb63df5e3ea30403b4b04a64af032c2a2219b7c7dc41afeecbacbd227d6f81f62cb7bb7d132ef5772d75f4c4bd0b2b75516bab8fc1cedf2474787e8898574150dde7e9ce599661f2c32cb8b3a14015ac8a652e12b8d549f824fd937f42fdc16c088c7ecb3b4817b588c56fcae6462c24bafc37139793249919dfb80bbba49a0d709b6d86c2c4175c0fb27662609b8bca571ee43a0d983d9ef1763195712555504d2fe18f04027d5842df7dfefc80220cd729ecfd400eee984f4cb51929b45df09bd0141324eb09604cdedede605ba6cf5deb7108fd307379da11bd95a16f33b67000f41eac6c3d20f95b95e425f2f020214fcffc0e1d1da62ff420f23553db5823cd24616459af12ea662c0c8d26f9f8049a593094348c436e2499f2111d795f63f01346176b14022a297af520aa03b29c99fb64a5d0ff0d76c002ed4a8a88791dd519355b140db1c979864f991ef134bee2d9e0340a89cd8420b7f45ea0b416aedf256e389a5241fa04a7c6c328d81604db824da50e9ad289c033f95effe6761be722a1302ca0b5104c3ad3d2b5907c4f28a2ad812a38a561039bac4c3777b1914d9c4bc20586ea994ffe065ad246831dd9d15843ac9e106aa00bdba616fcf3607c3df3bb4c2d26513ad6f7c275ef4064cd2529c88d2074b7ac92927f4b42b4ca21562e4e85d7716dc8e2a7274583b88d7c369be5878bcb495b34757664c9edb37f42d265781fc1f17129119ed3de62b74dac763b80933cbce335adf570d6c0e2097678292cfd80f7b52cb1b02bdf2678280811666d4ab0d495a28189b3919d5859c9fbec238003024c22d83045dd012ec07a497b5f6f3f8390bd0d0067ae9a293ad25b2e3a39c17d48f4f87f5c87d3827d537a3c37e5b5a1c3283f6985a2a72c7272bf9fd7aa14ea4ee45c79dd107f62a77231ac043710a8b39c6de6a3fb3a36896deff1bbe6233aa1a585854b628a2606e09b64b6c1d28ec17fe0ed129f65ff6510aef86b9f075eecf9dfc90e811f83ccc9d4cd9ea8a735a6d2b9140b7f02f067e53c6472078854abade9309c84b6892569753c5e926b5aa719673dbef13800a83363eea7ee9703d70ceb73eb417419af47faf28789c65669a51441739aabc2001e77c438e1874a0da226fb81dfbe5e1e37b00cea3d6861a316802907517615e150c1f055b577e68a6c77d078618c844a03327722b3d8e2a4b94548ab7dc3a0cf7cd9b7f6073980eae19b2f46cd510dba1d663d6da10eab6a6cfcc2037311dcdcd38ca6b1d1f7a3641c63790c2e5513abd20318f0bd1ed788099be342455e222be4dae47b9c3ec54e3bdeea3f6d50c355f7e375da78e9c0c1d5ee9b122a15fdecf55e662e696a4cf1b6bd7a5b19be6ecf3c66df8b7008c3e3cf523b235308c7e124da6ce7c0aeb85f46e529ac64573d4af74c3efb25a9930996d4eb995c67a18b18adc9ea665c18aea18ab77e22949c3c9857ee16d67a25179b17b97161c5c36bf6e279c7328805b39d71556d7ad20212461520aa9a3c806470c42679c35f5ca049855dc3be2d1ff9151da764610098d7078dd6963b0a46612f9ca60d5459b9ad6c6f1243494527f0d1c0af1cc64bf79e4fc380f12e1081fd2a533a080ffbce84b80aa81ca076244062cc95611e8822c73cfcf55bc27a050999183a0072b977eca77cd21a0043cedbc5e6e969700016a318b27430520770f9436f2aef176ed7a20e9b9963cebd26532eeeb33e19da9d3ae3c5756e468d89b3994e2be2dd8d8aadd8cef9badcf8e40aa38a48c9bf21c05a40fa095012a29635799915e7c02307f6caaeeadb7ba47c1e2ef49a30f92c507ca44de296e61aa490294910f7691eab7a116a690bebacf992b67f9b6747271307cc25b817eb9ff8f62214a2296cef06ff2f04db8aed1f418e5d7b77ef952910d7ad88aa54fcc28344ab234045e064f3b4bfe88598396b559a0de7040823abb4d68e34c8fd59c3804d0b8bd31a359ff87ae4e6464c18853dcc263ebb694774e7d0839be2a6d25da648a3a2fa292d8afc6e70a5b4acac73f9cc31b2cd85331829593e42630e90295243ccf4655478247ccc13c79932781a454f47f0a496843028876cb7ac714b93cec3188db646cd10cb1e260c5c8a8f7f5cf0cefc8c786af16d5786e246482117fcc945f331f1ceb3791e56a68cca29e94d91567980a54748f73915d1896f57ab3f4c5b622fc477a9a7c3e4b9532219146241ef40405a7a13fe0e146d28a0dadb6f795ef0bf4e9a1d10ed1df97979e57e183615930be4766467fc05c08994a1bf7827e1aa2a4b52ed5adf4c33c10ba2693abc393c4dab6b269026fe4c59ed3de58ec9a4e04620b7b4d53a4e722935e6afb1557c57543b83dcd958938995ec6e9ad348b9fd080e8ee9cb58a75441ca46023a4babf31c6492d3b06b2c8272661aff5bdcb5617cf56f695bddc6cfff3180136fda039eb7b4074e4dc38339ea8150a33fda8196f1787edf45233cff91bbebefb798bc42c6669c019a33ca6a9a1071b20d54427f96c81699f9ae5b7407a03d7fb8d220c475d3519abe52d34776fec19ec95c00f8decce2570b896d54ed73da31700808c5bb3c4da283c6a007748baebd5946a6d388dcc3de6669d3d24460bcfe32937215423078948e5b34265216ba482d805470aa171c8e5fcab2c74e46948d271cfec0e75a7610212e3192ba8f277ebc452a82f0683215eac2ff9ba6207b6ae9a9b1004583b741af71318633af7e2282380b7cf1301d8f61ea57c6c0a6368a9f9c03de903e2c2f0004a37015aedb949d9a39311c0560b75f9a8c44347be1da4674dfa2332aedd5af723e070880ea700b1953cb72d0139b44758b1e37474ab3caf04a8d6663eecf791a22db9da402be7456a2483f91110226f56db782a0a12de7b22526e44f5c1c4f430b73c8ef434e0580a365cbe8b771f1112f40cb14e030b067ecdb9027bd8a65dff3f0312fa5efd44931ff853bb377c245dfd8aa41d7b3285678fcba75169e10e032a3ff1d523e8f64c6040d0e9f850dbf87d04f2f5a30c1f0ea37f87898ad78a14cd5762fa9f5d05130b5112de6c54e5c2b9220c0eb7083b2942782f40789258b90cbda3c5f5e76362544ad010a5d3bb68d5a2c1df3953f6fe07e2fd4fdc6984f6e076d6ff77257b6ca4543cdc4b12cd7193767c1bd3fdbfdc711ef328011099632643bc340f63af9164448278034fd1d01a8fa93f0441136f38f2083633092570a4167ebf84bd59f3bf4f6681e5dbf6e811dac6e82fb8f5e75e1c6e4ee38afa3ed8a06a47cdea92519709215507539d2bd7e6cbede72940ea99fc8216b525f3d827c5c3cd3abbfaf0a1180bf798fe57908281ef65d257ac03abac4db64fe50986806f6efc312a3c43035a62e85bcc33041648b642f4dee40345b479941f591d9a4ce1bbf8fe78bae4ab2de0b147cfd9c08e3d557342e709868cc1e7bf0fb6934bfe8cfff734695e5476884d014404ec5cceeba436b5452e2bb058b73b46d9b14f57e4e1cf33e72ed32fe65ff02062b8be845458ce63f92a6104484d63ad1cef51ba9c16acddc352c3ff579586ae4964013a11c34b5bb19f639642db4e73247c4aa91d4f462bdf496719fa67a0d225e0c5228e41b4ae89edcbe0aef4cec74da37fed29c700bf08824d8166e9d10f36718c928f6cae11a406a0f4ff0711ede3e5342c04d52d3dfff6684fe071fdcb9319df5541658a21195a74bd1227abb3b6b880d524adb2f323f385c261bce9689d985db4ee3138c9198396146f1e3a348b244747913152e31c126ce5d51fa0f30e00d68fd9f4e35180c27f63d15dbc632bfcac3e146d79adf683f527906739154101f3133eef8d4f180ee6fab042a9d227c9612932e03973cb7d81a236b57b4d0c3ba7611aa5e0153ebafd35294498382ab05b7ac2a977ad5b7207772df4c0ffd5c12cf21278044dc337351743e5c9ccd39b714dc3c71c7c131233ece70c7847a8a2b94cb45991e637fb886fbef29ce35409e25efada7649d905cbbe0b15107d0134968479286bff36271a77775efe154eb2d377a9cfc972f46d7f84c7fff3919489a2bd3a918d77988a5f83bf9a3539e2546d365e8ba21974cb8925e52400911eab7614c0fe82b9c7406ab983c0bc4e80bfdacd7ed8d672bcd005e75760617c7611b3a2c6f170daf4cf1c789165637b6c55aed49f2c2a6352b1b386fd8974f4df44207b93faf6146db3d554a979689f483da8c3b881e4ee1e1555d03424f8e9d779f8ca30c9964d977a197f2e6676e561f52291fc32792aa5f1ba3a64a57fa4a4f13ecfc3d14b59c514acdfefbc92c949abe6ba7b2cbc90c05c01e4e04d7f25f84788da1098b6278bddae5607dfa20d8e966de3373817eaf0cef0549167597aa052482c5b1a400e5c948fbec8abd5d63735a34aed4904371a2c4c43b095b90ce4c1d252d45c80d066188ec93abe136987d38c3a334be7542f7c9d6ffffda7f304be9c58f0411df11874822442496cea79651b17d6058c923d89c8d9b619ac499fbb8e70ffc5002a9180991bcbcea0db83db891d905837f8c9bdedb37d69dfc8f4843229d91886090a310d2788d59de78f1161916212d597dc6e95705b564522c592a0774f433a7b5a9fac18fe504c988b9e5bf98f4ee4f2cb83f3bf9de42960981d84894e11ecd4a80e2e20e471d75b072af4a7dda21e0df0cc352f59c4c4f84d9bbbf713471918478bee1440c00f26cf33562123f8afdde2c9b75699699ef7f4ceafeff120a94f0002fc95dcd188923bbddbf703fa10044d8e883d41400f9fd95466778ad9b4d784434ad27b14efc860af7cd26e3cefd5d13faaa1fff211cb5fe8a8b61d89cd0319739af9a9ac63e9fa63f3c9b588bb72529c53d837003667eb9527fb06f9dd0e75e60984f0dd8f7d4515da5f93b88736f52bf28303963ec70de88661ca3f8dc4f09942d2cb4b1dce97182f8ff67161eb7efce13cc602bae865cd1adf6c55f842e130d6c0aab0bdc654185641972999c113521e83caf93567b6be5e1a4f6d736517a245988ff37c278dd700fbb931848fee86ad5fc15a6695634226be8bab5bfe99d89ef4fae04348de8727e9b9718c92af055d733ca28ab4ac6c2e930ab09c0dd73fb0fef3c4b4d710d47aed75bfeab15ee616208bdc6a708a23667deadebe40cdfcc213da2ba6ee3d14373a87a0a50eedee35a67eb95ebec6b634e87a1aaf355864b26692f333239756fb1811ee90910ecef514e2bdbbe3f5e664409269dfcd5645fc8ea4039dbf6a7019de7ef06ab5e24addcb98d6831f10d6b982ad302944f881abdaf0ff1aad8e834d3937b61c2846b7e97cd1b6de1dfb417a84ef0b010ac3e24aab2be1656fc38047510ec961e36d65bd73c</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">您好,接下来的内容需要密码才能阅览。</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
     </div>
 
     
@@ -288,7 +288,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://liuxin2020.github.io/2021/09/30/%E5%A6%82%E4%BD%95%E7%94%A8docker%E5%87%BA%E4%B8%80%E9%81%93ctf%E9%A2%98-crypto/" title="如何用docker出一道ctf题(crypto)">https://liuxin2020.github.io/2021/09/30/如何用docker出一道ctf题-crypto/</a>
+    <a href="https://liuxin2020.github.io/2021/10/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%96%E8%AF%81/" title="服务器取证">https://liuxin2020.github.io/2021/10/15/服务器取证/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -309,7 +309,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/ctf%E5%87%BA%E9%A2%98%E6%8C%87%E5%8D%97/" rel="tag"># ctf出题指南</a>
+              <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%96%E8%AF%81/" rel="tag"># 服务器取证</a>
           </div>
 
         
@@ -318,13 +318,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/09/28/%E5%A6%82%E4%BD%95%E7%94%A8docker%E5%87%BA%E4%B8%80%E9%81%93ctf%E9%A2%98(web)/" rel="prev" title="如何用docker出一道ctf题(web)">
-      <i class="fa fa-chevron-left"></i> 如何用docker出一道ctf题(web)
+    <a href="/2021/10/06/%E7%BB%BF%E5%9F%8E%E6%9D%AF%E5%AF%86%E7%A0%81/" rel="prev" title="绿城杯密码">
+      <i class="fa fa-chevron-left"></i> 绿城杯密码
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/10/04/%E8%8B%B1%E8%AF%AD%E5%8D%95%E8%AF%8D%E6%AF%8F%E6%97%A5%E6%89%93%E5%8D%A1/" rel="next" title="英语单词每日打卡">
-      英语单词每日打卡 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -383,7 +380,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E7%94%A8docker%E5%87%BA%E4%B8%80%E9%81%93ctf%E9%A2%98-crypto"><span class="nav-number">1.</span> <span class="nav-text">如何用docker出一道ctf题(crypto)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#python3%E7%AF%87"><span class="nav-number">1.1.</span> <span class="nav-text">python3篇</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sha256-py"><span class="nav-number">1.1.1.</span> <span class="nav-text">sha256.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dockerfile"><span class="nav-number">1.1.2.</span> <span class="nav-text">Dockerfile</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python2"><span class="nav-number">1.2.</span> <span class="nav-text">python2</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
