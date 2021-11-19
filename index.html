@@ -398,6 +398,107 @@ mjx-container[display="true"] + br {
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://liuxin2020.github.io/2021/11/19/ctfbot%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/face.jpg">
+      <meta itemprop="name" content="枫霜月雨">
+      <meta itemprop="description" content="天行健，君子以自强不息">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="枫霜月雨のblog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/11/19/ctfbot%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">ctfbot搭建指南</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-11-19 14:28:50 / 修改时间：20:50:39" itemprop="dateCreated datePublished" datetime="2021-11-19T14:28:50+08:00">2021-11-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">环境搭建</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="QQbot搭建记录"><a href="#QQbot搭建记录" class="headerlink" title="QQbot搭建记录"></a>QQbot搭建记录</h1><h2 id="无脑版（裸go-cqhttp"><a href="#无脑版（裸go-cqhttp" class="headerlink" title="无脑版（裸go-cqhttp)"></a>无脑版（裸go-cqhttp)</h2><p>从接口和<code>go-cqhttp</code></p>
+<p>先去<a target="_blank" rel="noopener" href="https://github.com/Mrs4s/go-cqhttp/releases">release</a>上下载，<code>wget</code>就行。</p>
+<p>直接走一波<code>./go-cqhttp</code>，然后会出<code>config.yml</code>，如下配置。</p>
+<p>反向代理加上脑子才需要，但是先挂出来吧。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">- ws-reverse:</span><br><span class="line">    ## 反向WS Universal 地址</span><br><span class="line">    ## 注意 设置了此项地址后下面两项将会被忽</span><br><span class="line">    universal: ws:&#x2F;&#x2F;127.0.0.1:8080&#x2F;cqhttp&#x2F;ws</span><br><span class="line">    ## 反向WS API 地址</span><br><span class="line">    api: ws:&#x2F;&#x2F;127.0.0.1:8080&#x2F;cqhttp&#x2F;api</span><br><span class="line">    ## 反向WS Event 地址</span><br><span class="line">    event: ws:&#x2F;&#x2F;127.0.0.1:8080&#x2F;cqhttp&#x2F;event</span><br><span class="line">    ## 重连间隔 单位毫秒</span><br><span class="line">    reconnect-interval: 3000</span><br><span class="line">    middlewares:</span><br><span class="line">      &lt;&lt;: *default # 引用默认中间件</span><br></pre></td></tr></table></figure>
+<p>然后不行试试<code>127.0.0.1</code>改<code>0.0.0.0</code></p>
+<p>还有什么</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod 777 ./go-cqhttp</span><br></pre></td></tr></table></figure>
+<p>接着执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./go-cqhttp</span><br></pre></td></tr></table></figure>
+<p>然后建议扫码登录。可以先测试下</p>
+<p>测试成功后使用这个命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nohup ./go-cqhttp &gt; go.log 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<p>到浏览器中输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1:5700&#x2F;send_private_msg?user_id&#x3D;xxxxx&amp;message&#x3D;aaaa</span><br></pre></td></tr></table></figure>
+<p>看看能不能收到消息，收到就成功了。</p>
+<p>接着改<code>CTFd/CTFd/api/v1/challenges.py</code></p>
+<p>加上这两部分</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># <span class="doctag">TODO:</span> Convert this into a re-useable decorator</span></span><br><span class="line"><span class="keyword">if</span> config.is_teams_mode() <span class="keyword">and</span> team <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">    abort(<span class="number">403</span>)</span><br><span class="line"></span><br><span class="line">fails = Fails.query.filter_by(</span><br><span class="line">    account_id=user.account_id, challenge_id=challenge_id</span><br><span class="line">).count()</span><br><span class="line"></span><br><span class="line">challenge = Challenges.query.filter_by(<span class="built_in">id</span>=challenge_id).first_or_404()</span><br><span class="line"><span class="comment">#从这开始</span></span><br><span class="line">challenge_name=challenge.name</span><br><span class="line">challenge_category=challenge.category</span><br><span class="line">user_name=user.name <span class="comment">#这里结束</span></span><br><span class="line"><span class="keyword">if</span> challenge.state == <span class="string">&quot;hidden&quot;</span>:</span><br><span class="line">    abort(<span class="number">404</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> status:  <span class="comment"># The challenge plugin says the input is right</span></span><br><span class="line">                <span class="keyword">if</span> ctftime() <span class="keyword">or</span> current_user.is_admin():</span><br><span class="line">                    chal_class.solve(</span><br><span class="line">                        user=user, team=team, challenge=challenge, request=request</span><br><span class="line">                    )</span><br><span class="line">                    clear_standings()</span><br><span class="line"></span><br><span class="line">                log(</span><br><span class="line">                    <span class="string">&quot;submissions&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;[&#123;date&#125;] &#123;name&#125; submitted &#123;submission&#125; on &#123;challenge_id&#125; with kpm &#123;kpm&#125; [CORRECT]&quot;</span>,</span><br><span class="line">                    submission=request_data[<span class="string">&quot;submission&quot;</span>].encode(<span class="string">&quot;utf-8&quot;</span>),</span><br><span class="line">                    challenge_id=challenge_id,</span><br><span class="line">                    kpm=kpm,</span><br><span class="line">                )</span><br><span class="line">                <span class="comment">#从这里开始加</span></span><br><span class="line">                <span class="comment"># auto-broadcast</span></span><br><span class="line"></span><br><span class="line">                solve_count = Solves.query.filter_by(challenge_id=challenge_id).count()</span><br><span class="line">                blood_number = <span class="string">&quot;&quot;</span></span><br><span class="line">                <span class="keyword">if</span> solve_count == <span class="number">1</span>:</span><br><span class="line">                    blood_number = <span class="string">&quot;一血&quot;</span></span><br><span class="line">                <span class="keyword">elif</span> solve_count == <span class="number">2</span>:</span><br><span class="line">                    blood_number = <span class="string">&quot;二血&quot;</span></span><br><span class="line">                <span class="keyword">elif</span> solve_count == <span class="number">3</span>:</span><br><span class="line">                    blood_number = <span class="string">&quot;三血&quot;</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="keyword">pass</span></span><br><span class="line">                <span class="keyword">if</span> blood_number:</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">&quot;是三血&quot;</span>)</span><br><span class="line">                    <span class="built_in">print</span>(challenge_category)  <span class="comment"># 题目分类</span></span><br><span class="line">                    <span class="built_in">print</span>(challenge_name)  <span class="comment"># 题目名称</span></span><br><span class="line">                    <span class="built_in">print</span>(user_name)</span><br><span class="line">                    <span class="built_in">print</span>(blood_number)</span><br><span class="line">                    <span class="keyword">import</span> requests</span><br><span class="line">                    url = <span class="string">&quot;http://127.0.0.1:5700/send_group_msg?group_id=xxxxx&amp;message=&quot;</span></span><br><span class="line">                    msg=<span class="string">&quot;恭喜&lt;&#123;&#125;&gt;获得[&#123;&#125;]类型题目《&#123;&#125;》 &#123;&#125;! Tql&quot;</span>.<span class="built_in">format</span>(user_name,challenge_category, challenge_name,blood_number)</span><br><span class="line">                    url=url+msg</span><br><span class="line">                    <span class="keyword">try</span>:</span><br><span class="line">                        requests.get(url=url)</span><br><span class="line">                    <span class="keyword">except</span>:</span><br><span class="line">                        <span class="keyword">pass</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">&quot;不是三血&quot;</span>)</span><br><span class="line">                    <span class="keyword">import</span> requests</span><br><span class="line">                    url = <span class="string">&quot;http://127.0.0.1:5700/send_group_msg?group_id=xxxxx&amp;message=&quot;</span></span><br><span class="line">                   </span><br><span class="line">                  </span><br><span class="line">                    msg=<span class="string">&quot;恭喜&lt;&#123;&#125;&gt;解出[&#123;&#125;]类型题目《&#123;&#125;》Tql&quot;</span>.<span class="built_in">format</span>(user_name,challenge_category, challenge_name)</span><br><span class="line">                    url=url+msg</span><br><span class="line">                    <span class="keyword">try</span>:</span><br><span class="line">                        <span class="built_in">print</span>(<span class="string">&#x27;不是三血开始推送&#x27;</span>)</span><br><span class="line">                        requests.get(url=url)</span><br><span class="line">                        <span class="built_in">print</span>(<span class="string">&#x27;不是三血推送成功&#x27;</span>)</span><br><span class="line">                    <span class="keyword">except</span>:</span><br><span class="line">                        <span class="built_in">print</span>(<span class="string">&#x27;不是三血推送失败&#x27;</span>)</span><br><span class="line">                        <span class="keyword">pass</span></span><br><span class="line">                <span class="comment">#到这结束    </span></span><br><span class="line">                <span class="keyword">return</span> &#123;</span><br><span class="line">                    <span class="string">&quot;success&quot;</span>: <span class="literal">True</span>,</span><br><span class="line">                    <span class="string">&quot;data&quot;</span>: &#123;<span class="string">&quot;status&quot;</span>: <span class="string">&quot;correct&quot;</span>, <span class="string">&quot;message&quot;</span>: message&#125;,</span><br><span class="line">                &#125;</span><br><span class="line">            <span class="keyword">else</span>:  <span class="comment"># The challenge plugin says the input is wrong</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://liuxin2020.github.io/2021/10/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%96%E8%AF%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -429,7 +530,7 @@ mjx-container[display="true"] + br {
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-16 21:22:53" itemprop="dateModified" datetime="2021-10-16T21:22:53+08:00">2021-10-16</time>
+                <time title="修改时间：2021-11-07 18:22:35" itemprop="dateModified" datetime="2021-11-07T18:22:35+08:00">2021-11-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -447,14 +548,14 @@ mjx-container[display="true"] + br {
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>831</span>
+              <span>1.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -619,7 +720,7 @@ mjx-container[display="true"] + br {
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-06 17:00:54" itemprop="dateModified" datetime="2021-10-06T17:00:54+08:00">2021-10-06</time>
+                <time title="修改时间：2021-10-23 17:57:26" itemprop="dateModified" datetime="2021-10-23T17:57:26+08:00">2021-10-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1130,86 +1231,6 @@ mjx-container[display="true"] + br {
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://liuxin2020.github.io/2021/08/28/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E7%94%B5%E5%AD%90%E6%95%B0%E6%8D%AE%E5%8F%96%E8%AF%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/face.jpg">
-      <meta itemprop="name" content="枫霜月雨">
-      <meta itemprop="description" content="天行健，君子以自强不息">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="枫霜月雨のblog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/28/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E7%94%B5%E5%AD%90%E6%95%B0%E6%8D%AE%E5%8F%96%E8%AF%81/" class="post-title-link" itemprop="url">零基础入门电子数据取证</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-08-28 08:11:59 / 修改时间：08:46:35" itemprop="dateCreated datePublished" datetime="2021-08-28T08:11:59+08:00">2021-08-28</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>476</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="零基础入门电子数据取证"><a href="#零基础入门电子数据取证" class="headerlink" title="零基础入门电子数据取证"></a>零基础入门电子数据取证</h1>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/08/28/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E7%94%B5%E5%AD%90%E6%95%B0%E6%8D%AE%E5%8F%96%E8%AF%81/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1281,7 +1302,7 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1294,7 +1315,7 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1334,13 +1355,13 @@ mjx-container[display="true"] + br {
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">148k</span>
+    <span title="站点总字数">152k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:15</span>
+    <span title="站点阅读时长">2:19</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
