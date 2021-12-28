@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/20210420122405.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/20210420122405.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/20210420122405.jpg">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"liuxin2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="枫酱的功能简介自己搭的一个小bot，写一下功能说明书。（此bot为自己开发搭建，本人水平极其有限，插件大多为白嫖或二开，少部分原创）。功能仍在持续更新中。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一只枫酱">
+<meta property="og:url" content="https://liuxin2020.github.io/2021/12/28/%E4%B8%80%E5%8F%AA%E6%9E%AB%E9%85%B1/index.html">
+<meta property="og:site_name" content="枫霜月雨のblog">
+<meta property="og:description" content="枫酱的功能简介自己搭的一个小bot，写一下功能说明书。（此bot为自己开发搭建，本人水平极其有限，插件大多为白嫖或二开，少部分原创）。功能仍在持续更新中。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2021/12/28/exHihP6n5op2Aqy.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/28/mXp7Aj6i41wa2bQ.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/28/IDzHLvUETn8qB9m.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/28/3x9VL4KvQ8fBDYr.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/28/V7b9KwqriegvCJL.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/28/vKXAhC2Ei1xYbGR.jpg">
+<meta property="og:image" content="https://s2.loli.net/2021/12/28/f9QFwq82g6k7xXy.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/29/IMgxpd3JWwDsoEz.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/28/y3l5FuQWeodx1OS.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/29/hLpeNSjOIG9gqrU.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/28/wiPuF236oOvVQDR.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/28/Qn21OWAJREGsV8w.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/28/r4ERbCvitLkxBzP.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/28/JpMxXb9j2SyKQL3.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/28/WUHw1oNqmXGiVJx.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/28/zIlHK8Q5fE7tbTM.png">
+<meta property="article:published_time" content="2021-12-28T12:24:46.000Z">
+<meta property="article:modified_time" content="2021-12-28T16:07:29.359Z">
+<meta property="article:author" content="枫霜月雨">
+<meta property="article:tag" content="bot">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2021/12/28/exHihP6n5op2Aqy.png">
+
+<link rel="canonical" href="https://liuxin2020.github.io/2021/12/28/%E4%B8%80%E5%8F%AA%E6%9E%AB%E9%85%B1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>一只枫酱 | 枫霜月雨のblog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">枫霜月雨のblog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Maple-rain</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://liuxin2020.github.io/2021/12/28/%E4%B8%80%E5%8F%AA%E6%9E%AB%E9%85%B1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/face.jpg">
+      <meta itemprop="name" content="枫霜月雨">
+      <meta itemprop="description" content="天行健，君子以自强不息">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="枫霜月雨のblog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          一只枫酱
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-28 20:24:46" itemprop="dateCreated datePublished" datetime="2021-12-28T20:24:46+08:00">2021-12-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-29 00:07:29" itemprop="dateModified" datetime="2021-12-29T00:07:29+08:00">2021-12-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">环境搭建</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="枫酱的功能简介"><a href="#枫酱的功能简介" class="headerlink" title="枫酱的功能简介"></a>枫酱的功能简介</h1><p>自己搭的一个小bot，写一下功能说明书。（此bot为自己开发搭建，本人水平极其有限，插件大多为白嫖或二开，少部分原创）。功能仍在持续更新中。</p>
+<span id="more"></span>
+<h2 id="群聊-amp-私聊"><a href="#群聊-amp-私聊" class="headerlink" title="群聊&amp;私聊"></a>群聊&amp;私聊</h2><h3 id="B站推送（白嫖）"><a href="#B站推送（白嫖）" class="headerlink" title="B站推送（白嫖）"></a>B站推送（白嫖）</h3><h4 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h4><p><a target="_blank" rel="noopener" href="https://github.com/kanomahoro/nonebot-hanayori"><em>基于NoneBot2的B站动态推送与开播提醒插件</em> </a></p>
+<h4 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h4><p>超级用户(主人)、群主、管理员、私聊</p>
+<h4 id="使用格式"><a href="#使用格式" class="headerlink" title="使用格式"></a>使用格式</h4><p><strong>在群聊中使用格式</strong>：@机器人 指令 UID</p>
+<p><strong>在私聊中使用格式</strong>：指令 UID</p>
+<p><strong>所有指令如下：</strong></p>
+<ol>
+<li><strong>关注 UID</strong> 添加新主播，UID为主播的B站UID</li>
+<li><strong>取关 UID</strong> 取关主播，UID为主播的B站UID</li>
+<li><strong>列表</strong> 显示当前关注列表</li>
+<li><strong>开启动态 UID</strong> 开启B站动态推送</li>
+<li><strong>关闭动态 UID</strong> 关闭B站动态推送</li>
+<li><strong>开启直播 UID</strong> 开启开播提醒</li>
+<li><strong>关闭直播 UID</strong> 关闭开播提醒</li>
+<li><strong>开启全体 UID</strong> 开启开播@全体成员</li>
+<li><strong>关闭全体 UID</strong> 关闭开播@全体成员</li>
+<li><strong>帮助</strong> 顾名思义</li>
+</ol>
+<h4 id="示例图"><a href="#示例图" class="headerlink" title="示例图"></a>示例图</h4><p><img src="https://s2.loli.net/2021/12/28/exHihP6n5op2Aqy.png" alt="image-20211228235235538"></p>
+<p><img src="https://s2.loli.net/2021/12/28/mXp7Aj6i41wa2bQ.png" alt="123"></p>
+<h3 id="沙雕图片（白嫖）"><a href="#沙雕图片（白嫖）" class="headerlink" title="沙雕图片（白嫖）"></a>沙雕图片（白嫖）</h3><h4 id="参考链接-1"><a href="#参考链接-1" class="headerlink" title="参考链接"></a>参考链接</h4><p><a target="_blank" rel="noopener" href="https://github.com/MeetWq/nonebot-plugin-petpet">制作头像相关的表情包</a></p>
+<h4 id="权限-1"><a href="#权限-1" class="headerlink" title="权限"></a>权限</h4><p>所有人</p>
+<h4 id="使用格式-1"><a href="#使用格式-1" class="headerlink" title="使用格式"></a>使用格式</h4><ul>
+<li>指令 + @user，如： 爬 @小Q</li>
+<li>指令 + qq号，如：爬 123456</li>
+<li>指令 + 自己，如：爬 自己</li>
+</ul>
+<h4 id="全部指令"><a href="#全部指令" class="headerlink" title="全部指令"></a>全部指令</h4><ul>
+<li>摸、摸摸、rua</li>
+<li>亲、亲亲</li>
+<li>贴、贴贴、蹭、蹭蹭</li>
+<li>顶、玩</li>
+<li>拍</li>
+<li>撕</li>
+<li>丢、扔</li>
+<li>爬</li>
+<li>精神支柱</li>
+<li>一直</li>
+</ul>
+<h4 id="示例图-1"><a href="#示例图-1" class="headerlink" title="示例图"></a>示例图</h4><p><img src="https://s2.loli.net/2021/12/28/IDzHLvUETn8qB9m.png" alt="image-20211228235543472"></p>
+<p><img src="https://s2.loli.net/2021/12/28/3x9VL4KvQ8fBDYr.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2021/12/28/V7b9KwqriegvCJL.png" alt="image-20211228235645656"></p>
+<h3 id="表情包生成（白嫖）"><a href="#表情包生成（白嫖）" class="headerlink" title="表情包生成（白嫖）"></a>表情包生成（白嫖）</h3><h4 id="参考链接-2"><a href="#参考链接-2" class="headerlink" title="参考链接"></a>参考链接</h4><p><a target="_blank" rel="noopener" href="https://github.com/MeetWq/nonebot-plugin-memes">用于表情包制作</a></p>
+<h4 id="权限-2"><a href="#权限-2" class="headerlink" title="权限"></a>权限</h4><p>所有人</p>
+<h4 id="使用格式-2"><a href="#使用格式-2" class="headerlink" title="使用格式"></a>使用格式</h4><p>指令+文字。多段文字中间要加空格。</p>
+<h4 id="全部指令-1"><a href="#全部指令-1" class="headerlink" title="全部指令"></a>全部指令</h4><p><img src="https://s2.loli.net/2021/12/28/vKXAhC2Ei1xYbGR.jpg" alt="1"></p>
+<h4 id="示例图-2"><a href="#示例图-2" class="headerlink" title="示例图"></a>示例图</h4><p><img src="https://s2.loli.net/2021/12/28/f9QFwq82g6k7xXy.png" alt="image-20211228235848593"></p>
+<p><img src="https://s2.loli.net/2021/12/29/IMgxpd3JWwDsoEz.png" alt="image-20211229000233636"></p>
+<h3 id="机器翻译（白嫖，不太好用）"><a href="#机器翻译（白嫖，不太好用）" class="headerlink" title="机器翻译（白嫖，不太好用）"></a>机器翻译（白嫖，不太好用）</h3><p>接口腾讯云，使用频率极低，之后仅更新命令方式。</p>
+<h4 id="参考链接-3"><a href="#参考链接-3" class="headerlink" title="参考链接"></a>参考链接</h4><p><a target="_blank" rel="noopener" href="https://github.com/Lancercmd/nonebot_plugin_translator">多语种翻译插件</a></p>
+<h4 id="权限-3"><a href="#权限-3" class="headerlink" title="权限"></a>权限</h4><p>所有人</p>
+<h4 id="使用格式-3"><a href="#使用格式-3" class="headerlink" title="使用格式"></a>使用格式</h4><p>待更新</p>
+<h3 id="ai聊天（原创）"><a href="#ai聊天（原创）" class="headerlink" title="ai聊天（原创）"></a>ai聊天（原创）</h3><p>采用腾讯云自然语言处理闲聊功能。</p>
+<h4 id="权限-4"><a href="#权限-4" class="headerlink" title="权限"></a>权限</h4><p>所有人</p>
+<h4 id="使用格式-4"><a href="#使用格式-4" class="headerlink" title="使用格式"></a>使用格式</h4><p>理论上应该是匹配“枫酱，”（中文逗号）。</p>
+<p>但是莫名其妙出了bug，匹配“枫酱”亦可以运行。</p>
+<p>不知道啥原因。。。建议第一种吧，不要去挑战bug。</p>
+<p><strong>格式：</strong></p>
+<p>枫酱，/枫酱+想说的话</p>
+<h4 id="示例图-3"><a href="#示例图-3" class="headerlink" title="示例图"></a>示例图</h4><p><img src="https://s2.loli.net/2021/12/28/y3l5FuQWeodx1OS.png" alt="img"></p>
+<h3 id="wordbank（白嫖-深度二开）"><a href="#wordbank（白嫖-深度二开）" class="headerlink" title="wordbank（白嫖+深度二开）"></a>wordbank（白嫖+深度二开）</h3><p>哇，终于到这插件了。。。</p>
+<h4 id="参考链接-4"><a href="#参考链接-4" class="headerlink" title="参考链接"></a>参考链接</h4><p><a target="_blank" rel="noopener" href="https://github.com/Joenothing-lst/word-bank"><em>无数据库的轻量问答插件</em> </a></p>
+<h4 id="权限（深度修改过）"><a href="#权限（深度修改过）" class="headerlink" title="权限（深度修改过）"></a>权限（深度修改过）</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">超级用户</th>
+<th style="text-align:center">群主</th>
+<th style="text-align:center">群管理</th>
+<th style="text-align:center">私聊好友</th>
+<th style="text-align:center">群好友</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">增加词条</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+</tr>
+<tr>
+<td style="text-align:center">删除词条</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">×</td>
+</tr>
+<tr>
+<td style="text-align:center">增加全局词条</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">×</td>
+<td style="text-align:center">×</td>
+<td style="text-align:center">×</td>
+<td style="text-align:center">×</td>
+</tr>
+<tr>
+<td style="text-align:center">删除全局词条</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">×</td>
+<td style="text-align:center">×</td>
+<td style="text-align:center">×</td>
+<td style="text-align:center">×</td>
+</tr>
+<tr>
+<td style="text-align:center">删除词库</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">×</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">×</td>
+</tr>
+<tr>
+<td style="text-align:center">删除全局词库</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">×</td>
+<td style="text-align:center">×</td>
+<td style="text-align:center">×</td>
+<td style="text-align:center">×</td>
+</tr>
+<tr>
+<td style="text-align:center">删除全部词库</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">×</td>
+<td style="text-align:center">×</td>
+<td style="text-align:center">×</td>
+<td style="text-align:center">×</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>注：私聊好友个人也可以建立属于自己的词库，与群词库是同级且独立的。</li>
+</ul>
+<h4 id="使用格式-5"><a href="#使用格式-5" class="headerlink" title="使用格式"></a>使用格式</h4><ul>
+<li><p>使用方法：</p>
+<ul>
+<li><p>设置词条命令由<code>问句</code>和<code>答句</code>组成。设置之后，收到<code>消息</code>时触发。并非所有人都可以设置词条，详见<a target="_blank" rel="noopener" href="https://github.com/Joenothing-lst/word-bank#permission">权限</a></p>
+</li>
+<li><p><code>问句</code>及其关键字</p>
+<ul>
+<li><p>问，当<code>问句</code>和<code>消息</code>全等时才会匹配（所有人均可以使用）<br>例子：问他不理答你被屏蔽了</p>
+<p>| 消息     | 回复       |<br>| ———— | ————— |<br>| 他不理   | 你被屏蔽了 |<br>| 他不理我 | -          |<br>| 你不理我 | -          |</p>
+</li>
+<li><p>模糊问，当<code>问句</code>出现在<code>消息</code>里时则会匹配（只有超级用户可以使用）<br>例子：模糊问他不理答你被屏蔽了</p>
+<p>| 消息     | 回复       |<br>| ———— | ————— |<br>| 他不理   | 你被屏蔽了 |<br>| 他不理我 | 你被屏蔽了 |<br>| 你不理我 | -          |</p>
+</li>
+<li><p>正则问，当<code>问句</code>被<code>消息</code>正则捕获时则会匹配（只有超级用户可以使用）<br>例子：正则问[他你]不理答你被屏蔽了</p>
+<p>| 消息     | 回复       |<br>| ———— | ————— |<br>| 他不理   | 你被屏蔽了 |<br>| 他不理我 | 你被屏蔽了 |<br>| 你不理我 | 你被屏蔽了 |</p>
+</li>
+<li><p>全局问，在所有群聊和私聊中都可以触发，可以和以上几种组合使用。（只有超级用户可以使用）<br>例子：全局模糊问不理我答你被屏蔽了</p>
+</li>
+</ul>
+</li>
+<li><p><code>答句</code></p>
+<ul>
+<li><p><code>/at</code> + <code>qq号</code>，当答句中包含<code>/at</code> + <code>qq号</code>时将会被替换为@某人（即<code>CQ码</code>）<br>例子：问群主在吗答/at123456789在吗</p>
+<p>| 群主qq号  | 消息     | 回复       |<br>| ————- | ———— | ————— |<br>| 123456789 | 群主在吗 | @群主 在吗 |</p>
+</li>
+<li><p><code>/self</code>，当答句中包含<code>/self</code>时将会被替换为发送者的群昵称<br>例子：问你好答/self你好啊</p>
+<p>| 发送者 | 消息 | 回复       |<br>| ——— | —— | ————— |<br>| 皆无   | 你好 | 皆无你好啊 |</p>
+</li>
+<li><p><code>/atself</code>，当答句中包含<code>/atself</code>时将会被替换为@发送者 例子：问你好答/atself你好啊</p>
+<p>| 发送者 | 消息 | 回复        |<br>| ——— | —— | —————- |<br>| 皆无   | 你好 | @皆无你好啊 |</p>
+</li>
+<li><p><code>/ban</code>，当答句中包含<code>/ban</code>后紧跟数字时将会禁言发送者，单位为秒，默认为300 例子：问你好答/ban30你将被禁言30秒</p>
+</li>
+</ul>
+</li>
+<li><p>删除</p>
+<ul>
+<li>删除词条+需要删除的<code>问句</code><br>例子：删除词条你好</li>
+<li>删除全局词条+需要删除的<code>问句</code><br>例子：删除全局词条你好</li>
+<li>删除全局词库<br>例子：删除全局词库</li>
+<li>删除全部词库<br>例子：删除全部词库</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="修复离谱bug"><a href="#修复离谱bug" class="headerlink" title="修复离谱bug"></a>修复离谱bug</h4><p>原版的bug真的是一堆了。在<strong>问</strong>和<strong>答</strong>中间加上一些空格，就能直接让词条变成不可删除状态。这bug。。。总之，修了。问答中间不允许出现空格。</p>
+<h4 id="示例图-4"><a href="#示例图-4" class="headerlink" title="示例图"></a>示例图</h4><p><img src="https://s2.loli.net/2021/12/29/hLpeNSjOIG9gqrU.png" alt="image-20211229000614211"></p>
+<h4 id="额外"><a href="#额外" class="headerlink" title="额外"></a>额外</h4><p>原先权限设置的很开，用户可以肆无忌惮的加全局词库，互相干扰。于是把权限缩小了。</p>
+<p>原先权限设置的很死，群聊用户没人权。于是把权限放开了。</p>
+<p>但是！放开权限意味着更加危险，我可不想因为小号进去了！！！</p>
+<p>所以，加了黑名单功能。懂得都懂，直接用一个单独加的测试黑名单进行演示（枫霜月雨是全宇宙最帅的人）。</p>
+<p><img src="https://s2.loli.net/2021/12/28/wiPuF236oOvVQDR.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2021/12/28/Qn21OWAJREGsV8w.png" alt="img"></p>
+<p>黑名单设置的不严，希望给群友和好友更好的体验。但是~一旦触发，你懂得。</p>
+<blockquote>
+<p>根据《治安管理处罚法》第二十五条第一款第一项的规定：散布谣言，谎报险情、警情或者以其他方法故意扰乱公共秩序的，处5日以上10日以下拘留，情节较轻的，处5日以下拘留。</p>
+<p>同时，如果当事人的行为造成严重危害，依法追究刑事责任。</p>
+</blockquote>
+<p>希望人没事。</p>
+<h2 id="仅群聊"><a href="#仅群聊" class="headerlink" title="仅群聊"></a>仅群聊</h2><h3 id="QQ音乐点歌（白嫖，有bug）"><a href="#QQ音乐点歌（白嫖，有bug）" class="headerlink" title="QQ音乐点歌（白嫖，有bug）"></a>QQ音乐点歌（白嫖，有bug）</h3><h4 id="参考链接-5"><a href="#参考链接-5" class="headerlink" title="参考链接"></a>参考链接</h4><p><a target="_blank" rel="noopener" href="https://github.com/kanomahoro/nonebot-simplemusic"><em>基于NoneBot2的最简点歌插件，支持网易云、QQ音乐</em> </a></p>
+<h4 id="权限-5"><a href="#权限-5" class="headerlink" title="权限"></a>权限</h4><p>所有人</p>
+<h4 id="使用格式-6"><a href="#使用格式-6" class="headerlink" title="使用格式"></a>使用格式</h4><ol>
+<li><strong>点歌 歌曲名</strong> 在QQ音乐中搜索指定歌曲，如果没有找到则不会有任何响应</li>
+<li><strong>点歌 歌曲名 歌手名</strong> 在QQ音乐中搜索指定歌曲，并试图匹配指定歌手，如果没有找到则不会有任何响应</li>
+<li><strong>网易点歌 歌曲名</strong> 在网易云音乐中搜索指定歌曲，如果没有找到则不会有任何响应</li>
+<li><strong>网易点歌 歌曲名 歌手名</strong> 在网易云音乐中搜索指定歌曲，并试图匹配指定歌手，如果没有找到则不会有任何响应</li>
+</ol>
+<h4 id="bug"><a href="#bug" class="headerlink" title="bug"></a>bug</h4><p>网抑云点歌无任何反应。之后抽空维修（但我也不用网抑云，不知道咋修。。。）</p>
+<h4 id="示例图-5"><a href="#示例图-5" class="headerlink" title="示例图"></a>示例图</h4><p><img src="https://s2.loli.net/2021/12/28/r4ERbCvitLkxBzP.png" alt="image-20211228234913372"></p>
+<p><img src="https://s2.loli.net/2021/12/28/JpMxXb9j2SyKQL3.png" alt="image-20211228235029336"></p>
+<h3 id="涩图"><a href="#涩图" class="headerlink" title="涩图"></a>涩图</h3><h4 id="不介绍，不开放"><a href="#不介绍，不开放" class="headerlink" title="不介绍，不开放"></a>不介绍，不开放</h4><h2 id="仅私聊"><a href="#仅私聊" class="headerlink" title="仅私聊"></a>仅私聊</h2><h3 id="定时早晚安（原创）"><a href="#定时早晚安（原创）" class="headerlink" title="定时早晚安（原创）"></a>定时早晚安（原创）</h3><p>技术上可拓展群聊，但是放群里功能鸡肋</p>
+<p>定时任务，每天早上5:50和晚上22:00。推送早晚安消息。（城市可定制）</p>
+<h3 id="示例图-6"><a href="#示例图-6" class="headerlink" title="示例图"></a>示例图</h3><p><img src="https://s2.loli.net/2021/12/28/WUHw1oNqmXGiVJx.png" alt="image-20211228234711323"></p>
+<p><img src="https://s2.loli.net/2021/12/28/zIlHK8Q5fE7tbTM.png" alt="image-20211228234805242"></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>枫霜月雨
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://liuxin2020.github.io/2021/12/28/%E4%B8%80%E5%8F%AA%E6%9E%AB%E9%85%B1/" title="一只枫酱">https://liuxin2020.github.io/2021/12/28/一只枫酱/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+  
+</div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/bot/" rel="tag"># bot</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/11/19/ctfbot%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/" rel="prev" title="ctfbot搭建指南">
+      <i class="fa fa-chevron-left"></i> ctfbot搭建指南
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9E%AB%E9%85%B1%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">枫酱的功能简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BE%A4%E8%81%8A-amp-%E7%A7%81%E8%81%8A"><span class="nav-number">1.1.</span> <span class="nav-text">群聊&amp;私聊</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#B%E7%AB%99%E6%8E%A8%E9%80%81%EF%BC%88%E7%99%BD%E5%AB%96%EF%BC%89"><span class="nav-number">1.1.1.</span> <span class="nav-text">B站推送（白嫖）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">参考链接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%83%E9%99%90"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">使用格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E5%9B%BE"><span class="nav-number">1.1.1.4.</span> <span class="nav-text">示例图</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B2%99%E9%9B%95%E5%9B%BE%E7%89%87%EF%BC%88%E7%99%BD%E5%AB%96%EF%BC%89"><span class="nav-number">1.1.2.</span> <span class="nav-text">沙雕图片（白嫖）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5-1"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">参考链接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%83%E9%99%90-1"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%A0%BC%E5%BC%8F-1"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">使用格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A8%E9%83%A8%E6%8C%87%E4%BB%A4"><span class="nav-number">1.1.2.4.</span> <span class="nav-text">全部指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E5%9B%BE-1"><span class="nav-number">1.1.2.5.</span> <span class="nav-text">示例图</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A8%E6%83%85%E5%8C%85%E7%94%9F%E6%88%90%EF%BC%88%E7%99%BD%E5%AB%96%EF%BC%89"><span class="nav-number">1.1.3.</span> <span class="nav-text">表情包生成（白嫖）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5-2"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">参考链接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%83%E9%99%90-2"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%A0%BC%E5%BC%8F-2"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">使用格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A8%E9%83%A8%E6%8C%87%E4%BB%A4-1"><span class="nav-number">1.1.3.4.</span> <span class="nav-text">全部指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E5%9B%BE-2"><span class="nav-number">1.1.3.5.</span> <span class="nav-text">示例图</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E7%BF%BB%E8%AF%91%EF%BC%88%E7%99%BD%E5%AB%96%EF%BC%8C%E4%B8%8D%E5%A4%AA%E5%A5%BD%E7%94%A8%EF%BC%89"><span class="nav-number">1.1.4.</span> <span class="nav-text">机器翻译（白嫖，不太好用）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5-3"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">参考链接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%83%E9%99%90-3"><span class="nav-number">1.1.4.2.</span> <span class="nav-text">权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%A0%BC%E5%BC%8F-3"><span class="nav-number">1.1.4.3.</span> <span class="nav-text">使用格式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ai%E8%81%8A%E5%A4%A9%EF%BC%88%E5%8E%9F%E5%88%9B%EF%BC%89"><span class="nav-number">1.1.5.</span> <span class="nav-text">ai聊天（原创）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%83%E9%99%90-4"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%A0%BC%E5%BC%8F-4"><span class="nav-number">1.1.5.2.</span> <span class="nav-text">使用格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E5%9B%BE-3"><span class="nav-number">1.1.5.3.</span> <span class="nav-text">示例图</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wordbank%EF%BC%88%E7%99%BD%E5%AB%96-%E6%B7%B1%E5%BA%A6%E4%BA%8C%E5%BC%80%EF%BC%89"><span class="nav-number">1.1.6.</span> <span class="nav-text">wordbank（白嫖+深度二开）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5-4"><span class="nav-number">1.1.6.1.</span> <span class="nav-text">参考链接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%83%E9%99%90%EF%BC%88%E6%B7%B1%E5%BA%A6%E4%BF%AE%E6%94%B9%E8%BF%87%EF%BC%89"><span class="nav-number">1.1.6.2.</span> <span class="nav-text">权限（深度修改过）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%A0%BC%E5%BC%8F-5"><span class="nav-number">1.1.6.3.</span> <span class="nav-text">使用格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E5%A4%8D%E7%A6%BB%E8%B0%B1bug"><span class="nav-number">1.1.6.4.</span> <span class="nav-text">修复离谱bug</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E5%9B%BE-4"><span class="nav-number">1.1.6.5.</span> <span class="nav-text">示例图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%9D%E5%A4%96"><span class="nav-number">1.1.6.6.</span> <span class="nav-text">额外</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%85%E7%BE%A4%E8%81%8A"><span class="nav-number">1.2.</span> <span class="nav-text">仅群聊</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#QQ%E9%9F%B3%E4%B9%90%E7%82%B9%E6%AD%8C%EF%BC%88%E7%99%BD%E5%AB%96%EF%BC%8C%E6%9C%89bug%EF%BC%89"><span class="nav-number">1.2.1.</span> <span class="nav-text">QQ音乐点歌（白嫖，有bug）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5-5"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">参考链接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%83%E9%99%90-5"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%A0%BC%E5%BC%8F-6"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">使用格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bug"><span class="nav-number">1.2.1.4.</span> <span class="nav-text">bug</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E5%9B%BE-5"><span class="nav-number">1.2.1.5.</span> <span class="nav-text">示例图</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%A9%E5%9B%BE"><span class="nav-number">1.2.2.</span> <span class="nav-text">涩图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E4%BB%8B%E7%BB%8D%EF%BC%8C%E4%B8%8D%E5%BC%80%E6%94%BE"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">不介绍，不开放</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%85%E7%A7%81%E8%81%8A"><span class="nav-number">1.3.</span> <span class="nav-text">仅私聊</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E6%97%B6%E6%97%A9%E6%99%9A%E5%AE%89%EF%BC%88%E5%8E%9F%E5%88%9B%EF%BC%89"><span class="nav-number">1.3.1.</span> <span class="nav-text">定时早晚安（原创）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E5%9B%BE-6"><span class="nav-number">1.3.2.</span> <span class="nav-text">示例图</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="枫霜月雨"
+      src="/images/face.jpg">
+  <p class="site-author-name" itemprop="name">枫霜月雨</p>
+  <div class="site-description" itemprop="description">天行健，君子以自强不息</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">枫霜月雨</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">155k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:21</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"left","width":250,"height":600},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/click-love.js"></script>
