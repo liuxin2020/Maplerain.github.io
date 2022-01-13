@@ -1,6 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>C语言学习笔记之函数篇</title>
+    <url>/2022/01/13/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%E5%87%BD%E6%95%B0%E7%AF%87/</url>
+    <content><![CDATA[<h1 id="函数篇"><a href="#函数篇" class="headerlink" title="函数篇"></a>函数篇</h1><p>本章是函数篇了哦</p>
+<span id="more"></span>
+<h2 id="初见函数"><a href="#初见函数" class="headerlink" title="初见函数"></a>初见函数</h2><h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>求出1-10、20-30、35-45的三个和</p>
+<h4 id="非函数代码"><a href="#非函数代码" class="headerlink" title="非函数代码"></a>非函数代码</h4><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">int</span> sum;</span><br><span class="line">	<span class="keyword">for</span> ( i=<span class="number">1</span>,sum=<span class="number">0</span>; i&lt;=<span class="number">10</span>; i++)&#123;</span><br><span class="line">		sum += i;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d到%d的和是%d\n&quot;</span>, <span class="number">1</span>, <span class="number">10</span>, sum);</span><br><span class="line">	<span class="keyword">for</span> ( i=<span class="number">20</span>,sum=<span class="number">0</span>; i&lt;=<span class="number">30</span>; i++)&#123;</span><br><span class="line">		sum += i;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d到%d的和是%d\n&quot;</span>, <span class="number">20</span>, <span class="number">30</span>, sum);</span><br><span class="line">	<span class="keyword">for</span> ( i=<span class="number">35</span>,sum=<span class="number">0</span>; i&lt;=<span class="number">45</span>; i++)&#123;</span><br><span class="line">		sum += i;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d到%d的和是%d\n&quot;</span>, <span class="number">35</span>, <span class="number">45</span>, sum);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注：代码复制是程序质量不良的表现。</p>
+<h4 id="函数版代码"><a href="#函数版代码" class="headerlink" title="函数版代码"></a>函数版代码</h4><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> begin, <span class="keyword">int</span> end)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> ( i=begin; i&lt;=end; i++)&#123;</span><br><span class="line">        sum +=i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d到%d的和是%d\n&quot;</span>, begin, end, sum);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    sum(<span class="number">1</span>,<span class="number">10</span>);</span><br><span class="line">    sum(<span class="number">20</span>,<span class="number">30</span>);</span><br><span class="line">    sum(<span class="number">35</span>,<span class="number">45</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="什么是函数"><a href="#什么是函数" class="headerlink" title="什么是函数"></a>什么是函数</h2><p>函数是一块代码，接受零个或多个参数。然后做一件事情，并返回零个或一个值。</p>
+<h2 id="函数定义"><a href="#函数定义" class="headerlink" title="函数定义"></a>函数定义</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> begin, <span class="keyword">int</span> end)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> ( i=begin; i&lt;=end; i++)&#123;</span><br><span class="line">        sum +=i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d到%d的和是%d\n&quot;</span>, begin, end, sum);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>void sum(int begin, int end)</code>为函数头</p>
+<p>第一个<code>&#123;&#125;</code>中的内容称为函数体</p>
+<p><code>sum</code>是函数名，<code>int begin, int end</code>为参数表</p>
+<p><code>void</code>是返回类型，在此例子中表明函数不返回函数值</p>
+<h2 id="调用函数"><a href="#调用函数" class="headerlink" title="调用函数"></a>调用函数</h2><ul>
+<li><p>调用语法：函数名(参数值);</p>
+</li>
+<li><p>()起到了调用函数的功能</p>
+</li>
+<li>如果有参数，则需要给出正确的数量和顺序</li>
+<li>这些值会被按照顺序依次用来初始化函数中的参数</li>
+</ul>
+<h2 id="函数返回"><a href="#函数返回" class="headerlink" title="函数返回"></a>函数返回</h2><p>函数知道每一次是哪里调用它，会返回到正确的地方。</p>
+]]></content>
+      <categories>
+        <category>基础课程学习</category>
+      </categories>
+      <tags>
+        <tag>C语言</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>pyqt6学习</title>
+    <url>/2022/01/11/pyqt6%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h1 id="pyqt6学习笔记"><a href="#pyqt6学习笔记" class="headerlink" title="pyqt6学习笔记"></a>pyqt6学习笔记</h1><p>整点可视化的GUI界面。</p>
+<span id="more"></span>
+<h2 id="日期和时间"><a href="#日期和时间" class="headerlink" title="日期和时间"></a>日期和时间</h2><p>PyQt6 有 <code>currentDate</code>、<code>currentTime</code> 和 <code>currentDateTime</code> 方法获取当前的日期或时间。</p>
+<h3 id="本地时间"><a href="#本地时间" class="headerlink" title="本地时间"></a>本地时间</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># file: current_date_time.py</span></span><br><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> PyQt6.QtCore <span class="keyword">import</span> QDate, QTime, QDateTime, Qt</span><br><span class="line"></span><br><span class="line">now = QDate.currentDate()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(now.toString(Qt.DateFormat.ISODate))        <span class="comment">#2022-01-11</span></span><br><span class="line"><span class="built_in">print</span>(now.toString(Qt.DateFormat.RFC2822Date))    <span class="comment">#11 Jan 2022</span></span><br><span class="line"></span><br><span class="line">datetime = QDateTime.currentDateTime()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(datetime.toString())                        <span class="comment">#Tue Jan 11 22:04:52 2022</span></span><br><span class="line"></span><br><span class="line">time = QTime.currentTime()</span><br><span class="line"><span class="built_in">print</span>(time.toString(Qt.DateFormat.ISODate))       <span class="comment">#22:04:52</span></span><br></pre></td></tr></table></figure>
+<h3 id="UTC时间"><a href="#UTC时间" class="headerlink" title="UTC时间"></a>UTC时间</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> PyQt6.QtCore <span class="keyword">import</span> QDateTime, Qt</span><br><span class="line"></span><br><span class="line">now = QDateTime.currentDateTime()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Local datetime: &#x27;</span>, now.toString(Qt.DateFormat.ISODate))              <span class="comment">#Local datetime:  2022-01-11T22:11:31</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Universal datetime: &#x27;</span>, now.toUTC().toString(Qt.DateFormat.ISODate))  <span class="comment">#Universal datetime:  2022-01-11T14:11:31Z</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;The offset from UTC is: <span class="subst">&#123;now.offsetFromUtc()&#125;</span> seconds&#x27;</span>)             <span class="comment">#The offset from UTC is: 28800 seconds</span></span><br><span class="line"><span class="comment">#本例获取了标准时间和本地时间。</span></span><br></pre></td></tr></table></figure>
+<p>剩下的其他功能感觉用处不大。截个图备用</p>
+<p><img src="https://s2.loli.net/2022/01/11/NiQtYK5IWgCpvrH.png" alt="image-20220111221613537"></p>
+<p>留下链接</p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a href="https://maicss.gitbook.io/pyqt-chinese-tutoral/pyqt6/datetime#li-shi-zhan-yi">日期和时间</a></p>
+<h2 id="第一个程序"><a href="#第一个程序" class="headerlink" title="第一个程序"></a>第一个程序</h2><h3 id="新建一个窗口"><a href="#新建一个窗口" class="headerlink" title="新建一个窗口"></a>新建一个窗口</h3><h4 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># file: simple.py</span></span><br><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">ZetCode PyQt6 tutorial</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">In this example, we create a simple</span></span><br><span class="line"><span class="string">window in PyQt6.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Author: Jan Bodnar</span></span><br><span class="line"><span class="string">Website: zetcode.com</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> PyQt6.QtWidgets <span class="keyword">import</span> QApplication, QWidget</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line"></span><br><span class="line">    app = QApplication(sys.argv)</span><br><span class="line"></span><br><span class="line">    w = QWidget()</span><br><span class="line">    w.resize(<span class="number">250</span>, <span class="number">200</span>)</span><br><span class="line">    w.move(<span class="number">300</span>, <span class="number">300</span>)</span><br><span class="line"></span><br><span class="line">    w.setWindowTitle(<span class="string">&#x27;Simple&#x27;</span>)</span><br><span class="line">    w.show()</span><br><span class="line"></span><br><span class="line">    sys.exit(app.<span class="built_in">exec</span>())</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>科创</category>
+      </categories>
+      <tags>
+        <tag>pyqt6</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C语言学习笔记之数组篇</title>
+    <url>/2022/01/09/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%E6%95%B0%E7%BB%84%E7%AF%87/</url>
+    <content><![CDATA[<h1 id="数组篇"><a href="#数组篇" class="headerlink" title="数组篇"></a>数组篇</h1><p>循环部分因为有python基础，就快速的过一遍，不作详细记录。直接开始数组篇的学习了哦~</p>
+<span id="more"></span>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a><strong>问题</strong></h2><p>如何写一个程序计算用户输入的数字的平均数，并输出所有大于平均数的数？</p>
+<h2 id="实验代码"><a href="#实验代码" class="headerlink" title="实验代码"></a>实验代码</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x;</span><br><span class="line">	<span class="keyword">double</span> sum = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">	<span class="comment">//定义数组</span></span><br><span class="line">    <span class="keyword">int</span> number[<span class="number">100</span>];</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;x);</span><br><span class="line">	<span class="keyword">while</span>( x!= <span class="number">-1</span> )&#123;</span><br><span class="line">		<span class="comment">//对数组中的元素赋值</span></span><br><span class="line">        number[cnt] = x;</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> i;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;%d\t&quot;</span>, cnt);</span><br><span class="line">			<span class="keyword">for</span> (i=<span class="number">0</span>; i&lt;=cnt; i++ )&#123;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;%d\t&quot;</span>, number[i]);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">				</span><br><span class="line">		sum += x;</span><br><span class="line">		cnt ++;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;x);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (cnt &gt; <span class="number">0</span> )&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%f\n&quot;</span>, sum/cnt);</span><br><span class="line">		<span class="keyword">int</span> i ;</span><br><span class="line">		<span class="comment">//遍历数组</span></span><br><span class="line">        <span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;cnt;i++)&#123;</span><br><span class="line">			<span class="comment">//使用数组中的元素</span></span><br><span class="line">            <span class="keyword">if</span> (number[i] &gt; sum/cnt)&#123;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, number[i]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/01/09/kAyqGXnPTxUwSo7.png" alt="image-20220109171512344"></p>
+<h2 id="定义数组"><a href="#定义数组" class="headerlink" title="定义数组"></a>定义数组</h2><h3 id="语法格式"><a href="#语法格式" class="headerlink" title="语法格式"></a>语法格式</h3><p> &lt;类型&gt;变量名称[元素数量];</p>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> grades[<span class="number">100</span>];</span><br><span class="line"><span class="keyword">double</span> weight[<span class="number">20</span>];</span><br></pre></td></tr></table></figure>
+<p>注：元素数量必须是整数</p>
+<h2 id="什么是数组"><a href="#什么是数组" class="headerlink" title="什么是数组"></a>什么是数组</h2><ul>
+<li><p>是一种容器（放东西的东西），特点是：</p>
+<p>1、其中的元素具有相同的数据类型</p>
+<p>2、一旦创建，不能改变大小</p>
+<p>3、*（数组中的元素在内存中是连续依次排列的）</p>
+</li>
+</ul>
+<h2 id="int-a-10"><a href="#int-a-10" class="headerlink" title="int a[10]"></a>int a[10]</h2><ul>
+<li>一个int的数组</li>
+<li>10个单元：a[0], a[1], a[2], … a[9]</li>
+<li>每个单元就是一个int类型的变量</li>
+<li>可以出现在赋值的左边或右边</li>
+<li>*在赋值左边的叫做左值</li>
+</ul>
+<h2 id="数组的单元"><a href="#数组的单元" class="headerlink" title="数组的单元"></a>数组的单元</h2><ul>
+<li>数组的每个单元就是数组类型的一个变量</li>
+<li>使用数组时放在[]中的数字叫做下标或索引，下表从0开始计数</li>
+</ul>
+<h2 id="有效的下标范围"><a href="#有效的下标范围" class="headerlink" title="有效的下标范围"></a>有效的下标范围</h2><ul>
+<li>编译器和运行环境都不会检查数组下标是否越界，无论是对数组单元做读还是写</li>
+<li>一旦程序运行，越界的数组访问可能造成问题，导致程序崩溃</li>
+<li>segmentation fault</li>
+<li>所以这是程序员的责任来保证程序只使用有效的下标值：[0,数组的大小-1]</li>
+</ul>
+<h2 id="长度为0的数组（图一乐）"><a href="#长度为0的数组（图一乐）" class="headerlink" title="长度为0的数组（图一乐）"></a>长度为0的数组（图一乐）</h2><p>int a[0];</p>
+<p>可以存在，但是没用啊。。。</p>
+<h2 id="实例练习1"><a href="#实例练习1" class="headerlink" title="实例练习1"></a>实例练习1</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>写一个程序，输入数量不确定的[0,9]范围内的整数，统计每一种数字出现的次数，输入-1表示结束。</p>
+]]></content>
+      <categories>
+        <category>基础课程学习</category>
+      </categories>
+      <tags>
+        <tag>C语言</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>一只枫酱</title>
     <url>/2021/12/28/%E4%B8%80%E5%8F%AA%E6%9E%AB%E9%85%B1/</url>
     <content><![CDATA[<h1 id="枫酱的功能简介"><a href="#枫酱的功能简介" class="headerlink" title="枫酱的功能简介"></a>枫酱的功能简介</h1><p>自己搭的一个小bot，写一下功能说明书。（此bot为自己开发搭建，本人水平极其有限，插件大多为白嫖或二开，少部分原创）。功能仍在持续更新中。</p>
@@ -785,20 +884,6 @@ q\,\,=\,\,n\,\,\div \,\,\left( p^2q^2 \right)</script><p>看得出来出题人�
       </categories>
       <tags>
         <tag>Django</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>BUUCTF web类SQL刷题记录</title>
-    <url>/2021/06/01/BUUCTF-web%E7%B1%BBSQL%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<h1 id="BUU刷题记录"><a href="#BUU刷题记录" class="headerlink" title="BUU刷题记录"></a>BUU刷题记录</h1><p>以sql题为主。（暂时没有时间更新）</p>
-<span id="more"></span>
-<h2 id="SUCTF-2019-EasySQL"><a href="#SUCTF-2019-EasySQL" class="headerlink" title="[SUCTF 2019]EasySQL"></a>[SUCTF 2019]EasySQL</h2><p>首先简单的在注入点输入<code>from</code>、<code>union</code>等关键字，发现都过滤了，甚至连<code>sleep</code>都过滤了。</p>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>SQL注入</tag>
       </tags>
   </entry>
   <entry>
