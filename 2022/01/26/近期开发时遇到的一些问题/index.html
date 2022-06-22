@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/20210420122405.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/20210420122405.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/20210420122405.jpg">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"liuxin2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="这几周遇到的问题和解决思路整合把nonebot2从alpha版本升级到了beta版本，历经了巨大的更新折磨。再次无限感谢nonebot群里群友准备的升级改动汇总，还有我们的各位大佬群友的帮助。在本次更新正式结束后，将慢慢总结遇到的问题。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="近期开发时遇到的一些问题">
+<meta property="og:url" content="https://liuxin2020.github.io/2022/01/26/%E8%BF%91%E6%9C%9F%E5%BC%80%E5%8F%91%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="枫霜月雨のblog">
+<meta property="og:description" content="这几周遇到的问题和解决思路整合把nonebot2从alpha版本升级到了beta版本，历经了巨大的更新折磨。再次无限感谢nonebot群里群友准备的升级改动汇总，还有我们的各位大佬群友的帮助。在本次更新正式结束后，将慢慢总结遇到的问题。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/01/26/9wJxmHORE3uhM2r.png">
+<meta property="article:published_time" content="2022-01-26T12:43:00.000Z">
+<meta property="article:modified_time" content="2022-06-05T12:59:28.611Z">
+<meta property="article:author" content="枫霜月雨">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/01/26/9wJxmHORE3uhM2r.png">
+
+<link rel="canonical" href="https://liuxin2020.github.io/2022/01/26/%E8%BF%91%E6%9C%9F%E5%BC%80%E5%8F%91%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>近期开发时遇到的一些问题 | 枫霜月雨のblog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">枫霜月雨のblog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Maple-rain</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://liuxin2020.github.io/2022/01/26/%E8%BF%91%E6%9C%9F%E5%BC%80%E5%8F%91%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/face.jpg">
+      <meta itemprop="name" content="枫霜月雨">
+      <meta itemprop="description" content="天行健，君子以自强不息">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="枫霜月雨のblog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          近期开发时遇到的一些问题
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-01-26 20:43:00" itemprop="dateCreated datePublished" datetime="2022-01-26T20:43:00+08:00">2022-01-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-06-05 20:59:28" itemprop="dateModified" datetime="2022-06-05T20:59:28+08:00">2022-06-05</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="这几周遇到的问题和解决思路整合"><a href="#这几周遇到的问题和解决思路整合" class="headerlink" title="这几周遇到的问题和解决思路整合"></a>这几周遇到的问题和解决思路整合</h1><p>把nonebot2从alpha版本升级到了beta版本，历经了巨大的更新折磨。再次无限感谢nonebot群里群友准备的<a target="_blank" rel="noopener" href="https://github.com/nonebot/discussions/discussions/74">升级改动汇总</a>，还有我们的各位大佬群友的帮助。在本次更新正式结束后，将慢慢总结遇到的问题。</p>
+<span id="more"></span>
+<h2 id="Q1、pypi的源地址"><a href="#Q1、pypi的源地址" class="headerlink" title="Q1、pypi的源地址"></a>Q1、pypi的源地址</h2><p>临时使用（换源都懂，但是有时候国内源更新的太慢，必须用官方源才行）</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple/    #清华</span><br><span class="line">pip3 install -i http://mirrors.aliyun.com/pypi/simple/       #阿里源</span><br><span class="line">pip3 install -i https://pypi.mirrors.ustc.edu.cn/simple/     #中科大</span><br><span class="line">pip3 install -i http://pypi.douban.com/simple/               #豆瓣</span><br><span class="line">pip3 install -i https://pypi.python.org/simple/              #pypi</span><br></pre></td></tr></table></figure>
+<p>永久换源</p>
+<p><img src="https://s2.loli.net/2022/01/26/9wJxmHORE3uhM2r.png" alt=""></p>
+<h2 id="Q2、枫酱的聊天黑名单功能"><a href="#Q2、枫酱的聊天黑名单功能" class="headerlink" title="Q2、枫酱的聊天黑名单功能"></a>Q2、枫酱的聊天黑名单功能</h2><p>嗯，因为有人不懂规矩，喜欢和枫酱聊一些不合适的内容，所以加了这个功能，开源一下。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> .blacklistsss <span class="keyword">import</span> blacklist</span><br><span class="line">msg = msg[<span class="number">2</span>:] <span class="comment">#beta版本的特性~</span></span><br><span class="line"><span class="keyword">for</span> each <span class="keyword">in</span> blacklist:</span><br><span class="line">    <span class="keyword">if</span> each <span class="keyword">in</span> msg:</span><br><span class="line">        <span class="keyword">await</span> maplechat.finish(<span class="string">&quot;请勿输入以上内容！！！&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>聊天插件并不复杂，也开源一波</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> nonebot <span class="keyword">import</span> on_command</span><br><span class="line"><span class="keyword">from</span> nonebot.rule <span class="keyword">import</span> to_me</span><br><span class="line"><span class="keyword">from</span> nonebot.typing <span class="keyword">import</span> T_State</span><br><span class="line"><span class="keyword">from</span> nonebot.params <span class="keyword">import</span> State</span><br><span class="line"><span class="keyword">from</span> nonebot.adapters <span class="keyword">import</span> Bot, Event</span><br><span class="line"><span class="keyword">from</span> nonebot.permission <span class="keyword">import</span> SUPERUSER</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> .blacklistsss <span class="keyword">import</span> blacklist</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> tencentcloud.common <span class="keyword">import</span> credential</span><br><span class="line"><span class="keyword">from</span> tencentcloud.common.profile.client_profile <span class="keyword">import</span> ClientProfile</span><br><span class="line"><span class="keyword">from</span> tencentcloud.common.profile.http_profile <span class="keyword">import</span> HttpProfile</span><br><span class="line"><span class="keyword">from</span> tencentcloud.common.exception.tencent_cloud_sdk_exception <span class="keyword">import</span> TencentCloudSDKException</span><br><span class="line"><span class="keyword">from</span> tencentcloud.nlp.v20190408 <span class="keyword">import</span> nlp_client, models</span><br><span class="line"></span><br><span class="line">__plugin_name__ = <span class="string">&#x27;chat&#x27;</span></span><br><span class="line">__plugin_usage__ = <span class="string">&#x27;用法：通过腾讯云的接口与枫酱聊天哦~&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># on_command()为针对命令型事件的响应，即以配置的命令前缀为开头的语句，新版本的on_command返回内容会带有指令本身。</span></span><br><span class="line">maplechat = on_command(<span class="string">&quot;枫酱&quot;</span>,priority=<span class="number">25</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 具体响应逻辑部分</span></span><br><span class="line"><span class="meta">@maplechat.handle()</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">handle_chat_receive</span>(<span class="params">bot: Bot, event: Event, state: T_State=State(<span class="params"></span>)</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取去除了命令前缀后的信息，并且用strip()去除前后的空格与换行符</span></span><br><span class="line">    msg = <span class="built_in">str</span>(event.get_message()).strip()</span><br><span class="line">    msg = msg[<span class="number">2</span>:]</span><br><span class="line">    <span class="keyword">for</span> each <span class="keyword">in</span> blacklist:</span><br><span class="line">        <span class="keyword">if</span> each <span class="keyword">in</span> msg:</span><br><span class="line">            <span class="keyword">await</span> maplechat.finish(<span class="string">&quot;请勿输入以上内容！！！&quot;</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        cred = credential.Credential(SecretId, SecretKey)</span><br><span class="line">        httpProfile = HttpProfile()</span><br><span class="line">        httpProfile.endpoint = <span class="string">&quot;nlp.tencentcloudapi.com&quot;</span></span><br><span class="line">    </span><br><span class="line">        clientProfile = ClientProfile()</span><br><span class="line">        clientProfile.httpProfile = httpProfile</span><br><span class="line">        client = nlp_client.NlpClient(cred, <span class="string">&quot;ap-guangzhou&quot;</span>, clientProfile)</span><br><span class="line">    </span><br><span class="line">        req = models.ChatBotRequest()</span><br><span class="line">        params = &#123;</span><br><span class="line">        <span class="string">&quot;Query&quot;</span> : msg</span><br><span class="line">        &#125;</span><br><span class="line">        req.from_json_string(json.dumps(params))</span><br><span class="line">    </span><br><span class="line">        resp = client.ChatBot(req)</span><br><span class="line">        reply = <span class="built_in">eval</span>(resp.to_json_string())[<span class="string">&quot;Reply&quot;</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">except</span> TencentCloudSDKException <span class="keyword">as</span> err:</span><br><span class="line">        <span class="built_in">print</span>(err)</span><br><span class="line">    <span class="comment"># finish会向信息来源发回作为参数的字符串，并且在执行后结束响应</span></span><br><span class="line">    <span class="comment"># 如果希望发送后继续执行代码，应该将finish改为send</span></span><br><span class="line">    <span class="keyword">await</span> maplechat.finish(reply)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="Q3、Docker-desktop寄了"><a href="#Q3、Docker-desktop寄了" class="headerlink" title="Q3、Docker desktop寄了"></a>Q3、Docker desktop寄了</h2><p>出大问题只能说，折腾了很久，很折磨心态。</p>
+<p>报错内容：什么堆栈问题，一个字看不懂。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/LeungSr/article/details/117900614">解决方案</a></p>
+<p>下载了一个<code>wsl.msi</code>，无脑下一步安装就行。</p>
+<h2 id="Q4、Docker-desktop又寄了"><a href="#Q4、Docker-desktop又寄了" class="headerlink" title="Q4、Docker desktop又寄了"></a>Q4、Docker desktop又寄了</h2><p>报错内容：</p>
+<p>System.InvalidOperationException:<br>Failed to set version to docker-desktop: exit code: -1</p>
+<p>临时解决方案：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh winsock reset    //以管理员身份进cmd</span><br></pre></td></tr></table></figure>
+<p>长期解决方案：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/guoxingege/article/details/108983329">CSDN1</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/MShow006/article/details/103774672">CSDN2</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/151392411">知乎</a></p>
+<h2 id="Q5、脚本安装docker"><a href="#Q5、脚本安装docker" class="headerlink" title="Q5、脚本安装docker"></a>Q5、脚本安装docker</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://get.docker.com -o get-docker.sh</span><br><span class="line">sh get-docker.sh</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>枫霜月雨
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://liuxin2020.github.io/2022/01/26/%E8%BF%91%E6%9C%9F%E5%BC%80%E5%8F%91%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/" title="近期开发时遇到的一些问题">https://liuxin2020.github.io/2022/01/26/近期开发时遇到的一些问题/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+  
+</div>
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/01/13/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%E5%87%BD%E6%95%B0%E7%AF%87/" rel="prev" title="C语言学习笔记之函数篇">
+      <i class="fa fa-chevron-left"></i> C语言学习笔记之函数篇
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/06/05/Docker%E4%BD%BF%E7%94%A8%E7%A7%98%E7%B1%8D/" rel="next" title="Docker使用秘籍(1)">
+      Docker使用秘籍(1) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%99%E5%87%A0%E5%91%A8%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E5%92%8C%E8%A7%A3%E5%86%B3%E6%80%9D%E8%B7%AF%E6%95%B4%E5%90%88"><span class="nav-number">1.</span> <span class="nav-text">这几周遇到的问题和解决思路整合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Q1%E3%80%81pypi%E7%9A%84%E6%BA%90%E5%9C%B0%E5%9D%80"><span class="nav-number">1.1.</span> <span class="nav-text">Q1、pypi的源地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q2%E3%80%81%E6%9E%AB%E9%85%B1%E7%9A%84%E8%81%8A%E5%A4%A9%E9%BB%91%E5%90%8D%E5%8D%95%E5%8A%9F%E8%83%BD"><span class="nav-number">1.2.</span> <span class="nav-text">Q2、枫酱的聊天黑名单功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q3%E3%80%81Docker-desktop%E5%AF%84%E4%BA%86"><span class="nav-number">1.3.</span> <span class="nav-text">Q3、Docker desktop寄了</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q4%E3%80%81Docker-desktop%E5%8F%88%E5%AF%84%E4%BA%86"><span class="nav-number">1.4.</span> <span class="nav-text">Q4、Docker desktop又寄了</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q5%E3%80%81%E8%84%9A%E6%9C%AC%E5%AE%89%E8%A3%85docker"><span class="nav-number">1.5.</span> <span class="nav-text">Q5、脚本安装docker</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="枫霜月雨"
+      src="/images/face.jpg">
+  <p class="site-author-name" itemprop="name">枫霜月雨</p>
+  <div class="site-description" itemprop="description">天行健，君子以自强不息</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">枫霜月雨</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">165k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:30</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"left","width":250,"height":600},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/click-love.js"></script>
