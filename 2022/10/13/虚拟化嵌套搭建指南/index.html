@@ -19,18 +19,25 @@
     var CONFIG = {"hostname":"liuxin2020.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="天行健，君子以自强不息">
+  <meta name="description" content="虚拟化嵌套搭建指南说通俗点，在虚拟机中使用hyper-v">
 <meta property="og:type" content="article">
 <meta property="og:title" content="虚拟化嵌套搭建指南">
 <meta property="og:url" content="https://liuxin2020.github.io/2022/10/13/%E8%99%9A%E6%8B%9F%E5%8C%96%E5%B5%8C%E5%A5%97%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/index.html">
 <meta property="og:site_name" content="枫霜月雨のblog">
-<meta property="og:description" content="天行健，君子以自强不息">
+<meta property="og:description" content="虚拟化嵌套搭建指南说通俗点，在虚拟机中使用hyper-v">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://c.img.dasctf.com/images/20221013/1665639280956-55de9e37-51bb-4bf7-adb1-8865cf86919f.png">
+<meta property="og:image" content="https://c.img.dasctf.com/images/20221013/1665639516542-4826cbdc-8d04-4ab1-b0bd-7fc5a7b08739.png">
+<meta property="og:image" content="https://c.img.dasctf.com/images/20221013/1665639958978-aebc2ad1-828d-4851-93a5-8e644031c846.png">
+<meta property="og:image" content="https://c.img.dasctf.com/images/20221013/1665640355054-db45382d-7dc4-4054-bded-77727e2df475.png">
+<meta property="og:image" content="https://c.img.dasctf.com/images/20221013/1665640378187-df7a4185-c6aa-4f2f-ac72-5656bd0f9cba.png">
+<meta property="og:image" content="https://c.img.dasctf.com/images/20221013/1665640535263-82c9312f-7c65-4dbf-8d08-3dafad4133ed.png">
 <meta property="article:published_time" content="2022-10-13T02:06:53.000Z">
-<meta property="article:modified_time" content="2022-10-13T02:10:15.457Z">
+<meta property="article:modified_time" content="2022-10-13T06:16:34.961Z">
 <meta property="article:author" content="枫霜月雨">
 <meta property="article:tag" content="debug">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://c.img.dasctf.com/images/20221013/1665639280956-55de9e37-51bb-4bf7-adb1-8865cf86919f.png">
 
 <link rel="canonical" href="https://liuxin2020.github.io/2022/10/13/%E8%99%9A%E6%8B%9F%E5%8C%96%E5%B5%8C%E5%A5%97%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/">
 
@@ -219,7 +226,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-10-13 10:06:53 / 修改时间：10:10:15" itemprop="dateCreated datePublished" datetime="2022-10-13T10:06:53+08:00">2022-10-13</time>
+              <time title="创建时间：2022-10-13 10:06:53 / 修改时间：14:16:34" itemprop="dateCreated datePublished" datetime="2022-10-13T10:06:53+08:00">2022-10-13</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -237,7 +244,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>1.5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -256,7 +263,64 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <h1 id="虚拟化嵌套搭建指南"><a href="#虚拟化嵌套搭建指南" class="headerlink" title="虚拟化嵌套搭建指南"></a>虚拟化嵌套搭建指南</h1><p>说通俗点，在虚拟机中使用hyper-v</p>
+<span id="more"></span>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>​        作为一个docker使用者，在开发和调试的过程中使用繁琐的命令行是比较折磨的。尤其是像我这种对命令不熟悉的小白，每次都要翻越手册和笔记。于是，docker官方提供了能运行在3个系统上的docker desktop，并且随着版本不断地更新和迭代，docker desktop已经能覆盖绝大多数学习时用到的命令，极大程度简化了学习成本。</p>
+<p>​        可以这么说，如果你是刚入门的小白，把docker基础命令过一遍，然后再去使用docker desktop，可以让你直接成为一个半资深的docker使用者。</p>
+<p>​        但是，由于docker desktop安装时默认安装c盘，只能通过软连接的方式把应用装到其他盘里，再通过一系列高端技巧把镜像仓库也运到别的盘里（反正我失败了）。而我们知道，往往一个镜像就几百MB甚至几GB的大小，下载下来后，你还需要本地进行修改保存。这样下来，docker吃起空间来完全是不讲道理的。那么能不能把docker desktop扔到移动硬盘上去，即插即用呢？</p>
+<p>​        于是，我想到了使用虚拟机VMware Station 16 pro，搭建一台win10虚拟机，并把它储存在移动硬盘上。正巧的是，微软官网最近也写了相关的文章，进一步证明了这一操作的可行性。</p>
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/virtualization/hyper-v-on-windows/tlfs/nested-virtualization">嵌套虚拟化</a></p>
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/virtualization/hyper-v-on-windows/user-guide/nested-virtualization">借助嵌套虚拟化在虚拟机中运行 Hyper-V</a></p>
+<h2 id="本机操作流程"><a href="#本机操作流程" class="headerlink" title="本机操作流程"></a>本机操作流程</h2><h3 id="检查本机cpu是否开启虚拟机"><a href="#检查本机cpu是否开启虚拟机" class="headerlink" title="检查本机cpu是否开启虚拟机"></a>检查本机cpu是否开启虚拟机</h3><p><img src="https://c.img.dasctf.com/images/20221013/1665639280956-55de9e37-51bb-4bf7-adb1-8865cf86919f.png" alt="image-20221013133435372"></p>
+<p>这个没什么好说的，默认都开了，没开的去BIOS里慢慢折腾吧。</p>
+<h3 id="更新VMware到最新版本"><a href="#更新VMware到最新版本" class="headerlink" title="更新VMware到最新版本"></a>更新VMware到最新版本</h3><p>（当前为16.2.4 build-20089737）</p>
+<p>大坑来了。在更新的过程中，疯狂提示这个报错</p>
+<p><img src="https://c.img.dasctf.com/images/20221013/1665639516542-4826cbdc-8d04-4ab1-b0bd-7fc5a7b08739.png" alt="image-20221013133834326"></p>
+<p>笑嘻了，这不有手就行？</p>
+<p>点开这个，找个最新的下载一下，重启一下，完事咯~</p>
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-US/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable latest supported downloads</a></p>
+<p>感觉就是在侮辱我的智商。找个x64版本下载、安装、重启，点开VMware的更新，依然报这个错。于是折腾了一下午，想了很多可能出现问题的地方，依然无果。就是因为这个报错，差点直接让我放弃了进一步操作的念头。因为我也没有经验，只不过在零星的资料中，判断这一步可能是比较关键的一步。</p>
+<p>那么这个bug到底是怎么解决的呢？</p>
+<p><img src="https://c.img.dasctf.com/images/20221013/1665639958978-aebc2ad1-828d-4851-93a5-8e644031c846.png" alt="image-20221013134556235"></p>
+<p>麻了，在刚刚的链接里找个x86版本下载、安装、重启，更新完毕。焯！</p>
+<h3 id="升级虚拟机"><a href="#升级虚拟机" class="headerlink" title="升级虚拟机"></a>升级虚拟机</h3><p><img src="https://c.img.dasctf.com/images/20221013/1665640355054-db45382d-7dc4-4054-bded-77727e2df475.png" alt="image-20221013134759053"></p>
+<p><img src="https://c.img.dasctf.com/images/20221013/1665640378187-df7a4185-c6aa-4f2f-ac72-5656bd0f9cba.png" alt="image-20221013135256244"></p>
+<h3 id="更改虚拟机设置"><a href="#更改虚拟机设置" class="headerlink" title="更改虚拟机设置"></a>更改虚拟机设置</h3><p><img src="https://c.img.dasctf.com/images/20221013/1665640535263-82c9312f-7c65-4dbf-8d08-3dafad4133ed.png" alt="image-20221013135533199"></p>
+<p>在处理器的虚拟化引擎里勾选第一项。然后看看能不能开启虚拟机。当然，如果这个时候启动成功没有报错，那么恭喜，你已经成功了。</p>
+<h3 id="启动时报错此平台不支持虚拟化的Intel-VT-x-EPT"><a href="#启动时报错此平台不支持虚拟化的Intel-VT-x-EPT" class="headerlink" title="启动时报错此平台不支持虚拟化的Intel VT-x/EPT"></a>启动时报错此平台不支持虚拟化的Intel VT-x/EPT</h3><p>第二个大坑来了</p>
+<h4 id="启用或关闭windows功能"><a href="#启用或关闭windows功能" class="headerlink" title="启用或关闭windows功能"></a>启用或关闭windows功能</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">功能名称</th>
+<th style="text-align:center">开关状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Windows沙盒</td>
+<td style="text-align:center">关闭</td>
+</tr>
+<tr>
+<td style="text-align:center">Hyper-V(家庭版是没有的)</td>
+<td style="text-align:center">关闭</td>
+</tr>
+<tr>
+<td style="text-align:center">虚拟机平台</td>
+<td style="text-align:center">打开</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="关闭内核隔离"><a href="#关闭内核隔离" class="headerlink" title="关闭内核隔离"></a>关闭内核隔离</h4><p>打开Windows安全中心&gt;设备安全性&gt;内核隔离，关闭</p>
+<h4 id="cmd输入"><a href="#cmd输入" class="headerlink" title="cmd输入"></a>cmd输入</h4><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bcdedit /<span class="built_in">set</span> hypervisorlaunchtype off</span><br></pre></td></tr></table></figure>
+<h4 id="重启电脑"><a href="#重启电脑" class="headerlink" title="重启电脑"></a>重启电脑</h4><p>此时再次打开虚拟机，应该没有什么问题了</p>
+<h2 id="win10虚拟机操作流程"><a href="#win10虚拟机操作流程" class="headerlink" title="win10虚拟机操作流程"></a>win10虚拟机操作流程</h2><p>这个就是正常的安装docker的操作了，没什么难点和坑点，在我之前的笔记里也有详细地介绍。</p>
+<h3 id="方便本机访问虚拟机"><a href="#方便本机访问虚拟机" class="headerlink" title="方便本机访问虚拟机"></a>方便本机访问虚拟机</h3><p>桥接+复制，开机后ipconfig即可。</p>
+<h3 id="启动docker-desktop报错wsl出了问题"><a href="#启动docker-desktop报错wsl出了问题" class="headerlink" title="启动docker desktop报错wsl出了问题"></a>启动docker desktop报错wsl出了问题</h3><p>下载一个wsl.msi，安装完重启一下虚拟机即可。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44047784/article/details/122209100">VMWare安装报错：此安装程序要求您重新启动系统以完成 Microsoft VC Redistributable安装，然后重新运行该安装程序。</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013511036/article/details/126049334">此平台不支持虚拟化的Intel VT-x/EPT</a></p>
+
     </div>
 
     
@@ -363,6 +427,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E5%8C%96%E5%B5%8C%E5%A5%97%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97"><span class="nav-number">1.</span> <span class="nav-text">虚拟化嵌套搭建指南</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E6%9C%BA%E6%93%8D%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-number">1.2.</span> <span class="nav-text">本机操作流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E6%9C%AC%E6%9C%BAcpu%E6%98%AF%E5%90%A6%E5%BC%80%E5%90%AF%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-number">1.2.1.</span> <span class="nav-text">检查本机cpu是否开启虚拟机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0VMware%E5%88%B0%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC"><span class="nav-number">1.2.2.</span> <span class="nav-text">更新VMware到最新版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%87%E7%BA%A7%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-number">1.2.3.</span> <span class="nav-text">升级虚拟机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%94%B9%E8%99%9A%E6%8B%9F%E6%9C%BA%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.2.4.</span> <span class="nav-text">更改虚拟机设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E6%97%B6%E6%8A%A5%E9%94%99%E6%AD%A4%E5%B9%B3%E5%8F%B0%E4%B8%8D%E6%94%AF%E6%8C%81%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9A%84Intel-VT-x-EPT"><span class="nav-number">1.2.5.</span> <span class="nav-text">启动时报错此平台不支持虚拟化的Intel VT-x&#x2F;EPT</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%AF%E7%94%A8%E6%88%96%E5%85%B3%E9%97%ADwindows%E5%8A%9F%E8%83%BD"><span class="nav-number">1.2.5.1.</span> <span class="nav-text">启用或关闭windows功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E9%97%AD%E5%86%85%E6%A0%B8%E9%9A%94%E7%A6%BB"><span class="nav-number">1.2.5.2.</span> <span class="nav-text">关闭内核隔离</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cmd%E8%BE%93%E5%85%A5"><span class="nav-number">1.2.5.3.</span> <span class="nav-text">cmd输入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E5%90%AF%E7%94%B5%E8%84%91"><span class="nav-number">1.2.5.4.</span> <span class="nav-text">重启电脑</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#win10%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%93%8D%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-number">1.3.</span> <span class="nav-text">win10虚拟机操作流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E4%BE%BF%E6%9C%AC%E6%9C%BA%E8%AE%BF%E9%97%AE%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-number">1.3.1.</span> <span class="nav-text">方便本机访问虚拟机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8docker-desktop%E6%8A%A5%E9%94%99wsl%E5%87%BA%E4%BA%86%E9%97%AE%E9%A2%98"><span class="nav-number">1.3.2.</span> <span class="nav-text">启动docker desktop报错wsl出了问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">1.4.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -431,13 +496,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">165k</span>
+    <span title="站点总字数">171k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:30</span>
+    <span title="站点阅读时长">2:35</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
