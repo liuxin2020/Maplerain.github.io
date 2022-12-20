@@ -27,8 +27,11 @@
 <meta property="og:description" content="数组篇循环部分因为有python基础，就快速的过一遍，不作详细记录。直接开始数组篇的学习了哦~">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2022/01/09/kAyqGXnPTxUwSo7.png">
+<meta property="og:image" content="https://c.img.dasctf.com/images/20221219/1671460082421-0f6c1c10-18e0-4495-9862-b45a5224075d.png">
+<meta property="og:image" content="https://c.img.dasctf.com/images/20221219/1671460382426-e684b8e7-ebf8-4795-b354-c5916d64b935.png">
+<meta property="og:image" content="https://c.img.dasctf.com/images/20221219/1671460401459-83f59b68-80f7-46a7-bdac-197d749ae92b.png">
 <meta property="article:published_time" content="2022-01-09T08:48:53.000Z">
-<meta property="article:modified_time" content="2022-01-13T13:59:14.454Z">
+<meta property="article:modified_time" content="2022-12-19T14:33:24.230Z">
 <meta property="article:author" content="枫霜月雨">
 <meta property="article:tag" content="C语言">
 <meta name="twitter:card" content="summary">
@@ -227,7 +230,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-13 21:59:14" itemprop="dateModified" datetime="2022-01-13T21:59:14+08:00">2022-01-13</time>
+                <time title="修改时间：2022-12-19 22:33:24" itemprop="dateModified" datetime="2022-12-19T22:33:24+08:00">2022-12-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -245,7 +248,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.2k</span>
+              <span>1.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -266,39 +269,45 @@
       
         <h1 id="数组篇"><a href="#数组篇" class="headerlink" title="数组篇"></a>数组篇</h1><p>循环部分因为有python基础，就快速的过一遍，不作详细记录。直接开始数组篇的学习了哦~</p>
 <span id="more"></span>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a><strong>问题</strong></h2><p>如何写一个程序计算用户输入的数字的平均数，并输出所有大于平均数的数？</p>
-<h2 id="实验代码"><a href="#实验代码" class="headerlink" title="实验代码"></a>实验代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x;</span><br><span class="line">	<span class="keyword">double</span> sum = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">	<span class="comment">//定义数组</span></span><br><span class="line">    <span class="keyword">int</span> number[<span class="number">100</span>];</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;x);</span><br><span class="line">	<span class="keyword">while</span>( x!= <span class="number">-1</span> )&#123;</span><br><span class="line">		<span class="comment">//对数组中的元素赋值</span></span><br><span class="line">        number[cnt] = x;</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> i;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;%d\t&quot;</span>, cnt);</span><br><span class="line">			<span class="keyword">for</span> (i=<span class="number">0</span>; i&lt;=cnt; i++ )&#123;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;%d\t&quot;</span>, number[i]);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">				</span><br><span class="line">		sum += x;</span><br><span class="line">		cnt ++;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;x);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (cnt &gt; <span class="number">0</span> )&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%f\n&quot;</span>, sum/cnt);</span><br><span class="line">		<span class="keyword">int</span> i ;</span><br><span class="line">		<span class="comment">//遍历数组</span></span><br><span class="line">        <span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;cnt;i++)&#123;</span><br><span class="line">			<span class="comment">//使用数组中的元素</span></span><br><span class="line">            <span class="keyword">if</span> (number[i] &gt; sum/cnt)&#123;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, number[i]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="一维数组"><a href="#一维数组" class="headerlink" title="一维数组"></a>一维数组</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a><strong>问题</strong></h3><p>如何写一个程序计算用户输入的数字的平均数，并输出所有大于平均数的数？</p>
+<h3 id="实验代码"><a href="#实验代码" class="headerlink" title="实验代码"></a>实验代码</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x;</span><br><span class="line">	<span class="keyword">double</span> sum = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">	<span class="comment">//定义数组</span></span><br><span class="line">    <span class="keyword">int</span> number[<span class="number">100</span>];</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;x);</span><br><span class="line">	<span class="keyword">while</span>( x!= <span class="number">-1</span> )&#123;</span><br><span class="line">		<span class="comment">//对数组中的元素赋值</span></span><br><span class="line">        number[cnt] = x;</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> i;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;%d\t&quot;</span>, cnt);</span><br><span class="line">			<span class="keyword">for</span> (i=<span class="number">0</span>; i&lt;=cnt; i++ )&#123;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;%d\t&quot;</span>, number[i]);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">				</span><br><span class="line">		sum += x;</span><br><span class="line">		cnt ++;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;x);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (cnt &gt; <span class="number">0</span> )&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%f\n&quot;</span>, sum/cnt);</span><br><span class="line">		<span class="keyword">int</span> i ;</span><br><span class="line">		<span class="comment">//遍历数组</span></span><br><span class="line">        <span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;cnt;i++)&#123;</span><br><span class="line">			<span class="comment">//使用数组中的元素</span></span><br><span class="line">            <span class="keyword">if</span> (number[i] &gt; sum/cnt)&#123;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, number[i]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><img src="https://s2.loli.net/2022/01/09/kAyqGXnPTxUwSo7.png" alt="image-20220109171512344"></p>
-<h2 id="定义数组"><a href="#定义数组" class="headerlink" title="定义数组"></a>定义数组</h2><h3 id="语法格式"><a href="#语法格式" class="headerlink" title="语法格式"></a>语法格式</h3><p> &lt;类型&gt;变量名称[元素数量];</p>
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> grades[<span class="number">100</span>];</span><br><span class="line"><span class="keyword">double</span> weight[<span class="number">20</span>];</span><br></pre></td></tr></table></figure>
+<h3 id="定义数组"><a href="#定义数组" class="headerlink" title="定义数组"></a>定义数组</h3><h4 id="语法格式"><a href="#语法格式" class="headerlink" title="语法格式"></a>语法格式</h4><p> &lt;类型&gt;变量名称[元素数量];</p>
+<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> grades[<span class="number">100</span>];</span><br><span class="line"><span class="keyword">double</span> weight[<span class="number">20</span>];</span><br></pre></td></tr></table></figure>
 <p>注：元素数量必须是整数</p>
-<h2 id="什么是数组"><a href="#什么是数组" class="headerlink" title="什么是数组"></a>什么是数组</h2><ul>
+<h3 id="什么是数组"><a href="#什么是数组" class="headerlink" title="什么是数组"></a>什么是数组</h3><ul>
 <li><p>是一种容器（放东西的东西），特点是：</p>
 <p>1、其中的元素具有相同的数据类型</p>
 <p>2、一旦创建，不能改变大小</p>
 <p>3、*（数组中的元素在内存中是连续依次排列的）</p>
 </li>
 </ul>
-<h2 id="int-a-10"><a href="#int-a-10" class="headerlink" title="int a[10]"></a>int a[10]</h2><ul>
+<h3 id="int-a-10"><a href="#int-a-10" class="headerlink" title="int a[10]"></a>int a[10]</h3><ul>
 <li>一个int的数组</li>
 <li>10个单元：a[0], a[1], a[2], … a[9]</li>
 <li>每个单元就是一个int类型的变量</li>
 <li>可以出现在赋值的左边或右边</li>
 <li>*在赋值左边的叫做左值</li>
 </ul>
-<h2 id="数组的单元"><a href="#数组的单元" class="headerlink" title="数组的单元"></a>数组的单元</h2><ul>
+<h3 id="数组的单元"><a href="#数组的单元" class="headerlink" title="数组的单元"></a>数组的单元</h3><ul>
 <li>数组的每个单元就是数组类型的一个变量</li>
 <li>使用数组时放在[]中的数字叫做下标或索引，下表从0开始计数</li>
 </ul>
-<h2 id="有效的下标范围"><a href="#有效的下标范围" class="headerlink" title="有效的下标范围"></a>有效的下标范围</h2><ul>
+<h3 id="有效的下标范围"><a href="#有效的下标范围" class="headerlink" title="有效的下标范围"></a>有效的下标范围</h3><ul>
 <li>编译器和运行环境都不会检查数组下标是否越界，无论是对数组单元做读还是写</li>
 <li>一旦程序运行，越界的数组访问可能造成问题，导致程序崩溃</li>
 <li>segmentation fault</li>
 <li>所以这是程序员的责任来保证程序只使用有效的下标值：[0,数组的大小-1]</li>
 </ul>
-<h2 id="长度为0的数组（图一乐）"><a href="#长度为0的数组（图一乐）" class="headerlink" title="长度为0的数组（图一乐）"></a>长度为0的数组（图一乐）</h2><p>int a[0];</p>
+<h3 id="长度为0的数组（图一乐）"><a href="#长度为0的数组（图一乐）" class="headerlink" title="长度为0的数组（图一乐）"></a>长度为0的数组（图一乐）</h3><p>int a[0];</p>
 <p>可以存在，但是没用啊。。。</p>
-<h2 id="实例练习1"><a href="#实例练习1" class="headerlink" title="实例练习1"></a>实例练习1</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>写一个程序，输入数量不确定的[0,9]范围内的整数，统计每一种数字出现的次数，输入-1表示结束。</p>
+<h3 id="实例练习1"><a href="#实例练习1" class="headerlink" title="实例练习1"></a>实例练习1</h3><h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><p>写一个程序，输入数量不确定的[0,9]范围内的整数，统计每一种数字出现的次数，输入-1表示结束。</p>
+<h2 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h2><p>一个三行五列的矩阵</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">3</span>][<span class="number">5</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="遍历二位数组"><a href="#遍历二位数组" class="headerlink" title="遍历二位数组"></a>遍历二位数组</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> ( i=<span class="number">0</span>; i&lt;<span class="number">3</span>; i++ )&#123;</span><br><span class="line">	<span class="keyword">for</span> ( j=<span class="number">0</span>; j&lt;<span class="number">5</span>; j++)&#123;</span><br><span class="line">		a[i][j] = i*j;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="二维数组的初始化"><a href="#二维数组的初始化" class="headerlink" title="二维数组的初始化"></a>二维数组的初始化</h3><p><img src="https://c.img.dasctf.com/images/20221219/1671460082421-0f6c1c10-18e0-4495-9862-b45a5224075d.png" alt="image-20221219221744702"></p>
+<h3 id="井字棋游戏实例"><a href="#井字棋游戏实例" class="headerlink" title="井字棋游戏实例"></a>井字棋游戏实例</h3><p><img src="https://c.img.dasctf.com/images/20221219/1671460382426-e684b8e7-ebf8-4795-b354-c5916d64b935.png" alt="image-20221219223248599"></p>
+<p><img src="https://c.img.dasctf.com/images/20221219/1671460401459-83f59b68-80f7-46a7-bdac-197d749ae92b.png" alt="image-20221219223319614"></p>
 
     </div>
 
@@ -409,7 +418,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E7%AF%87"><span class="nav-number">1.</span> <span class="nav-text">数组篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">1.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">实验代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E6%95%B0%E7%BB%84"><span class="nav-number">1.3.</span> <span class="nav-text">定义数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.3.1.</span> <span class="nav-text">语法格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-number">1.3.2.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%95%B0%E7%BB%84"><span class="nav-number">1.4.</span> <span class="nav-text">什么是数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#int-a-10"><span class="nav-number">1.5.</span> <span class="nav-text">int a[10]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E7%9A%84%E5%8D%95%E5%85%83"><span class="nav-number">1.6.</span> <span class="nav-text">数组的单元</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89%E6%95%88%E7%9A%84%E4%B8%8B%E6%A0%87%E8%8C%83%E5%9B%B4"><span class="nav-number">1.7.</span> <span class="nav-text">有效的下标范围</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%95%BF%E5%BA%A6%E4%B8%BA0%E7%9A%84%E6%95%B0%E7%BB%84%EF%BC%88%E5%9B%BE%E4%B8%80%E4%B9%90%EF%BC%89"><span class="nav-number">1.8.</span> <span class="nav-text">长度为0的数组（图一乐）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E7%BB%83%E4%B9%A01"><span class="nav-number">1.9.</span> <span class="nav-text">实例练习1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-number">1.9.1.</span> <span class="nav-text">题目</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E7%AF%87"><span class="nav-number">1.</span> <span class="nav-text">数组篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="nav-number">1.1.</span> <span class="nav-text">一维数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">1.1.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81"><span class="nav-number">1.1.2.</span> <span class="nav-text">实验代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E6%95%B0%E7%BB%84"><span class="nav-number">1.1.3.</span> <span class="nav-text">定义数组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">语法格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%95%B0%E7%BB%84"><span class="nav-number">1.1.4.</span> <span class="nav-text">什么是数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#int-a-10"><span class="nav-number">1.1.5.</span> <span class="nav-text">int a[10]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E7%9A%84%E5%8D%95%E5%85%83"><span class="nav-number">1.1.6.</span> <span class="nav-text">数组的单元</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E6%95%88%E7%9A%84%E4%B8%8B%E6%A0%87%E8%8C%83%E5%9B%B4"><span class="nav-number">1.1.7.</span> <span class="nav-text">有效的下标范围</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%95%BF%E5%BA%A6%E4%B8%BA0%E7%9A%84%E6%95%B0%E7%BB%84%EF%BC%88%E5%9B%BE%E4%B8%80%E4%B9%90%EF%BC%89"><span class="nav-number">1.1.8.</span> <span class="nav-text">长度为0的数组（图一乐）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E7%BB%83%E4%B9%A01"><span class="nav-number">1.1.9.</span> <span class="nav-text">实例练习1</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-number">1.1.9.1.</span> <span class="nav-text">题目</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="nav-number">1.2.</span> <span class="nav-text">二维数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%8D%E5%8E%86%E4%BA%8C%E4%BD%8D%E6%95%B0%E7%BB%84"><span class="nav-number">1.2.1.</span> <span class="nav-text">遍历二位数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.2.2.</span> <span class="nav-text">二维数组的初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%95%E5%AD%97%E6%A3%8B%E6%B8%B8%E6%88%8F%E5%AE%9E%E4%BE%8B"><span class="nav-number">1.2.3.</span> <span class="nav-text">井字棋游戏实例</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -478,13 +487,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">178k</span>
+    <span title="站点总字数">175k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:42</span>
+    <span title="站点阅读时长">2:39</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
@@ -621,7 +630,7 @@
 
 
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"left","width":250,"height":600},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- mathjax config similar to math.stackexchange -->
+<!-- mathjax config similar to math.stackexchange -->
 
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
@@ -651,7 +660,7 @@
 
 <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"left","width":250,"height":600},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/click-love.js"></script>
