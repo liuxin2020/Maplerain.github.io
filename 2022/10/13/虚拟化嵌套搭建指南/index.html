@@ -26,18 +26,18 @@
 <meta property="og:site_name" content="枫霜月雨のblog">
 <meta property="og:description" content="虚拟化嵌套搭建指南说通俗点，在虚拟机中使用hyper-v">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://c.img.dasctf.com/images/20221013/1665639280956-55de9e37-51bb-4bf7-adb1-8865cf86919f.png">
-<meta property="og:image" content="https://c.img.dasctf.com/images/20221013/1665639516542-4826cbdc-8d04-4ab1-b0bd-7fc5a7b08739.png">
-<meta property="og:image" content="https://c.img.dasctf.com/images/20221013/1665639958978-aebc2ad1-828d-4851-93a5-8e644031c846.png">
-<meta property="og:image" content="https://c.img.dasctf.com/images/20221013/1665640355054-db45382d-7dc4-4054-bded-77727e2df475.png">
-<meta property="og:image" content="https://c.img.dasctf.com/images/20221013/1665640378187-df7a4185-c6aa-4f2f-ac72-5656bd0f9cba.png">
-<meta property="og:image" content="https://c.img.dasctf.com/images/20221013/1665640535263-82c9312f-7c65-4dbf-8d08-3dafad4133ed.png">
+<meta property="og:image" content="https://c.img.dasctf.com/images/20221220/1671530871185-e4b3b914-3fb0-4844-bab1-bacc9a853586.png">
+<meta property="og:image" content="https://c.img.dasctf.com/images/20221220/1671530875941-4620ab1a-99a9-46fb-9274-504fb3821cd7.png">
+<meta property="og:image" content="https://c.img.dasctf.com/images/20221220/1671530880479-3ab1b8f2-a183-456f-8db7-0f00fb1c07df.png">
+<meta property="og:image" content="https://c.img.dasctf.com/images/20221220/1671530884241-ab8e1d03-3c7b-45f5-8450-c719e23dc5d5.png">
+<meta property="og:image" content="https://c.img.dasctf.com/images/20221220/1671530887427-3725078e-14f7-4f0d-b2a5-a445a998055b.png">
+<meta property="og:image" content="https://c.img.dasctf.com/images/20221220/1671530894722-a1f8ebe9-3b20-470f-a671-8b1691a3e603.png">
 <meta property="article:published_time" content="2022-10-13T02:06:53.000Z">
-<meta property="article:modified_time" content="2022-10-13T06:16:34.961Z">
+<meta property="article:modified_time" content="2022-12-20T10:08:17.484Z">
 <meta property="article:author" content="枫霜月雨">
 <meta property="article:tag" content="debug">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://c.img.dasctf.com/images/20221013/1665639280956-55de9e37-51bb-4bf7-adb1-8865cf86919f.png">
+<meta name="twitter:image" content="https://c.img.dasctf.com/images/20221220/1671530871185-e4b3b914-3fb0-4844-bab1-bacc9a853586.png">
 
 <link rel="canonical" href="https://liuxin2020.github.io/2022/10/13/%E8%99%9A%E6%8B%9F%E5%8C%96%E5%B5%8C%E5%A5%97%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/">
 
@@ -224,10 +224,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-10-13 10:06:53 / 修改时间：14:16:34" itemprop="dateCreated datePublished" datetime="2022-10-13T10:06:53+08:00">2022-10-13</time>
+              <time title="创建时间：2022-10-13 10:06:53" itemprop="dateCreated datePublished" datetime="2022-10-13T10:06:53+08:00">2022-10-13</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-12-20 18:08:17" itemprop="dateModified" datetime="2022-12-20T18:08:17+08:00">2022-12-20</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -271,21 +277,21 @@
 <p>​        于是，我想到了使用虚拟机VMware Station 16 pro，搭建一台win10虚拟机，并把它储存在移动硬盘上。正巧的是，微软官网最近也写了相关的文章，进一步证明了这一操作的可行性。</p>
 <p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/virtualization/hyper-v-on-windows/tlfs/nested-virtualization">嵌套虚拟化</a></p>
 <p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/virtualization/hyper-v-on-windows/user-guide/nested-virtualization">借助嵌套虚拟化在虚拟机中运行 Hyper-V</a></p>
-<h2 id="本机操作流程"><a href="#本机操作流程" class="headerlink" title="本机操作流程"></a>本机操作流程</h2><h3 id="检查本机cpu是否开启虚拟机"><a href="#检查本机cpu是否开启虚拟机" class="headerlink" title="检查本机cpu是否开启虚拟机"></a>检查本机cpu是否开启虚拟机</h3><p><img src="https://c.img.dasctf.com/images/20221013/1665639280956-55de9e37-51bb-4bf7-adb1-8865cf86919f.png" alt="image-20221013133435372"></p>
+<h2 id="本机操作流程"><a href="#本机操作流程" class="headerlink" title="本机操作流程"></a>本机操作流程</h2><h3 id="检查本机cpu是否开启虚拟机"><a href="#检查本机cpu是否开启虚拟机" class="headerlink" title="检查本机cpu是否开启虚拟机"></a>检查本机cpu是否开启虚拟机</h3><p><img src="https://c.img.dasctf.com/images/20221220/1671530871185-e4b3b914-3fb0-4844-bab1-bacc9a853586.png" alt="image-20221013133435372"></p>
 <p>这个没什么好说的，默认都开了，没开的去BIOS里慢慢折腾吧。</p>
 <h3 id="更新VMware到最新版本"><a href="#更新VMware到最新版本" class="headerlink" title="更新VMware到最新版本"></a>更新VMware到最新版本</h3><p>（当前为16.2.4 build-20089737）</p>
 <p>大坑来了。在更新的过程中，疯狂提示这个报错</p>
-<p><img src="https://c.img.dasctf.com/images/20221013/1665639516542-4826cbdc-8d04-4ab1-b0bd-7fc5a7b08739.png" alt="image-20221013133834326"></p>
+<p><img src="https://c.img.dasctf.com/images/20221220/1671530875941-4620ab1a-99a9-46fb-9274-504fb3821cd7.png" alt="image-20221013133834326"></p>
 <p>笑嘻了，这不有手就行？</p>
 <p>点开这个，找个最新的下载一下，重启一下，完事咯~</p>
 <p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-US/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable latest supported downloads</a></p>
 <p>感觉就是在侮辱我的智商。找个x64版本下载、安装、重启，点开VMware的更新，依然报这个错。于是折腾了一下午，想了很多可能出现问题的地方，依然无果。就是因为这个报错，差点直接让我放弃了进一步操作的念头。因为我也没有经验，只不过在零星的资料中，判断这一步可能是比较关键的一步。</p>
 <p>那么这个bug到底是怎么解决的呢？</p>
-<p><img src="https://c.img.dasctf.com/images/20221013/1665639958978-aebc2ad1-828d-4851-93a5-8e644031c846.png" alt="image-20221013134556235"></p>
+<p><img src="https://c.img.dasctf.com/images/20221220/1671530880479-3ab1b8f2-a183-456f-8db7-0f00fb1c07df.png" alt="image-20221013134556235"></p>
 <p>麻了，在刚刚的链接里找个x86版本下载、安装、重启，更新完毕。焯！</p>
-<h3 id="升级虚拟机"><a href="#升级虚拟机" class="headerlink" title="升级虚拟机"></a>升级虚拟机</h3><p><img src="https://c.img.dasctf.com/images/20221013/1665640355054-db45382d-7dc4-4054-bded-77727e2df475.png" alt="image-20221013134759053"></p>
-<p><img src="https://c.img.dasctf.com/images/20221013/1665640378187-df7a4185-c6aa-4f2f-ac72-5656bd0f9cba.png" alt="image-20221013135256244"></p>
-<h3 id="更改虚拟机设置"><a href="#更改虚拟机设置" class="headerlink" title="更改虚拟机设置"></a>更改虚拟机设置</h3><p><img src="https://c.img.dasctf.com/images/20221013/1665640535263-82c9312f-7c65-4dbf-8d08-3dafad4133ed.png" alt="image-20221013135533199"></p>
+<h3 id="升级虚拟机"><a href="#升级虚拟机" class="headerlink" title="升级虚拟机"></a>升级虚拟机</h3><p><img src="https://c.img.dasctf.com/images/20221220/1671530884241-ab8e1d03-3c7b-45f5-8450-c719e23dc5d5.png" alt="image-20221013134759053"></p>
+<p><img src="https://c.img.dasctf.com/images/20221220/1671530887427-3725078e-14f7-4f0d-b2a5-a445a998055b.png" alt="image-20221013135256244"></p>
+<h3 id="更改虚拟机设置"><a href="#更改虚拟机设置" class="headerlink" title="更改虚拟机设置"></a>更改虚拟机设置</h3><p><img src="https://c.img.dasctf.com/images/20221220/1671530894722-a1f8ebe9-3b20-470f-a671-8b1691a3e603.png" alt="image-20221013135533199"></p>
 <p>在处理器的虚拟化引擎里勾选第一项。然后看看能不能开启虚拟机。当然，如果这个时候启动成功没有报错，那么恭喜，你已经成功了。</p>
 <h3 id="启动时报错此平台不支持虚拟化的Intel-VT-x-EPT"><a href="#启动时报错此平台不支持虚拟化的Intel-VT-x-EPT" class="headerlink" title="启动时报错此平台不支持虚拟化的Intel VT-x/EPT"></a>启动时报错此平台不支持虚拟化的Intel VT-x/EPT</h3><p>第二个大坑来了</p>
 <h4 id="启用或关闭windows功能"><a href="#启用或关闭windows功能" class="headerlink" title="启用或关闭windows功能"></a>启用或关闭windows功能</h4><div class="table-container">
@@ -642,7 +648,7 @@
 
 
 
-<!-- mathjax config similar to math.stackexchange -->
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"left","width":250,"height":600},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- mathjax config similar to math.stackexchange -->
 
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
@@ -672,7 +678,7 @@
 
 <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"left","width":250,"height":600},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</body>
 </html>
 <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/click-love.js"></script>
